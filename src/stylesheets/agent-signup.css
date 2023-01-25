@@ -1,0 +1,90 @@
+.agentsignup {
+    display: flex;
+    justify-content: space-evenly;
+    width: 75%;
+    margin: 5rem 0rem;
+}
+
+.agentsignup-title {
+    margin: 0px;
+}
+
+.agentsignup-title > span {
+    display: block;
+}
+
+.form-container {
+    width: 350px;
+}
+
+.input-group {
+    border: 0.8px solid #A2A4A5;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 0rem 0.5rem;
+    /* width: 350px; */
+    margin: 1.2rem 0rem;
+    display: flex;
+}
+
+.input-group > label {
+    border-right: 0.8px solid #A2A4A5;
+    padding-right: 0.5rem;
+    color: rgba(55, 58, 71, 0.89);
+    text-transform: capitalize;
+    font-weight: 400;
+    font-size: 14px;
+    display: inline-flex;
+    margin: auto 0rem;
+}
+
+.input-group > label > svg {
+    height: 15px;
+    margin-right: 0.5rem;
+}
+
+.input-group > input, .input-group > input:focus-visible {
+    border: 0px;
+    outline: 0px;
+    padding: 0.8rem 0.5rem;
+    color: rgba(55, 58, 71, 0.89);
+    vertical-align: middle;
+    flex: 1;
+}
+
+.checkbox-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3.5rem;
+    margin-top: 2rem;
+}
+
+.checkbox {
+    content: '';
+    border-radius: 50%;
+    background-color: #D9D9D9;
+    height: 9px;
+    width: 9px;
+    display: block;
+    margin: 0rem 0.1rem;
+}
+
+.active {
+    background-color: #FF9C26;
+}
+
+.button {
+    width: 100%;
+    border: 0px;
+    border-radius: 8px;
+    padding: 0.75rem 0rem;
+    background-color: #FF9C26;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.d-none {
+    display: none;
+}
