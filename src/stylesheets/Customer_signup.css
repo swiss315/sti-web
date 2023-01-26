@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;;
+    
+    
+}
+
+.c_signup{
+    width: 100%;
+    margin-right: 0;
+    display: flex;
+    align-items: center;
+    margin: 4rem 0 !important;
+    
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+h2{
+    flex: 0.5;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 150%;    
+    align-self: flex-start;
+    color: #01071F;
+}
+
+.form-h{
+    align-self: center;
+    margin-top: 3rem;    
+    display: flex;
+    justify-content: center;
+}
+
+
+.input-h{
+    
+    color: #373A47E5;
+    width:510px;
+    background: white;
+    height:3rem;
+    border: 0.8px solid #A2A4A5;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    
+}
+.input-h label{
+    cursor: pointer;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    padding: 08px;
+    color: rgb(30,30,30);
+    border-right: 0.7px solid #4F525D;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+}
+
+label svg:nth-child(){
+    color: yellow ;
+}
+
+.input-h input{
+    border:none;
+    font-size: 14px;
+    flex: 1;
+    padding: 5px 0;
+    margin: 0 0.5rem;
+}
+.icon{
+    margin-right: 5px;
+    color: rgb(30,30,30);
+}
+
+.input_wrap{
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+.input_wrap p{
+    color: rgb(248, 65, 65);
+    font-size: 0.8rem;
+    
+}
+
+button{
+    margin-top: 2.5rem;
+    padding: 12px 152px;
+    gap: 10px;
+    background: #FF9C26;
+    border: none;
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 150%;
+    /* identical to box height, or 27px */
+
+    text-transform: capitalize;
+
+    color: #FFFFFF;
+}
+.h2{
+    display: none;
+}
+
+
+@media screen and (max-width: 1024px){
+    .c_signup{
+        padding: 1rem 3rem ;
+    }
+    .form-h{
+        padding-left: 3rem;
+    }
+}
+
+@media screen and (max-width: 914px){
+    html{
+        font-size: 90%;
+    }
+    .c_signup{
+        flex-direction: column;
+        width: 100%;
+
+        
+
+    }
+    .form-h{
+        padding: 0;
+    }
+    h2{
+        display: none;
+    }
+    .h2{
+        display: block!important;
+        font-size: 2.5rem;
+        align-self: center;
+    }
+
+}
+
+@media screen and (max-width: 745px){
+    html{
+        font-size: 75%;
+    }
+
+    .input-h{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 550px){
+    html{
+        font-size: 55%;
+    }
+    .input-wrap{
+        width: 80%;
+        align-self: center !important;
+    }
+
+    button{
+        font-size: 1.5rem;
+    }
+}
