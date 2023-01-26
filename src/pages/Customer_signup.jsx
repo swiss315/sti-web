@@ -1,9 +1,9 @@
-import "../pages/stylesheets/Customer_signup.css";
+import "../stylesheets/Customer_signup.css";
 import React from "react";
-import { AiOutlineMail } from "react-icons/ai";
-import { BsKey, BsTelephone } from "react-icons/bs";
-import  {useState} from 'react'
-import { HiOutlineUser } from "react-icons/hi";
+// import { AiOutlineMail } from "react-icons/ai";
+// import { BsKey, BsTelephone } from "react-icons/bs";
+// import  {useState} from 'react'
+// import { HiOutlineUser } from "react-icons/hi";
 import validate from "../validation/validateInfo";
 import useForm from "../validation/useForm";
 import Navbar from '../components/Navbar.js'
@@ -37,7 +37,8 @@ const About = ({ submitForm }) => {
           <div className="input_wrap">
             <div className="input-h">
               <label htmlFor="firstName">
-                <HiOutlineUser className="icon" /> First Name
+                {/* <HiOutlineUser className="icon" />  */}
+                First Name
               </label>
               <input
                 id="firstName"
@@ -53,7 +54,8 @@ const About = ({ submitForm }) => {
           <div className="input_wrap">
             <div className="input-h">
               <label htmlFor="lastName">
-                <HiOutlineUser className="icon" /> Last Name
+                {/* <HiOutlineUser className="icon" />  */}
+                Last Name
               </label>
               <input
                 id="lastName"
@@ -69,7 +71,8 @@ const About = ({ submitForm }) => {
           <div className="input_wrap">
             <div className="input-h">
               <label htmlFor="Email">
-                <AiOutlineMail className="icon" /> Email
+                {/* <AiOutlineMail className="icon" />  */}
+                Email
               </label>
               <input
                 id="Email"
@@ -85,7 +88,8 @@ const About = ({ submitForm }) => {
           <div className="input_wrap">
             <div className="input-h">
               <label htmlFor="password">
-                <BsKey className="icon" /> Password
+                {/* <BsKey className="icon" />  */}
+                Password
               </label>
               <input
                 id="password"
@@ -101,7 +105,8 @@ const About = ({ submitForm }) => {
           <div className="input_wrap">
             <div className="input-h">
               <label htmlFor="confirmPassword">
-                <BsKey className="icon" /> Confirm Password
+                {/* <BsKey className="icon" />  */}
+                Confirm Password
               </label>
               <input
                 id="confirmPassword"
@@ -117,7 +122,8 @@ const About = ({ submitForm }) => {
           <div className="input_wrap">
             <div className="input-h">
               <label htmlFor="phone">
-                <BsTelephone className="icon" /> Phone Number
+                {/* <BsTelephone className="icon" /> */}
+                Phone Number
               </label>
               <input id="phone" name="phone" type="number" />
             </div>
