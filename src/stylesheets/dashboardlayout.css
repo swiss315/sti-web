@@ -1,0 +1,43 @@
+.dashboardlayout {
+    display: grid;
+    width: 100vw;
+    grid-template-columns: 250px auto;
+    height: 100vh;
+}
+
+.sidebar {
+    background-color:  #011152;
+    height: 100vh;
+    position: relative;
+}
+
+.maincontent {
+    background-color: white;
+    padding: 2rem 4rem 0rem;
+    overflow: auto;
+}
+
+.logocontainer {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 1rem;
+}
+
+.closeicon {
+    margin: auto 0rem;
+}
+
+.sidbarcollapse {
+    display: grid;
+    width: 100vw;
+    grid-template-columns: 0px auto;
+    height: 100vh;
+}
+
+.maincontent > .sidebar-container {
+    display: none;
+}
+
+.maincontentexpand {
+    margin: 2rem 4rem;
+}
