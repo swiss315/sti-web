@@ -1,17 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
 
 *{
-    font-family: 'Poppins', sans-serif;;
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family:'Manrope', sans-serif;
+    
     
     
 }
 
+.customer_signup{
+    overflow-x: hidden;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+
 .c_signup{
     width: 100%;
-    margin-right: 0;
     display: flex;
     align-items: center;
-    margin: 4rem 0 !important;
+    padding: 4rem 3rem;
     
 }
 
@@ -63,9 +76,7 @@ h2{
     line-height: 150%;
 }
 
-label svg:nth-child(){
-    color: yellow ;
-}
+
 
 .input-h input{
     border:none;
@@ -114,11 +125,9 @@ button{
 
 @media screen and (max-width: 1024px){
     .c_signup{
-        padding: 1rem 3rem ;
+        padding: 1rem 0 ;
     }
-    .form-h{
-        padding-left: 3rem;
-    }
+   
 }
 
 @media screen and (max-width: 914px){
