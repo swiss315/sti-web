@@ -1,0 +1,30 @@
+input{
+    padding: 1rem;
+    width: 30vw;
+    border-radius: 10px;
+    color: #373A47E5;
+    border: 1px solid #A2A4A5;
+}
+.in{
+    padding-bottom: 1em;
+}
+.forgot-password a{
+    float: right;
+    margin-top: 1rem;
+    font-size: 14px;
+    font-weight: 500;
+}
+.button button{
+    margin-top: 4rem;
+    background-color: #FF9C26;
+    border: none;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+}
+.sides1 h2{
+    margin-top: 7rem;
+}
+.sides2{
+    padding: 16rem 14rem;
+}
