@@ -1,0 +1,53 @@
+.sidbar-info {
+    color: white;
+    padding: 2rem 1rem;
+    border-bottom: 0.6px solid rgba(255, 255, 255, 0.8);
+}
+
+.sidbar-info-name {
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 0.5rem;
+}
+
+.sidbar-info-name > span {
+    font-weight: 600;
+}
+
+.sidebar-info-wallet {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.sidebar-menu {
+    padding: 2rem 2.2rem;
+}
+
+.sidebar-menu > a, .logout > a {
+    display: block;
+    color: rgba(254, 254, 254, 0.85);
+    text-decoration: none;
+    padding: 1.15rem 0rem;
+}
+
+.sidebar-menu > a > svg, .sidebar-menu > a > span, .logout > a > svg, .logout > a > span {
+    vertical-align: middle;
+}
+
+.sidebar-menu > a > span, .logout > a > span {
+    padding-left: 2.2rem;
+}
+
+.sidebar-menu > a > .mypin {
+    padding-left: 2.55rem;
+}
+
+.logout {
+    position: absolute;
+    bottom: 15px;
+}
+
+/* .sidebar-menu > a > div {
+    display: flex;
+} */
