@@ -1,7 +1,7 @@
 .agentsignup {
     display: flex;
     justify-content: space-evenly;
-    width: 75%;
+    width: 80%;
     margin: 5rem 0rem;
 }
 
@@ -14,7 +14,7 @@
 }
 
 .form-container {
-    width: 350px;
+    width: 31.5vw;
 }
 
 .input-group {
@@ -22,9 +22,9 @@
     border-radius: 8px;
     overflow: hidden;
     padding: 0rem 0.5rem;
-    /* width: 350px; */
     margin: 1.2rem 0rem;
     display: flex;
+    padding-right: 0rem;
 }
 
 .input-group > label {
@@ -73,7 +73,7 @@
     background-color: #FF9C26;
 }
 
-.button {
+.agent-button {
     width: 100%;
     border: 0px;
     border-radius: 8px;

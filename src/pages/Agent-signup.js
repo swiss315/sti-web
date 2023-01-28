@@ -138,9 +138,9 @@ function Agentsignup() {
                     <span className={`checkbox ${active ? 'active' : ''}`}></span>
                     <span className={`checkbox ${active ? '' : 'active'}`}></span>
                 </div>
-                {active ? <div className='button' onClick={nextClick} >
+                {active ? <div className='agent-button' onClick={nextClick} >
                     Next
-                </div> : <button className='button'>
+                </div> : <button className='agent-button'>
                     Submit
                 </button>}
                 

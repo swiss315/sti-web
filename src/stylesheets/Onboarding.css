@@ -4,10 +4,11 @@
     margin: 0;
    }
    body{
-    min-width: 100vh;
+    /* min-width: 100vh; */
+    /* height: 100vh; */
    }
 
-.navbar{
+/* .navbar{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,7 +41,7 @@ li{
     padding: 0.4rem 1rem;
     border-radius: 10px;
     border: 1px solid white;
-}
+} */
 .sides{
     display: flex;   
 }
@@ -62,47 +63,55 @@ li{
     justify-content: unset;
     gap: 1rem;
     align-items: center;
+    text-decoration: none;
+    color: #01071F;
 }
 .column2{
-    background-color: #FDFAF6;
+    /* i commented this out */
+    /* background-color: #FDFAF6; */
     border: 1px solid #FF9C26;
     border-radius: 5px;
-    padding: 1rem;
-    width: 20rem;
+    padding: 1.5rem;
+    /* width: 20rem; */
 }
 .column3{
     margin-top: 2rem;
     background-color: #FFFFFF;
     border: 1px solid #FF9C26;
     border-radius: 5px;
-    padding: 1rem;
-    width: 20rem;
+    padding: 1.5rem;
+    /* i commented this out
+    width: 20rem;    */
 }
 .simple-insurance{
-    padding: 0 6rem;
+    padding: 1.5rem 6rem;
 }
 h2{
     margin-block-start: 0em;
 }
 .side2{
-    padding: 6rem 14rem;
+    padding: 9rem 14rem;
 }
 .cust{
     font-size: 10px;
     /* margin-block-start: 0em; */
 }
-h6{
+/* i commented this out */
+/* h6{
     margin-block-start: 1em;
     margin-block-end: 0.3em;
-}
+} */
 .unknown{
     display: flex;
     justify-content: space-between;
 }
-.arrow{
+
+/* i commented this out */
+
+/* .arrow{
     padding-left: 3rem;
     padding-top: 1rem;
-}
+} */
 .next1{
     background-color: orange;
     width: 2rem;
@@ -119,5 +128,78 @@ h6{
 .next-button{
     display: flex;
     justify-content: center;
-    padding-bottom: 2.5rem;
+    margin-bottom: 2.5rem;
 }
+
+    /* My added style */
+
+.column1:hover {
+    background-color: #FDFAF6;
+}
+.account-type-text {
+    color: #5C5C5C;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 1.5rem 0rem;
+}
+.account-type-title {
+    font-weight: 700;
+    font-size: 29px;
+}
+.img-customer {
+    border: 2px solid #FF9C26;
+    border-radius: 4px;
+}
+.img-customer > svg {
+    vertical-align: middle;
+    margin: 0.15rem;
+    padding: 0.15rem;
+}
+.img-customer > svg > path {
+    fill: #FF9C26;
+}
+.column1:hover > .img-customer {
+    background-color: #FF9C26;
+}
+.column1:hover > .img-customer > svg > path {
+    fill: white;
+}
+.column-container-title {
+    font-size: 16px;
+}
+.cust {
+    color: #4F525D;
+    font-size: 12px;
+    padding-top: 0.35rem;
+}
+.arrow > svg > path {
+    fill: white;
+}
+.column1:hover > .unknown > .arrow > svg > path {
+    fill: #FF9C26;
+}
+.unknown {
+    display: flex;
+    justify-content: space-between;
+    width: -webkit-fill-available;
+}
+.arrow{
+    margin: auto 0rem;
+}
+.arrow > svg {
+    vertical-align: middle;
+}
+.sides {
+    height: 85vh;
+}
+.side1 > div > svg {
+    margin: 0rem 6rem;
+}
+.side1 > div {
+    margin: 4rem 0rem;
+}
+.simple-insurance > p {
+    padding: 1.1rem 0rem;
+    color: rgba(1, 7, 31, 0.6);
+}
+

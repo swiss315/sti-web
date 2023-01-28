@@ -56,11 +56,11 @@ function Navbar() {
                     <Link>Home</Link>
                     <Link>About Us</Link>
                     <Link>Contact Us</Link>
-                    <Link className='login-button'>
+                    <Link to='/login' className='login-button'>
                         <Loginbuttonicon /> 
                         <span>Login</span> 
                     </Link>
-                    <Link className='register-button'>
+                    <Link to='/' className='register-button'>
                         Register
                     </Link>
                 </div>

@@ -26,14 +26,14 @@ const About = ({ submitForm }) => {
     <div className="customer_signup">
       <Navbar/>
     <div className="c_signup">
-      <h2>
+      <h2 className="h21">
         Sign Up <br />
         Below
       </h2>
-      <h2 className="h2">Sign Up Below</h2>
+      <h2 className="h2 h21">Sign Up Below</h2>
 
       <div className="form-h">
-        <form >
+        <form className="form">
           <div className="input_wrap">
             <div className="input-h">
               <label htmlFor="firstName">
