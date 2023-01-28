@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import "./Onboarding.css";
-import Logo from "../../Images/LogoSTI.svg";
-import Log from "../../Images/Vector1.svg";
-import Group from "../../Images/Group.svg";
-import Customer from "../../Images/Groupcustomer.svg";
-import Agent from "../../Images/Groupagent.svg";
-// import { AiOutlineArrowRight } from "react-icons/ai";
+import Logo from "../../assets/icons/Logo.svg";
+import Log from "../../assets/icons/Vector1.svg";
+import Group from "../../assets/icons/Group.svg";
+import Customer from "../../assets/icons/Groupcustomer.svg";
+import Agent from "../../assets/icons/Groupagent.svg";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import Login from "../Login/Login"
 
 const Onboarding = ({showLogIn,  setShowLogIn}) => {
@@ -76,7 +76,7 @@ const Onboarding = ({showLogIn,  setShowLogIn}) => {
                 </p>
               </div>
               <div className="arrow">
-                {/* <AiOutlineArrowRight /> */}
+                <AiOutlineArrowRight />
               </div>
             </div>
           </div>

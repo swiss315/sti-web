@@ -1,7 +1,7 @@
 import React from "react";
 import "./Login.css";
-import Logo from "../../Images/LogoSTI.svg";
-import Log from "../../Images/Vector1.svg";
+import Logo from "../../assets/icons/LogoSTI.svg";
+import Log from "../../assets/icons/Vector1.svg";
 // import { Envelope } from '@fortawesome/fontawesome-svg-core'
 
 const Login = ({showLogIn,  setShowLogIn}) => {
