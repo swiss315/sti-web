@@ -42,9 +42,9 @@ const Login = ({showLogIn,  setShowLogIn}) => {
         </div>
       </div> */}
       <Navbar />
-      <div className="sides">
+      <div className="sides side-edit">
         <div className="sides1">
-          <h2>Welcome Back Customer!</h2>
+          <h2>Welcome Back <span>Customer!</span></h2>
         </div>
         <div className="sides2">
           <div className='input-group'>

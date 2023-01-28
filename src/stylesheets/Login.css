@@ -22,9 +22,23 @@ input{
     padding: 1rem;
     border-radius: 10px;
 }
-.sides1 h2{
+/* .sides1 h2{
     margin-top: 7rem;
-}
-.sides2{
+} */
+/* .sides2{
     padding: 16rem 14rem;
+} */
+
+/* style added */
+
+.side-edit{
+    display: flex;
+    justify-content: space-evenly;
+    width: 85%;
+}
+.sides1 > h2 > span {
+    display: block;
+}
+.sides1 > h2 {
+    margin-top: 6rem;
 }
