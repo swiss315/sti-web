@@ -39,8 +39,9 @@ function Dashboardlayout() {
               <Notification />
             </div>
           </div>
-
+        
           <Routes>
+            {/* add route of dashboard here */}
               <Route path="dashboard" index element={<Dashboard />} />
           </Routes>
         </div>
