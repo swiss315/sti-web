@@ -43,8 +43,8 @@
 }
 
 .dashboard-nav {
-   display: flex;
-   justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .profile-notification {
