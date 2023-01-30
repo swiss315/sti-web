@@ -1,0 +1,78 @@
+.dashboard-content {
+    padding: 4rem 0rem;
+}
+
+.insurance-type-tab {
+    border: 1px solid #898B93;
+    border-radius: 10px;
+    align-items: center;
+    padding: 8px 24px;
+    color: #898B93;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.insurance-tab-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.active {
+    background-color: #011152;
+    color: white;
+}
+
+.insurance-tab-content {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+}
+
+.tab-box {
+    border-radius: 14px;
+    width: 355px;
+    height: 305px;
+    position: relative;
+}
+
+.maincontent > div > .insurance-tab-container > .insurance-type-tab {
+    font-size: 12px;
+    padding: 8px 15px;
+}
+
+.maincontent > div > .insurance-tab-content > .tab-box {
+    width: 305px;
+    height: 295px;
+}
+
+.tab-box > div {
+    position: absolute;
+    bottom: 0;
+    width: inherit;
+    opacity: 0.5;
+    background-color: black;
+    color: white;
+    padding: 1rem 1rem;
+    border-bottom-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+}
+
+.tab-box > div > h2, .tab-box > div > p {
+    color: white;
+}
+
+.search-container > .input-group > label {
+    border: 0px;
+}
+
+.search-container > .input-group > label > svg > path {
+    fill: #818588;
+}
+
+.search-container {
+    padding-bottom: 1.2rem;
+}
+
+.dashboard-greetings {
+    padding: 0.5rem 0rem;
+}

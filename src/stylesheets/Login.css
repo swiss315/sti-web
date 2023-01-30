@@ -42,3 +42,6 @@ input{
 .sides1 > h2 {
     margin-top: 6rem;
 }
+.sides2 {
+    margin: auto 0rem;
+}

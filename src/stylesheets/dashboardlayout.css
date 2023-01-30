@@ -54,3 +54,7 @@
 .profile-notification > svg {
     margin: 0rem 1rem;
 }
+
+.sidbarcollapse > .sidebar {
+    visibility: hidden;
+}
