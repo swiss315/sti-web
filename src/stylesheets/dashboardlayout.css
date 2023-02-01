@@ -1,7 +1,7 @@
 .dashboardlayout {
     display: grid;
     width: 100vw;
-    grid-template-columns: 250px auto;
+    grid-template-columns: 300px auto;
     height: 100vh;
 }
 
@@ -39,5 +39,22 @@
 }
 
 .maincontentexpand {
-    margin: 2rem 4rem;
+    margin: 2rem 6.5rem;
+}
+
+.dashboard-nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-notification {
+    display: flex;
+}
+
+.profile-notification > svg {
+    margin: 0rem 1rem;
+}
+
+.sidbarcollapse > .sidebar {
+    visibility: hidden;
 }
