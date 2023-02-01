@@ -7,7 +7,7 @@ import {ReactComponent as Arrowicon} from "../assets/icons/arrowicon.svg";
 import {ReactComponent as Group} from "../assets/icons/Group.svg"
 import "../stylesheets/Onboarding.css";
 
-const Onboarding = ({showLogIn,  setShowLogIn}) => {
+const Onboarding = () => {
  
   return (
     <div className="onboard">

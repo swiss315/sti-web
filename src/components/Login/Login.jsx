@@ -44,10 +44,10 @@ const Login = ({showLogIn,  setShowLogIn}) => {
         <div className="sides2">
           <div className="in">
             {/* <i class="fa fa-envelope icon"></i> */}
-            <input type="Email" placeholder="  Email |" />
+            <input type="Email" placeholder="  Email |" required />
           </div>
           <div className="in">
-            <input type="Password" placeholder=" Password |" />
+            <input type="Password" placeholder=" Password |" required />
           </div>
           <div className="forgot-password">
             <a className="forgot" href="">

@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import "./Onboarding.css";
 import Logo from "../../assets/icons/Logo.svg";
 import Log from "../../assets/icons/Vector1.svg";
@@ -7,7 +6,7 @@ import Group from "../../assets/icons/Group.svg";
 import Customer from "../../assets/icons/Groupcustomer.svg";
 import Agent from "../../assets/icons/Groupagent.svg";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import Login from "../Login/Login"
+
 
 const Onboarding = ({showLogIn,  setShowLogIn}) => {
  

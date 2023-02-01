@@ -5,6 +5,8 @@ import Agentsignup from './pages/Agent-signup';
 import  About from './pages/Customer_signup';
 import Dashboardlayout from './pages/Dashboardlayout';
 import  Login from './pages/Login';
+import PinTransaction from './pages/PinTransaction';
+import PinPassword from './pages/PinPassword';
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
           <Route path='/*' exact element={<Dashboardlayout/>} />
         </Routes>
       </Router>
+     <PinPassword />
     </div>
   );
 }

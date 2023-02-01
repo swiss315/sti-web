@@ -1,0 +1,83 @@
+.general-claims{
+    padding: 1rem 8rem;
+}
+.claims-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.sign-update{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+.myclaims h4{
+    margin-top: 3rem;
+}
+.claim-form{
+    padding: 2rem 5rem;
+    box-shadow: 0px 4px 20px rgba(1, 17, 82, 0.1);
+    border-radius: 12px;
+}
+.claim-type{
+    display: grid;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+.claim-notice{
+    display: flex;
+}
+.claim-notice p{
+    font-size: 12px;
+    display: grid;
+    margin-left: 0.5rem;
+}
+.claim-track{
+    padding: 2rem 10rem;
+}
+.describe{
+    height: 6rem;
+}
+.pin-message{
+    text-align: center;
+    padding: 10rem;
+}
+.transaction-table{
+    padding-top: 3rem;
+}
+.bell{
+    margin-top: 2rem;
+}
+
+
+/* pinpassword */
+.form-group{
+    display: grid;
+}
+.password-form{
+    padding: 5rem 18rem;
+}
+.password-form form{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(1, 17, 82, 0.1);
+    border-radius: 12px;
+    padding: 3rem 5rem;
+}
+.form-group label{
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    margin-top: 2rem;
+}
+.form-group input{
+    border: 1px solid rgba(0, 7, 15, 0.12);
+border-radius: 4px;
+}
+.password-form button{
+    border-radius: 4px;
+display: block;
+justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+}
