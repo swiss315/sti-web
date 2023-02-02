@@ -87,8 +87,8 @@ const Motor = () => {
                     <p>Premium Value: {item.value}</p>
                     <p>Premium Type: {item.type}</p>
                     <p>Payment Status: <span  className={
-                        item.pay == "Paid"? "active" : (
-                            item.pay == "Failed" ? "notactive" : "pending"
+                        item.pay === "Paid"? "active" : (
+                            item.pay === "Failed" ? "notactive" : "pending"
                         )
                         
                     }>{item.pay}</span> </p>
