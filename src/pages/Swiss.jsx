@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState } from 'react'
 import "../stylesheets/motor.css"
 import swissp from '../assets/swissp.png'
 import Policy from '../components/Policy'
@@ -11,7 +10,7 @@ import Policy from '../components/Policy'
 const Swiss = () => {
 
 
-    const [swissData, setSwissData] = useState([
+    const swissData = [
         {
             id: 1,
             number: 'SWISS/01/23/SA/10677',
@@ -51,7 +50,7 @@ const Swiss = () => {
             stats: 'Not Active'
     
         },
-    ])
+    ]
 
 
 
