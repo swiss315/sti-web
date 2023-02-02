@@ -21,11 +21,7 @@ function App() {
           <Route path='/login' exact element={<Login/>} />
           <Route path='/*' exact element={<Dashboardlayout/>} />
         </Routes>
-        <Routes>
-          <Route index path='/' element={<Policies/>} />
-          <Route path='motor' element={<Motor/>} />
-          <Route path='swiss' element={<Swiss/>} />
-      </Routes>
+        
       </Router>
      
     </div>
