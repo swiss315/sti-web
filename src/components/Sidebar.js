@@ -38,7 +38,7 @@ function Sidebar() {
                     My Pins
                 </span>
             </Link>
-            <Link>
+            <Link to="/policies">
                 <Activepolicies />
                 <span>
                     Active Policies
