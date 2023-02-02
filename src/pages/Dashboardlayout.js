@@ -10,6 +10,9 @@ import Pin from '../pages/Pin';
 import PinTransaction from '../pages/PinTransaction';
 import PinPassword from '../pages/PinPassword';
 import TrackClaim from '../pages/TrackClaim';
+import Policies from '../pages/Policies'
+import Motor from '../pages/Motor'
+import Swiss from '../pages/Swiss';
 
 import {ReactComponent as Logoicon} from "../assets/icons/logoicon.svg";
 import {ReactComponent as Closeicon} from "../assets/icons/closeicon.svg";
@@ -53,6 +56,9 @@ function Dashboardlayout() {
               <Route path="transactionhistory" index element={<PinTransaction />} />
               <Route path="changepassword" index element={<PinPassword />} />
               <Route path="trackclaim" index element={<TrackClaim />} />
+              <Route path='policy' element={<Policies/>} />
+              <Route path='motor' element={<Motor/>} />
+              <Route path='swiss' element={<Swiss/>} />
           </Routes>
         </div>
     </div>
