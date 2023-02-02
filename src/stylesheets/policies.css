@@ -32,7 +32,7 @@
 
 .policies_container h3{
     color: #01071F;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 600;
     
 }
@@ -46,10 +46,10 @@
     grid-gap: 2.5rem;
     align-self: center;
 }
-a{ 
+.insurance_link{ 
     box-sizing: border-box;
     width: inherit;
-    height: inherit;    
+    height: 18rem;    
     background: #FFFFFF;
     box-shadow: 0px 4px 15px rgba(1, 7, 31, 0.08);
     border-radius: 14px;
@@ -57,9 +57,9 @@ a{
         
 }
 
-img{
-    width: 19.5rem;
-    height: 14rem !important;
+.insurance_img{
+    width: inherit;
+    height: 12rem !important;
     border-radius: 14px 14px 0px 40px;
 }
 .text{
