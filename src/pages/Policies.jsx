@@ -1,4 +1,4 @@
-import "./policies.css";
+import "../stylesheets/policies.css";
 import { BrowserRouter, Routes, Route, Switch, Redirect, Link, Outlet } from 'react-router-dom';
 import React from "react";
 import Motor from "./Motor";
