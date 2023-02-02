@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import "../stylesheets/motor.css'
+import "../stylesheets/motor.css"
 import swissp from '../assets/swissp.png'
 import Policy from '../components/Policy'
 
