@@ -56,7 +56,7 @@ function Dashboardlayout() {
               <Route path="transactionhistory" index element={<PinTransaction />} />
               <Route path="changepassword" index element={<PinPassword />} />
               <Route path="trackclaim" index element={<TrackClaim />} />
-              <Route path='policy' element={<Policies/>} />
+              <Route path='policies' element={<Policies/>} />
               <Route path='motor' element={<Motor/>} />
               <Route path='swiss' element={<Swiss/>} />
           </Routes>
