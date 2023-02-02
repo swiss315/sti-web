@@ -5,9 +5,7 @@ import Agentsignup from './pages/Agent-signup';
 import  About from './pages/Customer_signup';
 import Dashboardlayout from './pages/Dashboardlayout';
 import  Login from './pages/Login';
-import Policies from './pages/Policies'
-import Motor from './pages/Motor'
-import Swiss from './pages/Swiss';
+
 
 
 function App() {
