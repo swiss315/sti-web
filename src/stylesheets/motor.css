@@ -13,10 +13,7 @@
     
     
 }
-img {
-    width: 50%;
-    height: 50%;
-}
+
 .motor{
     overflow-x: hidden;
     justify-content: center;
@@ -44,7 +41,7 @@ img {
     padding-bottom: 2.3rem;
 }
 
-h3{
+.motor_container h3{
     font-size: 1.5rem;
     color: #01071F;
 
@@ -55,7 +52,7 @@ h3{
     font-size: 1rem;
 }
 
-img{
+.motor_container img{
     width: 100%;
     border-radius: 8px;
     height: 10rem;
