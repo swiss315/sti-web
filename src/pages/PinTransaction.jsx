@@ -9,10 +9,10 @@ const PinTransaction = () => {
     <div className="general-claims">
       <div className="claims-header">
         <AiOutlineArrowLeft />
-        <div className="sign-update">
+        {/* <div className="sign-update">
           <FaUserAlt />
           <img className="bell" src={Bell} alt="" />
-        </div>
+        </div> */}
       </div>
       <div className="myclaims">
         <h4>Transaction History</h4>
@@ -20,11 +20,11 @@ const PinTransaction = () => {
       <table className="transaction-table">
         <thead>
           <tr>
-            <th>Reference No</th>
-            <th>Policy</th>
-            <th>Insurance claim</th>
-            <th>Amount</th>
-            <th>Date</th>
+            <th className="ref">Reference No</th>
+            <th className="ref">Policy</th>
+            <th className="ref">Insurance claim</th>
+            <th className="ref">Amount</th>
+            <th className="ref">Date</th>
           </tr>
         </thead>
 

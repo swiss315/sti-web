@@ -9,10 +9,10 @@ const PinPassword = () => {
     <div className="general-claims">
       <div className="claims-header">
         <AiOutlineArrowLeft />
-        <div className="sign-update">
+        {/* <div className="sign-update">
           <FaUserAlt />
           <img className="bell" src={Bell} alt="" />
-        </div>
+        </div> */}
       </div>
       <div className="myclaims">
         <h4>Change Password</h4>
@@ -21,15 +21,15 @@ const PinPassword = () => {
         <form action="">
           <div className="form-group">
             <label>Old Password</label>
-            <input type="password" className="form-control" />
+            <input type="password" className="form-control" placeholder="************" />
           </div>
           <div className="form-group">
             <label>New Password</label>
-            <input type="password" className="form-control" />
+            <input type="password" className="form-control" placeholder="************" />
           </div>
           <div className="form-group">
             <label>Confirm New Password</label>
-            <input type="password" className="form-control" />
+            <input type="password" className="form-control" placeholder="************"/>
           </div>
           <button>Change Password</button>
         </form>

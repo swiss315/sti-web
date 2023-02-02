@@ -9,10 +9,10 @@ const TrackClaim = () => {
     <div className="general-claims">
       <div className="claims-header">
         <AiOutlineArrowLeft />
-        <div className="sign-update">
+        {/* <div className="sign-update">
           <FaUserAlt />
           <img className="bell" src={Bell} alt="" />
-        </div>
+        </div> */}
       </div>
       <div className="myclaims">
         <h4>My Claims</h4>

@@ -5,6 +5,11 @@ import '../stylesheets/dashboardlayout.css'
 
 import Dashboard from './Dashboard';
 import Sidebar from '../components/Sidebar';
+import Claims from '../pages/Claims';
+import Pin from '../pages/Pin';
+import PinTransaction from '../pages/PinTransaction';
+import PinPassword from '../pages/PinPassword';
+import TrackClaim from '../pages/TrackClaim';
 
 import {ReactComponent as Logoicon} from "../assets/icons/logoicon.svg";
 import {ReactComponent as Closeicon} from "../assets/icons/closeicon.svg";
@@ -43,6 +48,11 @@ function Dashboardlayout() {
           <Routes>
             {/* add route of dashboard here */}
               <Route path="dashboard" index element={<Dashboard />} />
+              <Route path="claim" index element={<Claims />} />
+              <Route path="pin" index element={<Pin />} />
+              <Route path="transactionhistory" index element={<PinTransaction />} />
+              <Route path="changepassword" index element={<PinPassword />} />
+              <Route path="trackclaim" index element={<TrackClaim />} />
           </Routes>
         </div>
     </div>

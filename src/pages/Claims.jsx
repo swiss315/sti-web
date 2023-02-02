@@ -3,24 +3,26 @@ import "../stylesheets/Claims.css";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
 import Bell from "../assets/icons/Bell.svg";
+import { Link } from "react-router-dom";
 
 const Claims = () => {
   return (
     <div className="general-claims">
       <div className="claims-header">
         <AiOutlineArrowLeft />
-        <div className="sign-update">
+        {/* <div className="sign-update">
           <FaUserAlt />
           <img className="bell" src={Bell} alt="" />
-        </div>
+        </div> */}
       </div>
       <div className="myclaims">
         <h4>My Claims</h4>
       </div>
       <div className="claim-track">
         <div className="claim-report">
-          <button>Report A Claim</button>
-          <button>Track A Claim</button>
+          <Link to='/claim'>
+          <button className="button1">Report A Claim</button> </Link>
+         <Link to='/trackclaim'> <button className="button2">Track A Claim</button> </Link>
         </div>
         <div className="claim-form">
           <div className="claim-type">

@@ -13,6 +13,7 @@ import {ReactComponent as Helpicon} from "../assets/icons/help&feedbackicon.svg"
 import {ReactComponent as Logouticon} from "../assets/icons/logouticon.svg";
 
 
+
 function Sidebar() {
   return (
     <div>
@@ -25,13 +26,13 @@ function Sidebar() {
             </p>
         </div>
         <div className='sidebar-menu'>
-            <Link>
+            <Link to="/claim">
                 <Claimicon />
                 <span>
                     Claims
                 </span>
             </Link>
-            <Link>
+            <Link to="/pin">
                 <Mypinsicon />
                 <span className='mypin'>
                     My Pins
@@ -43,7 +44,7 @@ function Sidebar() {
                     Active Policies
                 </span>
             </Link>
-            <Link>
+            <Link to='/transactionhistory'>
                 <Transactionicon />
                 <span>
                     Transaction History
@@ -55,7 +56,7 @@ function Sidebar() {
                     Report and Incident
                 </span>
             </Link>
-            <Link>
+            <Link to='/changepassword'>
                 <Passwordicon />
                 <span>
                     Change Password

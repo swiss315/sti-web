@@ -25,8 +25,34 @@
     gap: 0.5rem;
     margin-bottom: 2rem;
 }
+.claim-type input{
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #f8f5f5
+}
 .claim-notice{
     display: flex;
+}
+.claim-submit button{
+    width: 100%;
+    padding: 1rem;
+}
+.claim-report button{
+    padding: 1rem 5.7rem;
+    line-height: 0;
+    font-size: 16px;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    border: 1px solid rgba(162, 164, 165, 0.72);
+    border-radius: 12px;
+}
+.button1{
+    background-color: #FF9C26;
+    color: white;
+}
+.button2{
+    background-color: white;
+    color: #C0C3C4;
 }
 .claim-notice p{
     font-size: 12px;
@@ -34,7 +60,7 @@
     margin-left: 0.5rem;
 }
 .claim-track{
-    padding: 2rem 10rem;
+    display: block;
 }
 .describe{
     height: 6rem;
@@ -42,9 +68,6 @@
 .pin-message{
     text-align: center;
     padding: 10rem;
-}
-.transaction-table{
-    padding-top: 3rem;
 }
 .bell{
     margin-top: 2rem;
@@ -56,7 +79,7 @@
     display: grid;
 }
 .password-form{
-    padding: 5rem 18rem;
+    padding-top: 2rem;
 }
 .password-form form{
     background: #FFFFFF;
@@ -72,7 +95,9 @@
 }
 .form-group input{
     border: 1px solid rgba(0, 7, 15, 0.12);
-border-radius: 4px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(1, 17, 82, 0.1);
+    border-radius: 12px;
 }
 .password-form button{
     border-radius: 4px;
@@ -80,4 +105,26 @@ display: block;
 justify-content: center;
     font-size: 14px;
     font-weight: 600;
+    padding: 1rem 8.3rem;
+}
+
+
+
+/* transaction table */
+.transaction-table{
+    width: 100%;
+    border: 1px solid #003DC90D;
+    background: #FFFFFF;
+box-shadow: 0px 4px 18px rgba(1, 17, 82, 0.15);
+border-radius: 16px;
+padding-bottom: 1rem;
+margin-top: 3rem;
+}
+.transaction-table tr th{
+    padding: 1rem;
+    font-size: 11px;
+    border-bottom: 1px solid #003DC90D;
+}
+.ref{
+    font-weight: 100;
 }
