@@ -1,0 +1,164 @@
+:root{
+    --font-color: #01071F;
+}
+
+*{
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family:'Manrope', sans-serif;
+    
+    
+    
+}
+img {
+    width: 50%;
+    height: 50%;
+}
+.motor{
+    overflow-x: hidden;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+
+.motor_container{
+    width: 100%;
+    padding: 4.5rem 7rem;
+    
+}
+
+.policy_heading{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+
+}
+.policy_text{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 2.3rem;
+}
+
+h3{
+    font-size: 1.5rem;
+    color: #01071F;
+
+}
+
+.policy_text p{
+    color: #01071FCC;
+    font-size: 1rem;
+}
+
+img{
+    width: 100%;
+    border-radius: 8px;
+    height: 10rem;
+}
+
+.policy_container{
+    padding: 2.3rem 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.details p{
+    font-size: 0.8rem;
+    margin-bottom: 0.8rem;
+}
+.transaction{
+    display: flex;
+    flex-direction: row;
+    
+}
+.dot{
+    align-self: start;
+    margin-right: 0.8rem;
+    margin-top: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #FF9C26;
+}
+
+
+.active{
+    color: #00A82F;
+}
+
+.notactive{
+    color: #FE2121D6;
+}
+
+.pending{
+    color: #FEE609;
+}
+
+.stats-pending{
+    color: #FF9C26E3;
+}
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1024px){
+    
+    html{
+        font-size: 85%;
+    }
+}
+
+@media screen and (max-width: 885px){
+    
+    html{
+        font-size: 80%;
+    }
+    .policy_container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .transaction{
+        padding-bottom: 1.5rem;
+    }
+    
+}
+
+@media screen and (max-width: 640px){
+    
+    html{
+        font-size: 68%;
+    }
+    h3{
+        font-size: 1.2rem;
+    }
+    .policy_text p{
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 550px){
+    
+    html{
+        font-size: 70%;
+    }
+
+    .policy_container{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
+
