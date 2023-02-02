@@ -66,8 +66,8 @@ const Policies = () => {
           <div className="policies_wrap">
             {policiesData.map((item)=>(
               
-                <Link key={item.id} to={item.path} >
-                <img src={item.image} alt="insurance_images" />
+                <Link className="insurance_link" key={item.id} to={item.path} >
+                <img className="insurance_img" src={item.image} alt="insurance_images" />
                 <div className="text">
                   <p>{item.text}</p>
                   <h3>{item.heading}</h3>
