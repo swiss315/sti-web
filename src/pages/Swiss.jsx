@@ -10,7 +10,11 @@ import Policy from '../components/Policy'
 const Swiss = () => {
 
 
+<<<<<<< HEAD
     const swissData = [
+=======
+    const swissData= [
+>>>>>>> 8416aeb (update)
         {
             id: 1,
             number: 'SWISS/01/23/SA/10677',

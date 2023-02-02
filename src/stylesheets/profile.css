@@ -1,0 +1,140 @@
+.profile-container {
+    width: 600px;
+    padding: 2rem 3rem;
+    margin: 2.5rem auto;
+    padding-top: 0.5rem;
+}
+
+.profile-box {
+    text-align: center;
+}
+
+.profile-box > div, .edit-profile-box > div {
+    content: '';
+    height: 6.5rem;
+    width: 6.5rem;
+    background-color: #C4C4C4;
+    border-radius: 50%;
+    margin: 0rem auto;
+    margin-bottom: 0.7rem;
+}
+
+.profile-box > span {
+    display: block;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0.7rem auto;
+    width: fit-content;
+    padding: 0.5rem 1rem;
+}
+
+.profile-edit-button {
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    color: white;
+    background-color: #FF9C26;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.profile-menu {
+    box-shadow: 0px 4px 20px #F7F7F8;
+    background-color: #F7F7F8;
+    border-radius: 8px;
+    width: 428px;
+    margin: 4rem auto;
+}
+
+.profile-menu > a {
+    display: block;
+    text-decoration: none;
+    color: rgba(0, 7, 15, 0.9);
+    font-weight: 700;
+    font-size: 16px;
+    padding: 1.5rem 2rem;
+}
+
+.profile-menu > a > svg, .profile-menu > a > span {
+    vertical-align: middle;
+    margin: 0rem 0.7rem;
+}
+
+.profile-menu > .second {
+    border-top: 0.8px solid rgba(79, 82, 93, 0.19);
+    border-bottom: 0.8px solid rgba(79, 82, 93, 0.19);
+}
+
+.redlogout {
+    color: rgba(225, 6, 6, 0.84);
+}
+
+.d-none {
+    display: none;
+}
+
+.edit-profile-box {
+    text-align: center;
+}
+
+.edit-profile-box > span {
+    font-weight: 600;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.profile-input-group {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    gap: 15px
+}
+
+.profile-input > input, .profile-input > textarea {
+    border: 1px solid rgba(1, 7, 31, 0.12);
+    border-radius: 4px;
+    width: 100%;
+    padding: 0.65rem 0rem;
+}
+
+.profile-input {
+    text-align: left;
+}
+
+.profile-input > label {
+    display: block;
+    font-weight: 400;
+    font-size: 13px;
+    color: #1B2631;
+    margin-bottom: 0.5rem;
+}
+
+.profile-form-group {
+    width: 450px;
+    margin: 4rem auto;
+}
+
+.profile-input-group > .profile-input {
+    width: -webkit-fill-available;
+}
+
+.profile-form-group > div {
+    margin: 1rem 0rem;
+}
+
+.edit-profile-text {
+    color: rgba(0, 7, 15, 0.65);
+    font-size: 11px;
+    margin: 0.7rem 0rem;
+}
+
+.uploadimage {
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    margin: 2rem 0rem;
+}
+
+.edit-profile-button > button {
+    padding: 12px 50px;
+}

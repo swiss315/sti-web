@@ -1,5 +1,5 @@
 import React from 'react'
-import '../policies/motor.css'
+import '../stylesheets/motor.css'
 
 const Policy= ({heading, text, image,number, names,dob, sdate, edate, period, price, plate, value, type, pay ,stats}) => {
   return (

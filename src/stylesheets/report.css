@@ -1,0 +1,76 @@
+.report-content {
+    margin: 2rem 0rem;
+}
+
+.report-title {
+    font-weight: 600;
+font-size: 24px;
+}
+
+.report-card-container {
+    box-shadow: 0px 4px 20px rgba(1, 17, 82, 0.1);
+    border-radius: 12px;
+    width: 600px;
+    padding: 2rem 3rem;
+    margin: 2.5rem auto;
+    padding-top: 0.5rem;
+}
+
+.report-inputgroup {
+    margin: 1.3rem 0rem;
+}
+
+.report-inputgroup > label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.report-inputgroup > input {
+    border: 1px solid rgba(1, 7, 31, 0.1);
+    border-radius: 4px;
+    padding: 10px;
+    width: -webkit-fill-available;
+}
+
+.report-inputgroup > textarea {
+    border: 1px solid rgba(1, 7, 31, 0.1);
+    border-radius: 4px;
+    padding: 10px;
+    width: -webkit-fill-available;
+}
+
+.upload-input {
+    text-align: center;
+    border: 1px solid rgba(1, 7, 31, 0.1);
+    border-radius: 4px; 
+    padding: 1.5rem 0rem;
+}
+
+.upload-input > p {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.upload-input > p > span {
+    font-size: 13px;
+    color: #0064E5;
+    cursor: pointer;
+}
+
+.report-button {
+    text-align: center;
+}
+
+.report-button > button {
+    margin-top: 2rem;
+    padding: 10px 4rem;
+    background: #FF9C26;
+    border: none;
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+}

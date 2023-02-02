@@ -1,6 +1,7 @@
 import "../stylesheets/policies.css";
-import { BrowserRouter, Routes, Route, Switch, Redirect, Link, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import React from "react";
+// import Motor from "./Motor";
 import all from '../assets/all.png'
 import marine from '../assets/marine.png';
 import motor from '../assets/motor.png';

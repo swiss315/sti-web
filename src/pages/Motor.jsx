@@ -1,4 +1,8 @@
 import React from 'react'
+<<<<<<< HEAD
+=======
+// import { useState } from 'react'
+>>>>>>> 8416aeb (update)
 import "../stylesheets/motor.css"
 import motorp from '../assets/motorp.png'
 import Policy from '../components/Policy'

@@ -2,7 +2,7 @@
     padding: 1rem 8rem;
 }
 .claims-header{
-    display: flex;
+    display: none;
     justify-content: space-between;
     align-items: center;
 }

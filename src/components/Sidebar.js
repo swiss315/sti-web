@@ -50,7 +50,7 @@ function Sidebar() {
                     Transaction History
                 </span>
             </Link>
-            <Link>
+            <Link to='/report'>
                 <Reporticon />
                 <span>
                     Report and Incident
@@ -62,7 +62,7 @@ function Sidebar() {
                     Change Password
                 </span>
             </Link>
-            <Link>
+            <Link to='/feedback'>
                 <Helpicon />
                 <span>
                     Help & Feedback

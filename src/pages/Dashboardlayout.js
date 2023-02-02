@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 
 import '../stylesheets/dashboardlayout.css'
 
 import Dashboard from './Dashboard';
+import ReportandIncident from './report&incident';
+import Helpandfeedback from './Help&feedback';
+import Profile from './profile';
 import Sidebar from '../components/Sidebar';
 import Claims from '../pages/Claims';
 import Pin from '../pages/Pin';
@@ -17,6 +20,7 @@ import Swiss from '../pages/Swiss';
 import {ReactComponent as Logoicon} from "../assets/icons/logoicon.svg";
 import {ReactComponent as Closeicon} from "../assets/icons/closeicon.svg";
 import {ReactComponent as Sidebarmenu} from "../assets/icons/sidebarmenu.svg";
+import {ReactComponent as Backicon} from "../assets/icons/backicon.svg";
 import {ReactComponent as Labelname} from "../assets/icons/blacklabel.svg";
 import {ReactComponent as Notification} from "../assets/icons/notification.svg";
 
@@ -26,6 +30,10 @@ function Dashboardlayout() {
   const handleclick = () => {
     setSidebar(!sidebar);
   };
+
+  const location = useLocation();
+  let pagename = location.pathname;
+  pagename = pagename.slice(1);
 
 
   return (
@@ -40,10 +48,14 @@ function Dashboardlayout() {
         <div className={` ${sidebar ? "maincontentexpand" : "maincontent"}`}>
           <div className='dashboard-nav'>
             <div className='sidebar-container'>
-              <Sidebarmenu onClick={handleclick}/>
+              {
+                pagename === 'dashboard' ? <Sidebarmenu onClick={handleclick}/> : <Link to='/dashboard' > <Backicon /> </Link>
+              }
             </div>
             <div className='profile-notification'>
-              <Labelname />
+              <Link to='/profile'>
+                <Labelname />
+              </Link>
               <Notification />
             </div>
           </div>
@@ -59,6 +71,9 @@ function Dashboardlayout() {
               <Route path='policies' element={<Policies/>} />
               <Route path='motor' element={<Motor/>} />
               <Route path='swiss' element={<Swiss/>} />
+              <Route path="report" index element={<ReportandIncident />} />
+              <Route path="feedback" index element={<Helpandfeedback />} />
+              <Route path="profile" index element={<Profile />} />
           </Routes>
         </div>
     </div>
