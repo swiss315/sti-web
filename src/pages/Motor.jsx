@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState } from 'react'
 import "../stylesheets/motor.css"
 import motorp from '../assets/motorp.png'
 import Policy from '../components/Policy'
@@ -11,7 +10,7 @@ import Policy from '../components/Policy'
 const Motor = () => {
 
 
-    const [motorData, setMotorData] = useState([
+    const motorData = [
         {
             id: 1,
             number: 'MOT/PM/01/23/SA/10677',
@@ -60,7 +59,7 @@ const Motor = () => {
             stats: 'Pending'
     
         },
-    ])
+    ]
 
 
 
