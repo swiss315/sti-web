@@ -55,7 +55,7 @@
     display: flex;
 }
 
-.profile-notification > svg {
+.profile-notification > a {
     margin: 0rem 1rem;
 }
 

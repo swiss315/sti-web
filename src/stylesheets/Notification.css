@@ -1,0 +1,16 @@
+.notification-button-container {
+    /* position: relative; */
+    display: flex;
+    justify-content: center;
+}
+
+.notification-button {
+    position: absolute;
+    bottom: 20px;
+    padding: 15px 50px;
+    background-color: #969AAB;
+}
+
+.notification-title {
+    margin-top: 2rem;
+}

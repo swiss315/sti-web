@@ -28,6 +28,7 @@ import Marineinsurance from './Marineinsurance';
 import Allrisk from './Allrisk';
 import Travelinsurance from './Travelinsurance';
 import Swissinsurance from './swissinsurance';
+import Notifications from './Notification';
 
 function Dashboardlayout() {
   const [sidebar, setSidebar] = useState(false);
@@ -61,7 +62,9 @@ function Dashboardlayout() {
               <Link to='/profile'>
                 <Labelname />
               </Link>
-              <Notification />
+              <Link to='/notification'>
+                <Notification />
+              </Link>
             </div>
           </div>
         
@@ -82,7 +85,7 @@ function Dashboardlayout() {
               <Route path="motor-insurance" index element={<Motorinsuranceregister />} />
               <Route path="swiss-insurance" index element={<Swissinsurance />} />
               <Route path="marine-insurance" index element={<Marineinsurance />} />
-              {/* <Route path="marine-coperate" index element={<Marinecoperate/>} /> */}
+              <Route path="notification" index element={<Notifications/>} />
               <Route path="all-risk" index element={<Allrisk />} />
               <Route path="travel-insurance" index element={<Travelinsurance />} />
           </Routes>
