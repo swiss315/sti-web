@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Link } from "react-router-dom";
 
 import '../stylesheets/dashboard.css'
 
@@ -6,7 +7,6 @@ import marineinsurance from "../assets/images/marineinsurance.png";
 import {ReactComponent as Searchicon} from "../assets/icons/searchicon.svg";
 
 function Dashboard() {
-  const [tab, setTab] = useState("Motor")
   return (
     <div className='dashboard-content'>
       <p>
@@ -27,36 +27,24 @@ function Dashboard() {
         </div>
       </div>
       <div className='insurance-tab-container'>
-        <div className={`insurance-type-tab ${tab === "Motor" ? "dashboard-active" : ""}`} onClick={() => {
-              setTab("Motor");
-            }}>
+        <Link to='/motor-insurance' className={`insurance-type-tab `} >
           Motor Insurance
-        </div>
-        <div className={`insurance-type-tab ${tab === "Risk" ? "dashboard-active" : ""}`} onClick={() => {
-              setTab("Risk");
-            }}>
+        </Link>
+        <Link to='/all-risk' className={`insurance-type-tab `} >
           All Risk Insurance
-        </div>
-        <div className={`insurance-type-tab ${tab === "Swiss" ? "dashboard-active" : ""}`} onClick={() => {
-              setTab("Swiss");
-            }}>
+        </Link>
+        <Link to='/swiss-insurance' className={`insurance-type-tab `} >
           Swiss-F Insurance
-        </div>
-        <div className={`insurance-type-tab ${tab === "Travel" ? "dashboard-active" : ""}`} onClick={() => {
-              setTab("Travel");
-            }}>
+        </Link>
+        <Link to='/travel-insurance' className={`insurance-type-tab `} >
           Easy Travel Insurance Cover
-        </div>
-        <div className={`insurance-type-tab ${tab === "Marine" ? "dashboard-active" : ""}`} onClick={() => {
-              setTab("Marine");
-            }}>
+        </Link>
+        <Link to='/marine-insurance' className={`insurance-type-tab`}>
           Marine Insurance
-        </div>
-        <div className={`insurance-type-tab ${tab === "Contractor" ? "dashboard-active" : ""}`} onClick={() => {
-              setTab("Contractor");
-            }}>
+        </Link>
+        <Link className={`insurance-type-tab `} >
           Contractors All Risk Insurance
-        </div>
+        </Link>
       </div>
       <div className='insurance-tab-content'>
           <div className='tab-box' style={{ backgroundImage: `url(${marineinsurance})` }}>

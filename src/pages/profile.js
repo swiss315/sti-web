@@ -55,7 +55,7 @@ function Profile() {
             </div>
         </div>
         <div>
-            <div className='edit-profile-box'>
+            <div className={`edit-profile-box ${show ? '' : 'd-none'}`}>
                 <div>
                     <img src={filename} alt='profilepicture' />
                 </div>

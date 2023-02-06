@@ -1,12 +1,12 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+// import React from 'react'
+// import { Link } from 'react-router-dom'
 
-const Logout = () => {
-  return (
-    <div>
+// const Logout = () => {
+//   return (
+//     <div>
         
-    </div>
-  )
-}
+//     </div>
+//   )
+// }
 
-export default Logout
+// export default Logout

@@ -23,7 +23,7 @@
     border: 1px solid #FF9C26;
     border-radius: 4px;
     background-color: #fdfaf6;
-    color: black;
+    color: black !important;
     cursor: pointer;
 }
 
@@ -36,6 +36,7 @@
     background-color: #FF9C26;
     padding: 12px 7rem;
     cursor: pointer;
+    border: 0px;
 }
 
 .activebutton {
@@ -48,4 +49,8 @@
     font-size: 14px;
     color: rgba(1, 7, 31, 0.84);
     margin-top: 0.8rem;
+}
+
+.help-textarea {
+    margin: 4.5rem 0rem;
 }

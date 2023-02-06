@@ -1,0 +1,18 @@
+.buttonstar {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 25px;
+    margin-top: 1rem;
+  }
+  .on {
+    color: #FCBE73;
+  }
+  .off {
+    color: #ccc !important;
+  }
+
+  .star-rating {
+    display: flex;
+  }

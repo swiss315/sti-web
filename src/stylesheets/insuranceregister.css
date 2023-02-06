@@ -1,0 +1,137 @@
+.insurance-tab {
+    border: 1px solid rgba(162, 164, 165, 0.72);
+    border-radius: 12px;
+    width: 600px;
+    display: flex;
+    /* padding: 2rem 3rem; */
+    margin: 2.5rem auto;
+    /* padding-top: 0.5rem; */
+}
+
+.insurance-tab > div {
+    width: -webkit-fill-available;
+    text-align: center;
+    color: #C0C3C4;
+    cursor: pointer;
+    padding: 0.65rem 0rem;
+}
+
+.insurance-tab > .active {
+    background-color: #FF9C26;
+    border: 0.8px solid #FFFFFF;
+    border-radius: 12px;
+    color: white;
+}
+
+.insurance-selectgroup > select {
+    border: 1px solid rgba(1, 7, 31, 0.1);
+    border-radius: 4px;
+    padding: 10px;
+    width: -webkit-fill-available;
+    -webkit-appearance: none;
+    appearance: none;
+    -moz-appearance: none;
+    background-image: url('https://www.svgrepo.com/show/80156/down-arrow.svg');
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+    background-position: calc(100% - 16px);
+}
+
+.insurance-selectgroup > select::after {
+    right: 10px;
+    position: absolute;
+}
+
+.insurance-card-container {
+    box-shadow: 0px 4px 20px rgb(1 17 82 / 10%);
+    border-radius: 12px;
+    /* width: 600px; */
+    padding: 2rem 3rem;
+    margin: 2.5rem auto 0rem;
+    padding-top: 0.5rem;
+    
+}
+
+.insurance-disclosure > h6 {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.insurance-disclosure > p {
+    font-size: 12px;
+    padding-top: 1rem;
+}
+
+.insurance-form {
+    width: 600px;
+    margin: 0rem auto;
+}
+
+.insurance-checkbox > input {
+    width: auto;
+    vertical-align: middle;
+}
+
+.insurance-checkbox > span {
+    color: #5C5C5C;
+    font-size: 13px;
+    padding-left: 15px;
+}
+
+.insurance-checkbox > span > a {
+    color: #0064E5;
+}
+
+.insurance-checkbox {
+    padding: 1rem 0rem;
+}
+
+.insurance-button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.insurance-button > button, .insurance-next > div {
+    margin-top: 0rem;
+    padding: 10px 4rem;
+    background: #FF9C26;
+    border: none;
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.insurance-next > div {
+    margin-top: 0rem;
+    padding: 10px 4rem;
+    background: #FF9C26;
+    border: none;
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    color: white;
+    width: fit-content;
+    margin: 0rem auto;
+}
+
+.insurance-next {
+    cursor: pointer;
+}
+
+.insurance-back {
+    margin: auto 0rem;
+} 
+
+.insurance-back > a {
+    text-transform: capitalize;
+    color: #FF9C26;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.d-none {
+    display: none;
+}

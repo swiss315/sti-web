@@ -23,7 +23,11 @@ import {ReactComponent as Sidebarmenu} from "../assets/icons/sidebarmenu.svg";
 import {ReactComponent as Backicon} from "../assets/icons/backicon.svg";
 import {ReactComponent as Labelname} from "../assets/icons/blacklabel.svg";
 import {ReactComponent as Notification} from "../assets/icons/notification.svg";
-import Logout from './Logout';
+import Motorinsuranceregister from './Motorinsuranceregister';
+import Marineinsurance from './Marineinsurance';
+import Allrisk from './Allrisk';
+import Travelinsurance from './Travelinsurance';
+import Swissinsurance from './swissinsurance';
 
 function Dashboardlayout() {
   const [sidebar, setSidebar] = useState(false);
@@ -75,6 +79,12 @@ function Dashboardlayout() {
               <Route path="report" index element={<ReportandIncident />} />
               <Route path="feedback" index element={<Helpandfeedback />} />
               <Route path="profile" index element={<Profile />} />
+              <Route path="motor-insurance" index element={<Motorinsuranceregister />} />
+              <Route path="swiss-insurance" index element={<Swissinsurance />} />
+              <Route path="marine-insurance" index element={<Marineinsurance />} />
+              {/* <Route path="marine-coperate" index element={<Marinecoperate/>} /> */}
+              <Route path="all-risk" index element={<Allrisk />} />
+              <Route path="travel-insurance" index element={<Travelinsurance />} />
           </Routes>
         </div>
     </div>

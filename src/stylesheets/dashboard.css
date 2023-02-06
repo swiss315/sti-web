@@ -17,7 +17,7 @@
     justify-content: space-evenly;
 }
 
-.dashboard-active {
+.insurance-type-tab:hover {
     background-color: #011152;
     color: white;
 }

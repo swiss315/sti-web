@@ -15,35 +15,35 @@ const policiesData = [
   
   {
     id: 1,
-    path: 'marine',
+    path: '/marine',
     image: marine,
     text: '2 policies',
     heading: 'Marine Insurance'
   },
   {
     id: 2,
-    path: 'motor',
+    path: '/motor',
     image: motor,
     text: '2 policies',
     heading: 'Motor Insurance'
   },
   {
     id: 3,
-    path: 'easy',
+    path: '/easy',
     image: easy,
     text: '2 policies',
     heading: 'Easy Travel Insurance'
   },
   {
     id: 4,
-    path: 'all',
+    path: '/all',
     image: all,
     text: '2 policies',
     heading: 'All Risk Insurance'
   },
   {
     id: 5 ,
-    path: 'swiss',    
+    path: '/swiss',    
     image: swiss,
     text: '2 policies',
     heading: 'Swiss-F Insurance'
