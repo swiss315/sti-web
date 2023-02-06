@@ -69,7 +69,7 @@ function Sidebar() {
                 </span>
             </Link>
             <div className='logout'>
-                <Link>
+                <Link to='/login'>
                     <Logouticon />
                     <span>
                         Logout

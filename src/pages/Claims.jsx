@@ -8,13 +8,13 @@ import { Link } from "react-router-dom";
 const Claims = () => {
   return (
     <div className="general-claims">
-      <div className="claims-header">
-        <AiOutlineArrowLeft />
-        {/* <div className="sign-update">
+      {/* <div className="claims-header">
+       <Link to='/home'> <AiOutlineArrowLeft /> </Link>
+         <div className="sign-update">
           <FaUserAlt />
           <img className="bell" src={Bell} alt="" />
-        </div> */}
-      </div>
+        </div> 
+      </div> */}
       <div className="myclaims">
         <h4>My Claims</h4>
       </div>
@@ -24,7 +24,7 @@ const Claims = () => {
           <button className="button1">Report A Claim</button> </Link>
          <Link to='/trackclaim'> <button className="button2">Track A Claim</button> </Link>
         </div>
-        <div className="claim-form">
+        <form className="claim-form">
           <div className="claim-type">
             <label htmlFor="">Claim Type</label>
             <input type="text" placeholder="Select preferred type" />
@@ -92,7 +92,7 @@ const Claims = () => {
           <div className="claim-submit">
             <button>Submit</button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

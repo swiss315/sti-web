@@ -71,7 +71,7 @@ const Login = ({showLogIn,  setShowLogIn}) => {
             </Link>
           </div>
           <div className="button">
-            <button>Login</button>
+            <Link to='/dashboard'><button>Login</button></Link>
           </div>
         </div>
       </div>

@@ -16,6 +16,7 @@ import {ReactComponent as Closeicon} from "../assets/icons/closeicon.svg";
 import {ReactComponent as Sidebarmenu} from "../assets/icons/sidebarmenu.svg";
 import {ReactComponent as Labelname} from "../assets/icons/blacklabel.svg";
 import {ReactComponent as Notification} from "../assets/icons/notification.svg";
+import Logout from './Logout';
 
 function Dashboardlayout() {
   const [sidebar, setSidebar] = useState(false);
@@ -53,6 +54,7 @@ function Dashboardlayout() {
               <Route path="transactionhistory" index element={<PinTransaction />} />
               <Route path="changepassword" index element={<PinPassword />} />
               <Route path="trackclaim" index element={<TrackClaim />} />
+              <Route path="login" index element={<Logout />} />
           </Routes>
         </div>
     </div>

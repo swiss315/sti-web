@@ -11,13 +11,13 @@ import Bell from "../assets/icons/Bell.svg";
 const Pin  = () => {
   return (
     <div className="general-claims">
-    <div className="claims-header">
+    {/* <div className="claims-header">
       <AiOutlineArrowLeft />
-      <div className="sign-update">
+       <div className="sign-update">
         <FaUserAlt />
         <img src={Bell} alt="" />
-      </div>
-    </div>
+      </div> 
+    </div> */}
     <div className="myclaims">
       <h4>My Pins</h4>
     </div>

@@ -1,5 +1,8 @@
+/* *{
+  outline: green  solid !important;
+} */
 .general-claims{
-    padding: 1rem 8rem;
+    /* padding: 1rem 8rem; */
 }
 .claims-header{
     display: flex;
@@ -28,7 +31,7 @@
 .claim-type input{
     width: 100%;
     border-radius: 10px;
-    border: 1px solid #f8f5f5
+    border: 1px solid #A2A4A5B8
 }
 .claim-notice{
     display: flex;
@@ -45,6 +48,7 @@
     font-weight: 500;
     border: 1px solid rgba(162, 164, 165, 0.72);
     border-radius: 12px;
+    width: 49%;
 }
 .button1{
     background-color: #FF9C26;
@@ -61,6 +65,7 @@
 }
 .claim-track{
     display: block;
+    padding: 1rem 16rem;
 }
 .describe{
     height: 6rem;
@@ -80,6 +85,7 @@
 }
 .password-form{
     padding-top: 2rem;
+    padding: 2rem 16rem;
 }
 .password-form form{
     background: #FFFFFF;
@@ -98,6 +104,7 @@
     background: #FFFFFF;
     box-shadow: 0px 4px 20px rgba(1, 17, 82, 0.1);
     border-radius: 12px;
+    width: 100%;
 }
 .password-form button{
     border-radius: 4px;
@@ -106,6 +113,7 @@ justify-content: center;
     font-size: 14px;
     font-weight: 600;
     padding: 1rem 8.3rem;
+    width: 100%;
 }
 
 
@@ -122,9 +130,42 @@ margin-top: 3rem;
 }
 .transaction-table tr th{
     padding: 1rem;
-    font-size: 11px;
+    font-size: 16px;
     border-bottom: 1px solid #003DC90D;
 }
 .ref{
     font-weight: 100;
+}
+
+/* media screens */
+
+@media screen and (max-width: 400px) {
+.claim-track{
+    padding: 0;
+}
+.claim-report button{
+    width: 100%;
+    padding: 2rem;
+}
+.claim-type input{
+    width: auto;
+}
+.transaction-table tr th{
+    font-size: 9px;
+}
+.password-form form{
+    padding: 1rem 3rem;
+}
+.form-group label
+{
+    font-size: 10px;
+}
+.password-form{
+    padding: 0;
+}
+.password-form button{
+    padding: 1rem 3rem;
+    margin-bottom: 2rem;
+}
+
 }
