@@ -133,6 +133,16 @@
     
 }
 
+
+@media screen and (max-width: 850px){
+    
+    .motor_container{
+    padding: 2.8rem 4.5rem;
+    }
+}
+
+
+
 @media screen and (max-width: 640px){
     
     html{
@@ -143,6 +153,9 @@
     }
     .policy_text p{
         font-size: 0.7rem;
+    }
+    .motor_container{
+    padding: 2.5rem 3.5rem;
     }
 }
 
