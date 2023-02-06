@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family:'Manrope', sans-serif;
+    text-decoration: none;
+    
+    
+    
+}
+
+.termsandprivacy h3{
+    padding-left: 6rem ;
+    padding-top: 4.5rem;
+    font-weight: 700;
+font-size: 24px;
+line-height: 120%;
+/* identical to box height, or 29px */
+
+
+color: #01071F;
+}
+
+.terms_container{
+    text-align: justify;
+    padding: 2.5rem 14rem 2.5rem 6rem;
+}
+
+.terms_container p{
+    font-size: 1rem;
+    padding-bottom: 1rem;
+}

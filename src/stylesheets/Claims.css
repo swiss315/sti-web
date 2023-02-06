@@ -5,7 +5,7 @@
     /* padding: 1rem 8rem; */
 }
 .claims-header{
-    display: flex;
+    display: none;
     justify-content: space-between;
     align-items: center;
 }
@@ -41,8 +41,8 @@
     padding: 1rem;
 }
 .claim-report button{
-    padding: 1rem 5.7rem;
-    line-height: 0;
+    padding: 1rem 5rem;
+    line-height: 1;
     font-size: 16px;
     margin-bottom: 2rem;
     font-weight: 500;
@@ -50,9 +50,12 @@
     border-radius: 12px;
     width: 49%;
 }
-.button1{
-    background-color: #FF9C26;
-    color: white;
+.button1 .active {
+    border: 1px solid #FF9C26;
+    border-radius: 4px;
+    background-color: #fdfaf6;
+    color: black;
+    cursor: pointer;
 }
 .button2{
     background-color: white;

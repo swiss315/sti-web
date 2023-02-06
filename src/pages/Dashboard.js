@@ -27,32 +27,32 @@ function Dashboard() {
         </div>
       </div>
       <div className='insurance-tab-container'>
-        <div className={`insurance-type-tab ${tab === "Motor" ? "active" : ""}`} onClick={() => {
+        <div className={`insurance-type-tab ${tab === "Motor" ? "dashboard-active" : ""}`} onClick={() => {
               setTab("Motor");
             }}>
           Motor Insurance
         </div>
-        <div className={`insurance-type-tab ${tab === "Risk" ? "active" : ""}`} onClick={() => {
+        <div className={`insurance-type-tab ${tab === "Risk" ? "dashboard-active" : ""}`} onClick={() => {
               setTab("Risk");
             }}>
           All Risk Insurance
         </div>
-        <div className={`insurance-type-tab ${tab === "Swiss" ? "active" : ""}`} onClick={() => {
+        <div className={`insurance-type-tab ${tab === "Swiss" ? "dashboard-active" : ""}`} onClick={() => {
               setTab("Swiss");
             }}>
           Swiss-F Insurance
         </div>
-        <div className={`insurance-type-tab ${tab === "Travel" ? "active" : ""}`} onClick={() => {
+        <div className={`insurance-type-tab ${tab === "Travel" ? "dashboard-active" : ""}`} onClick={() => {
               setTab("Travel");
             }}>
           Easy Travel Insurance Cover
         </div>
-        <div className={`insurance-type-tab ${tab === "Marine" ? "active" : ""}`} onClick={() => {
+        <div className={`insurance-type-tab ${tab === "Marine" ? "dashboard-active" : ""}`} onClick={() => {
               setTab("Marine");
             }}>
           Marine Insurance
         </div>
-        <div className={`insurance-type-tab ${tab === "Contractor" ? "active" : ""}`} onClick={() => {
+        <div className={`insurance-type-tab ${tab === "Contractor" ? "dashboard-active" : ""}`} onClick={() => {
               setTab("Contractor");
             }}>
           Contractors All Risk Insurance

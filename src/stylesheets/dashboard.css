@@ -17,7 +17,7 @@
     justify-content: space-evenly;
 }
 
-.active {
+.dashboard-active {
     background-color: #011152;
     color: white;
 }

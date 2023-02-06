@@ -1,11 +1,25 @@
-import React from "react";
+
+import React, { useRef, useState } from 'react'
+
+import '../stylesheets/report.css'
+
+import {ReactComponent as Uploadicon} from "../assets/icons/uploadicon.svg";
+
 import "../stylesheets/Claims.css";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { FaUserAlt } from "react-icons/fa";
-import Bell from "../assets/icons/Bell.svg";
+// import { FaUserAlt } from "react-icons/fa";
+// import Bell from "../assets/icons/Bell.svg";
 import { Link } from "react-router-dom";
 
 const Claims = () => {
+
+  const click = useRef('')
+  const [filename, setFilename] = useState()
+
+  const file = () => {
+      click.current.click()
+    }
+
   return (
     <div className="general-claims">
       {/* <div className="claims-header">
@@ -54,33 +68,32 @@ const Claims = () => {
             placeholder="Choose File from your device here"
           >
             <label htmlFor="">Upload Estimate Of Claim Cost</label>
-            <input
-              type="file"
-              id="avatar"
-              name="avatar"
-              accept="image/png, image/jpeg"
-            />
+            <input type='file' ref={click} onChange={(e) => { setFilename(e.target.files[0].name)}} hidden />
+                    <div className='upload-input'>
+                        <Uploadicon />
+                        <p>{filename}</p>
+                        <p>Choose File from your device <span onClick={file}>here</span></p>
+                    </div>
           </div>
           <div className="claim-type">
             <label htmlFor="" placeholder="Choose File from your device here">
               Upload Damage Picture
             </label>
-            <input
-              type="file"
-              id="avatar"
-              name="avatar"
-              accept="image/png, image/jpeg"
-            />
+            <input type='file' ref={click} onChange={(e) => { setFilename(e.target.files[0].name)}} hidden />
+                    <div className='upload-input'>
+                        <Uploadicon />
+                        <p>{filename}</p>
+                        <p>Choose File from your device <span onClick={file}>here</span></p>
+                    </div>
           </div>
           <div className="claim-type">
             <label htmlFor="">Upload Other Documents</label>
-            <input
-              type="file"
-              id="avatar"
-              name="avatar"
-              accept="image/png, image/jpeg"
-              placeholder="Choose File from your device here"
-            />
+            <input type='file' ref={click} onChange={(e) => { setFilename(e.target.files[0].name)}} hidden />
+                    <div className='upload-input'>
+                        <Uploadicon />
+                        <p>{filename}</p>
+                        <p>Choose File from your device <span onClick={file}>here</span></p>
+                    </div>
           </div>
           <div className="claim-notice">
             <h5>NB:</h5>

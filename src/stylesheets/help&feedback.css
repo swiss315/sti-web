@@ -1,0 +1,51 @@
+.feedback-container {
+    width: 500px;
+    padding: 2rem 3rem;
+    margin: 2.5rem auto;
+    padding-top: 0.5rem;
+}
+
+.feedback-header > p > span {
+    display: block;
+}
+
+.feedback-button {
+    border: 1px solid rgba(1, 7, 31, 0.1);
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 0.8rem 0rem;
+    margin: 1.5rem 0rem;
+}
+
+.feedback-button:hover, .active {
+    border: 1px solid #FF9C26;
+    border-radius: 4px;
+    background-color: #fdfaf6;
+    color: black;
+    cursor: pointer;
+}
+
+.feedback-next {
+    display: none;
+    text-align: center;
+}
+
+.feedback-next-button {
+    background-color: #FF9C26;
+    padding: 12px 7rem;
+    cursor: pointer;
+}
+
+.activebutton {
+    display: block;
+    text-align: center;
+}
+
+.feedback-header > p {
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(1, 7, 31, 0.84);
+    margin-top: 0.8rem;
+}

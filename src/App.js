@@ -7,6 +7,7 @@ import Dashboardlayout from './pages/Dashboardlayout';
 import  Login from './pages/Login';
 
 
+
 function App() {
   return (
     <div className="App">
@@ -18,6 +19,7 @@ function App() {
           <Route path='/login' exact element={<Login/>} />
           <Route path='/*' exact element={<Dashboardlayout/>} />
         </Routes>
+        
       </Router>
      
     </div>

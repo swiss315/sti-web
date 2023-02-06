@@ -34,8 +34,12 @@
     height: 100vh;
 }
 
-.maincontent > .sidebar-container {
+.maincontent > .dashboard-nav > .sidebar-container {
     display: none;
+}
+
+.maincontent > .dashboard-nav {
+    justify-content: flex-end;
 }
 
 .maincontentexpand {
