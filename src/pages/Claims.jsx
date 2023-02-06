@@ -6,7 +6,6 @@ import '../stylesheets/report.css'
 import {ReactComponent as Uploadicon} from "../assets/icons/uploadicon.svg";
 
 import "../stylesheets/Claims.css";
-import { AiOutlineArrowLeft } from "react-icons/ai";
 // import { FaUserAlt } from "react-icons/fa";
 // import Bell from "../assets/icons/Bell.svg";
 import { Link } from "react-router-dom";

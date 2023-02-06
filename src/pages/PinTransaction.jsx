@@ -1,8 +1,5 @@
 import React from "react";
 import "../stylesheets/Claims.css";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-// import { FaUserAlt } from "react-icons/fa";
-// import Bell from "../assets/icons/Bell.svg";
 
 const PinTransaction = () => {
   return (
