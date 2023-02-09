@@ -72,7 +72,9 @@ function Helpandfeedback() {
           </div>
           <div className={`insurance-button-container`}>
             <div className="insurance-back">
-              <Link>Back</Link>
+              <Link onClick={() => {
+                setNext(false);
+              }}>Back</Link>
             </div>
             <div className="insurance-button">
               <button>submit</button>

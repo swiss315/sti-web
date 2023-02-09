@@ -170,7 +170,7 @@ function Motorinsuranceregister() {
           >
             <input type="checkbox" />
             <span>
-              I have reviewed and agreed to the disclosure and privacy policy
+              I have reviewed and agreed to the disclosure and <Link to='/terms&condition'>privacy policy</Link>
             </span>
           </div>
           <div className={`insurance-next ${tab === "next" ? "d-none" : ""}`}>
@@ -344,8 +344,7 @@ function Motorinsuranceregister() {
           <div className={`insurance-checkbox ${tab === "" ? "d-none" : ""}`}>
             <input type="checkbox" />
             <span>
-              I have reviewed and agreed to the disclosure and
-              <Link>privacy policy</Link>
+              I have reviewed and agreed to the disclosure and <Link to='/terms&condition'>privacy policy</Link>
             </span>
           </div>
           <div

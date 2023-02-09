@@ -29,9 +29,11 @@ import Allrisk from './Allrisk';
 import Travelinsurance from './Travelinsurance';
 import Swissinsurance from './swissinsurance';
 import Notifications from './Notification';
+import Terms from './Terms';
+import Privacy from './Privacy';
 
 function Dashboardlayout() {
-  const [sidebar, setSidebar] = useState(false);
+  const [sidebar, setSidebar] = useState(true);
 
   const handleclick = () => {
     setSidebar(!sidebar);
@@ -88,6 +90,8 @@ function Dashboardlayout() {
               <Route path="notification" index element={<Notifications/>} />
               <Route path="all-risk" index element={<Allrisk />} />
               <Route path="travel-insurance" index element={<Travelinsurance />} />
+              <Route path="terms&condition" index element={<Terms />} />
+              <Route path="privacy" index element={<Privacy />} />
           </Routes>
         </div>
     </div>

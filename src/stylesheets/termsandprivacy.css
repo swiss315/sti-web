@@ -27,10 +27,54 @@ color: #01071F;
 
 .terms_container{
     text-align: justify;
-    padding: 2.5rem 14rem 2.5rem 6rem;
+    padding: 2.5rem 6rem 2.5rem 6rem;
 }
 
 .terms_container p{
     font-size: 1rem;
     padding-bottom: 1rem;
+}
+
+@media only screen and (max-width: 1280px) {
+   
+}
+
+@media only screen and (max-width: 1024px) {
+   
+}
+
+@media only screen and (max-width: 992px) {
+
+}
+
+@media only screen and (max-width: 820px) {
+   
+}
+
+@media only screen and (max-width: 768px) {
+   
+}
+
+@media only screen and (max-width: 600px) {
+    .terms_container {
+        padding: 2.5rem 4rem 2.5rem 4rem;
+    }
+
+    .termsandprivacy h3 {
+        padding-left: 4rem;
+    }    
+}
+
+@media only screen and (max-width: 500px) {
+    .terms_container {
+        padding: 2.5rem 2rem 2.5rem 2rem;
+    }
+
+    .termsandprivacy h3 {
+        padding-left: 2rem;
+    } 
+}
+
+@media only screen and (max-width: 300px) {
+
 }

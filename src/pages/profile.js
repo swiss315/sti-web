@@ -36,13 +36,13 @@ function Profile() {
                     </span>
                 </div>
                 <div className='profile-menu'>
-                    <Link>
+                    <Link to='/terms&condition'>
                         <Termsicon /> 
                         <span>
                             Terms & Conditions
                         </span>
                     </Link>
-                    <Link className='second'>
+                    <Link to='/privacy' className='second'>
                         <Privacyicon /> 
                         <span>
                             Privacy Policy

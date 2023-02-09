@@ -32,6 +32,7 @@
     width: 100vw;
     grid-template-columns: 0px auto;
     height: 100vh;
+    /* overflow: hidden; */
 }
 
 .maincontent > .dashboard-nav > .sidebar-container {
@@ -61,4 +62,51 @@
 
 .sidbarcollapse > .sidebar {
     visibility: hidden;
+}
+
+@media only screen and (max-width: 1280px) {
+    .dashboardlayout {
+        grid-template-columns: 260px auto;
+    }
+
+    .sidbarcollapse {
+        overflow: scroll;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .dashboardlayout {
+        grid-template-columns: 225px auto;
+    }
+
+    .maincontentexpand {
+        margin: 2rem 4rem;
+    }
+
+    .sidbarcollapse {
+        overflow: scroll;
+    }
+    
+}
+
+
+
+@media only screen and (max-width: 992px) {
+    .maincontent {
+        padding: 2rem 2rem 0rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {}
+
+@media only screen and (max-width: 600px) {
+    .maincontentexpand {
+        margin: 2rem 2rem;
+    }
+
+   
+}
+
+@media only screen and (max-width: 500px) {
+    
 }

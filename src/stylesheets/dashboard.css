@@ -76,3 +76,149 @@
 .dashboard-greetings {
     padding: 0.5rem 0rem;
 }
+
+@media only screen and (max-width: 1280px) {
+    .maincontent > div > .insurance-tab-container > .insurance-type-tab {
+        padding: 8px 10px;
+    }
+
+    .insurance-type-tab {
+        padding: 8px 13px;
+    }
+
+    .tab-box {
+        width: 335px;
+        height: 285px;
+    } 
+    
+    .maincontent > div > .insurance-tab-content > .tab-box {
+        width: 275px;
+        height: 255px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .maincontent > div > .insurance-tab-container > .insurance-type-tab {
+        font-size: 10px;
+        padding: 8px 6px;
+    }
+
+    .tab-box {
+        width: 275px;
+        height: 245px;
+    }
+
+    .insurance-tab-content {
+        gap: 10px;
+    }
+
+    .insurance-type-tab {
+        padding: 8px 8px;
+        font-size: 13px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .tab-box > div {
+        width: -webkit-fill-available;
+    }
+
+    .dashboard-greetings {
+        display: block;
+    }
+
+    .insurance-tab-container {
+        gap: 5px;
+    }
+
+    .maincontent > div > .insurance-tab-content > .tab-box {
+        width: 200px;
+        height: 183px;
+    }
+
+    .tab-box > div > h2 {
+        display: block;
+        font-size: 12px;
+    }
+
+    .tab-box {
+        width: 255px;
+        height: 200px;
+    }
+}
+
+@media only screen and (max-width: 820px) {
+    .tab-box {
+        width: 225px;
+        height: 200px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .tab-box {
+        width: 205px;
+        height: 180px;
+    }
+
+    .maincontent > div > .insurance-tab-content > .tab-box {
+        width: 150px;
+        height: 139px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .insurance-tab-container {
+        gap: 5px;
+    }
+
+    .insurance-type-tab {
+        padding: 8px 7px;
+        font-size: 10px;
+    }
+
+    .tab-box {
+        width: 150px;
+        height: 145px;
+    }
+
+    .insurance-type-tab {
+        padding: 8px 8px;
+        font-size: 10px;
+    }
+
+    .sidbarcollapse {
+        grid-template-columns: 0px auto;
+    }
+
+    .sidebar {
+        background-color: #011152;
+        height: 100vh;
+        position: relative;
+        width: 225px;
+        z-index: 99;
+    }
+
+    .dashboardlayout {
+        grid-template-columns: 0px auto;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .tab-box {
+        width: auto;
+        height: 145px;
+    }
+
+    .insurance-tab-content {
+        display: grid;
+        justify-content: space-evenly;
+        margin-top: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+    }
+
+    .insurance-tab-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+    }
+    
+}

@@ -118,7 +118,7 @@ function Swissinsurance() {
             <input type="checkbox" />
             <span>
               I have reviewed and agreed to the disclosure and{" "}
-              <Link>privacy policy</Link>
+              <Link to='/terms&condition'>privacy policy</Link>
             </span>
           </div>
           <div className={`insurance-button`}>
