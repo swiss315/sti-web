@@ -14,7 +14,13 @@ import {ReactComponent as Logouticon} from "../assets/icons/logouticon.svg";
 
 
 
-function Sidebar() {
+function Sidebar({setSidebar, sidebar}) {
+
+
+    // const handleclick = () => {
+    //   setSidebar(!sidebar);
+    // };
+
   return (
     <div>
         <div className='sidbar-info'>
@@ -26,43 +32,43 @@ function Sidebar() {
             </p>
         </div>
         <div className='sidebar-menu'>
-            <Link to="/claim">
+            <Link to="/claim" onClick={() => setSidebar(!sidebar) } >
                 <Claimicon />
                 <span>
                     Claims
                 </span>
             </Link>
-            <Link to="/pin">
+            <Link to="/pin" onClick={() => setSidebar(!sidebar) }>
                 <Mypinsicon />
                 <span className='mypin'>
                     My Pins
                 </span>
             </Link>
-            <Link to="/policies">
+            <Link to="/policies" onClick={() => setSidebar(!sidebar) }>
                 <Activepolicies />
                 <span>
                     Active Policies
                 </span>
             </Link>
-            <Link to='/transactionhistory'>
+            <Link to='/transactionhistory' onClick={() => setSidebar(!sidebar) }>
                 <Transactionicon />
                 <span>
                     Transaction History
                 </span>
             </Link>
-            <Link to='/report'>
+            <Link to='/report' onClick={() => setSidebar(!sidebar) }>
                 <Reporticon />
                 <span>
                     Report and Incident
                 </span>
             </Link>
-            <Link to='/changepassword'>
+            <Link to='/changepassword' onClick={() => setSidebar(!sidebar) }>
                 <Passwordicon />
                 <span>
                     Change Password
                 </span>
             </Link>
-            <Link to='/feedback'>
+            <Link to='/feedback' onClick={() => setSidebar(!sidebar) }>
                 <Helpicon />
                 <span>
                     Help & Feedback

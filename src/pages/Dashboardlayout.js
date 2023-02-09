@@ -51,7 +51,7 @@ function Dashboardlayout() {
                 <Logoicon />
                 <Closeicon className='closeicon' onClick={handleclick} />
             </div>
-            <Sidebar />
+            <Sidebar sidebar={sidebar} setSidebar={setSidebar} />
         </div>
         <div className={` ${sidebar ? "maincontentexpand" : "maincontent"}`}>
           <div className='dashboard-nav'>
