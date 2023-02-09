@@ -33,7 +33,7 @@ const About = ({ submitForm }) => {
       <h2 className="h2 h21">Sign Up Below</h2>
 
       <div className="form-h">
-        <form className="form">
+        <form className="customer_signup">
           <div className="input_wrap">
             <div className="input-h">
               <label htmlFor="firstName">
