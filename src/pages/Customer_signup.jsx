@@ -125,7 +125,7 @@ const About = ({ submitForm }) => {
                 <BsTelephone className="icon" />
                 Phone Number
               </label>
-              <input id="phone" name="phone" type="number" />
+              <input id="phone" name="phone"  />
             </div>
           </div>
 

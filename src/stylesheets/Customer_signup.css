@@ -21,17 +21,15 @@
 
 
 .c_signup{
-    width: 100%;
+    width: 85%;
     display: flex;
+    justify-content: space-evenly;
     align-items: center;
-    padding: 3.5rem 5rem;
+    padding: 4.5rem 5rem;
     
 }
 
-.customer_signup{
-    display: flex;
-    flex-direction: column;
-}
+
 
 .h21{
     flex: 0.5;
@@ -44,7 +42,7 @@
 
 .form-h{
     align-self: center;
-    margin-top: 3rem;    
+    margin-top: 1.5rem;    
     display: flex;
     justify-content: center;
 }
@@ -79,7 +77,7 @@
 
 
 .input-h input{
-    border:none;
+    border: 0px!important;
     font-size: 14px;
     flex: 1;
     padding: 5px 0;
@@ -105,6 +103,7 @@
     margin-top: 2.5rem;
     padding: 12px 152px;
     gap: 10px;
+    width: inherit;
     background: #FF9C26;
     border: none;
     border-radius: 8px;
@@ -124,8 +123,12 @@
 
 
 @media screen and (max-width: 1024px){
+    html{
+        font-size: 95%;
+    }
     .c_signup{
-        padding: 1rem 0 ;
+        width: 100%;
+        padding: 3.2rem 5rem ;
     }
    
 }
@@ -142,7 +145,7 @@
 
     }
     .form-h{
-        padding: 0;
+        padding: 1.5rem 0;
     }
     .h21{
         display: none;
@@ -174,7 +177,10 @@
         align-self: center !important;
     }
 
-    button{
+    .form_btn{
         font-size: 1.5rem;
+        width: fit-content !important;
+        
+        
     }
 }

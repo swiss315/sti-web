@@ -21,7 +21,7 @@
 
 
 .policies_container{
-    padding: 4.5rem 6rem;
+    padding: 4.5rem 4rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,7 +41,7 @@
     padding-top: 2.5rem ;    
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem , 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(18rem , 1fr));
     grid-template-rows: auto auto;
     grid-gap: 2.5rem;
     align-self: center;
@@ -81,4 +81,57 @@
     font-size: 22px;
     line-height: 120%;
     color: #FF9C26;
+}
+
+
+
+@media screen and (max-width: 850px){
+    html{
+        font-size: 85%;
+    }
+
+    .insurance_link{ 
+        height: 19rem;               
+   
+}
+}
+@media screen and (max-width: 700px){
+    html{
+        font-size: 85%;
+    }
+    .policies_wrap{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+        justify-self: center;
+    }
+    .insurance_link{ 
+        height: 20rem;               
+    }
+    
+    .insurance_img{
+        width: 100%;
+        height: 14rem !important;
+    
+    }
+}
+
+@media screen and (max-width: 460px){
+
+    html{
+        font-size: 65%;
+    }
+    .insurance_link{ 
+        height: fit-content;               
+    }
+    .policies_wrap{
+        width: 100%;
+    }
+    .policies_container{
+        padding: 4.5rem 2rem;
+             
+     
+        
+    }
 }
