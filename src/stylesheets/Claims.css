@@ -1,6 +1,7 @@
-/* *{
-  outline: green  solid !important;
-} */
+*{
+  /* outline: green  solid !important; */
+  overflow-x: hidden;
+}
 .general-claims{
     /* padding: 1rem 8rem; */
 }
@@ -117,6 +118,7 @@ justify-content: center;
     font-weight: 600;
     padding: 1rem 8.3rem;
     width: 100%;
+    margin-top: 2rem;
 }
 
 
@@ -141,34 +143,74 @@ margin-top: 3rem;
 }
 
 /* media screens */
-
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
+    .claim-track{
+        padding: 2rem;
+    }
+    .claim-submit{
+        margin-top: 2rem;
+    }
+    .claim-report{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .claim-report button{
+        padding: 1rem 14rem;
+        width: auto;
+    }
+    .password-form{
+        padding: 1rem 2rem;
+    }
+    .password-form button{
+        padding: 1rem 1rem;
+    font-size: 12px;
+    font-weight: 600;
+    }
+}
+@media screen and (max-width: 767px) and (min-width: 501px){
 .claim-track{
-    padding: 0;
+    padding: 2rem 8rem;
 }
-.claim-report button{
-    width: 100%;
-    padding: 2rem;
-}
-.claim-type input{
-    width: auto;
-}
-.transaction-table tr th{
-    font-size: 9px;
-}
-.password-form form{
-    padding: 1rem 3rem;
-}
-.form-group label
-{
-    font-size: 10px;
+.claim-submit{
+    margin-top: 2rem;
 }
 .password-form{
-    padding: 0;
+    padding: 2rem 4rem;
 }
-.password-form button{
-    padding: 1rem 3rem;
-    margin-bottom: 2rem;
 }
-
+@media screen and (max-width: 924px) and (min-width: 768px){
+.claim-track{
+    padding: 2rem 8rem;
+}
+.claim-submit{
+    margin-top: 2rem;
+}
+.password-form{
+    padding: 2rem 10rem;
+}
+}
+@media screen and (max-width: 1200px) and (min-width: 925px){
+.claim-track{
+    padding: 2rem 10rem;
+}
+.claim-submit{
+    margin-top: 2rem;
+}
+.password-form{
+    padding: 2rem 12rem;
+}
+}
+@media screen and (min-width: 1201px){
+.claim-track{
+    padding: 2rem 10rem;
+}
+.claim-submit{
+    margin-top: 2rem;
+}
+.password-form{
+    padding: 2rem 14rem;
+}
 }

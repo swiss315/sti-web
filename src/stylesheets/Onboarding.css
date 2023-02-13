@@ -202,4 +202,75 @@ h2{
     padding: 1.1rem 0rem;
     color: rgba(1, 7, 31, 0.6);
 }
+@media screen and (max-width: 500px) {
+.sides{
+    display: block;
+}
+.side2{
+    padding: 6rem;
+}
+.account-type-title{
+    font-size: 25px;
+}
+.account-type-text{
+    font-size: 14px;
+    line-height: 1.5;
+}
+.simple-insurance p{
+    font-size: 14px;
+    line-height: 1.5;
+}
+}
 
+@media screen and (max-width: 767px) and (min-width: 501px){
+    .sides{
+        display: block;
+    }
+    .side2{
+        padding: 6rem;
+    }
+    .account-type-title{
+        font-size: 25px;
+    }
+    .account-type-text{
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    .simple-insurance p{
+        font-size: 14px;
+        line-height: 1.5;
+    }
+}
+
+@media screen and (max-width: 924px) and (min-width: 768px){
+    .side2{
+        padding: 9rem 4rem;
+    }
+    .side1 > div > svg{
+         margin: 1rem;
+}
+.simple-insurance > p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+.account-type-text{
+    font-size: 14px;
+    line-height: 1.5;
+}
+}
+@media screen and (max-width: 1200px) and (min-width: 925px){
+    .side2{
+        padding: 4rem 4rem;
+    }
+    .side2{
+    padding: 9rem 4rem;
+}
+.simple-insurance > p{
+    font-size: 16px;
+    line-height: 1.5;
+}
+.account-type-text{
+    font-size: 16px;
+    line-height: 1.5;
+}
+}
