@@ -220,6 +220,9 @@ h2{
     font-size: 14px;
     line-height: 1.5;
 }
+.side1 div svg{
+    margin: 1rem;
+}
 }
 
 @media screen and (max-width: 767px) and (min-width: 501px){

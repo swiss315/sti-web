@@ -41,6 +41,12 @@
     width: 100%;
     padding: 1rem;
 }
+.claim-type select {
+    height: 3.5rem;
+    border-radius: 10px;
+    border: 1px solid #A2A4A5B8;
+    width: 100%;
+}
 .claim-report button{
     padding: 1rem 5rem;
     line-height: 1;

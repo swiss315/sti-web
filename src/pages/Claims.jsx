@@ -39,8 +39,15 @@ const Claims = () => {
         </div>
         <form className="claim-form">
           <div className="claim-type">
+          
             <label htmlFor="">Claim Type</label>
-            <input type="text" placeholder="Select preferred type" />
+            {/* <input type="text" placeholder="Select preferred type" /> */}
+            <select class=" use_user4" name="Claim Type">
+            <option value="none" selected>Select preferred type</option>
+                        <option value="male">Type1</option>
+                        <option value="female">Type2</option>
+                        <option value="other">Type3</option>
+                        </select>
           </div>
           <div className="claim-type">
             <label htmlFor="">Policy Number</label>
