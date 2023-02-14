@@ -11,14 +11,14 @@ const TrackClaim = () => {
           <img className="bell" src={Bell} alt="" />
         </div>
       </div> */}
-      <div className="myclaims">
+      {/* <div className="myclaims">
         <h4>My Claims</h4>
-      </div>
+      </div> */}
       <div className="claim-track">
-      <div className="claim-report">
+      {/* <div className="claim-report">
         <button>Report A Claim</button>
         <button>Track A Claim</button>
-      </div>
+      </div> */}
       <div className="claim-form">
         <div className="claim-type">
           <label htmlFor="">Claim Type</label>

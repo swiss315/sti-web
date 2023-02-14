@@ -12,7 +12,7 @@ import useForm from "../validation/useForm";
 // import { Envelope } from '@fortawesome/fontawesome-svg-core'
 
 const Login = ({ submitForm }) => {
-  const { handleChange, handleSubmit, values, errors } = useForm(
+  const { handleChange, errors } = useForm(
     submitForm,
     validate
   );

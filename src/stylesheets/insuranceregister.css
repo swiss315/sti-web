@@ -20,7 +20,7 @@
     background-color: #FF9C26;
     border: 0.8px solid #FFFFFF;
     border-radius: 12px;
-    color: white;
+    color: white !important;
 }
 
 .insurance-selectgroup > select {

@@ -88,3 +88,39 @@
 .d-none {
     display: none;
 }
+
+@media only screen and (max-width: 1024px) {
+
+}
+
+@media only screen and (max-width: 600px) {
+
+}
+
+@media only screen and (max-width: 500px) {
+    .agentsignup {
+        display: block;
+        width: 100%;
+    }
+
+    .form-container {
+        width: 65vw;
+        margin: 0rem auto;
+    }
+
+    .input-group > label {
+        font-size: 11px;
+    }
+
+    .input-group > label > svg {
+        height: 11px;
+    }
+
+    .agentsignup-title > span {
+        display: inline-block;
+    }
+
+    .agentsignup-title {
+        margin: 3rem 2rem;
+    }
+}

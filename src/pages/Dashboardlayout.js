@@ -12,7 +12,6 @@ import Claims from '../pages/Claims';
 import Pin from '../pages/Pin';
 import PinTransaction from '../pages/PinTransaction';
 import PinPassword from '../pages/PinPassword';
-import TrackClaim from '../pages/TrackClaim';
 import Policies from '../pages/Policies'
 import Motor from '../pages/Motor'
 import Swiss from '../pages/Swiss';
@@ -77,7 +76,6 @@ function Dashboardlayout() {
               <Route path="pin" index element={<Pin />} />
               <Route path="transactionhistory" index element={<PinTransaction />} />
               <Route path="changepassword" index element={<PinPassword />} />
-              <Route path="trackclaim" index element={<TrackClaim />} />
               <Route path='policies' element={<Policies/>} />
               <Route path='motor' element={<Motor/>} />
               <Route path='swiss' element={<Swiss/>} />

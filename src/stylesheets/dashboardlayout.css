@@ -17,11 +17,11 @@
     overflow: auto;
 }
 
-.logocontainer {
+/* .logocontainer {
     display: flex;
     justify-content: space-between;
     margin: 1rem 1rem;
-}
+} */
 
 .closeicon {
     margin: auto 0rem;
