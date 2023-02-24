@@ -72,24 +72,24 @@ function Dashboardlayout() {
           <Routes>
             {/* add route of dashboard here */}
               <Route path="dashboard" index element={<Dashboard />} />
-              <Route path="claim" index element={<Claims />} />
-              <Route path="pin" index element={<Pin />} />
-              <Route path="transactionhistory" index element={<PinTransaction />} />
+              <Route path="claim"  element={<Claims />} />
+              <Route path="pin"  element={<Pin />} />
+              <Route path="transactionhistory"  element={<PinTransaction />} />
               <Route path="changepassword" index element={<PinPassword />} />
               <Route path='policies' element={<Policies/>} />
               <Route path='motor' element={<Motor/>} />
               <Route path='swiss' element={<Swiss/>} />
-              <Route path="report" index element={<ReportandIncident />} />
-              <Route path="feedback" index element={<Helpandfeedback />} />
-              <Route path="profile" index element={<Profile />} />
-              <Route path="motor-insurance" index element={<Motorinsuranceregister />} />
-              <Route path="swiss-insurance" index element={<Swissinsurance />} />
-              <Route path="marine-insurance" index element={<Marineinsurance />} />
-              <Route path="notification" index element={<Notifications/>} />
-              <Route path="all-risk" index element={<Allrisk />} />
-              <Route path="travel-insurance" index element={<Travelinsurance />} />
-              <Route path="terms&condition" index element={<Terms />} />
-              <Route path="privacy" index element={<Privacy />} />
+              <Route path="report"  element={<ReportandIncident />} />
+              <Route path="feedback"  element={<Helpandfeedback />} />
+              <Route path="profile"  element={<Profile />} />
+              <Route path="motor-insurance"  element={<Motorinsuranceregister />} />
+              <Route path="swiss-insurance"  element={<Swissinsurance />} />
+              <Route path="marine-insurance"  element={<Marineinsurance />} />
+              <Route path="notification"  element={<Notifications/>} />
+              <Route path="all-risk"  element={<Allrisk />} />
+              <Route path="travel-insurance"  element={<Travelinsurance />} />
+              <Route path="terms&condition"  element={<Terms />} />
+              <Route path="privacy"  element={<Privacy />} />
           </Routes>
         </div>
     </div>

@@ -62,7 +62,7 @@ function Motorinsuranceregister() {
               </div>
               <div className="report-inputgroup">
                 <label>Phone Number</label>
-                <input type="text" />
+                <input type="number" />
               </div>
               <div className="report-inputgroup">
                 <label>Residential Address</label>
@@ -89,7 +89,7 @@ function Motorinsuranceregister() {
               </div>
               <div className="report-inputgroup">
                 <label>Next Of Kin Phone Number</label>
-                <input type="text" />
+                <input type="number" />
               </div>
               <div className="report-inputgroup">
                 <label>Mailing Address</label>
@@ -138,7 +138,7 @@ function Motorinsuranceregister() {
               </div>
               <div className="report-inputgroup">
                 <label>Phone Number</label>
-                <input type="text" />
+                <input type="number" />
               </div>
               <div className="report-inputgroup">
                 <label>Mailing Address</label>

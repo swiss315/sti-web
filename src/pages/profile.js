@@ -91,7 +91,7 @@ function Profile() {
                         <label>
                             Phone Number
                         </label>
-                        <input type='text' />
+                        <input type='number' />
                     </div>
                     <div className='profile-input'>
                         <label>

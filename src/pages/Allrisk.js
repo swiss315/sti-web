@@ -74,7 +74,7 @@ function Allrisk() {
             </div>
             <div className="report-inputgroup">
               <label>Phone Number</label>
-              <input type="text" />
+              <input type="number" />
             </div>
             <div className="report-inputgroup">
               <label>Residential Address</label>
@@ -194,7 +194,7 @@ function Allrisk() {
           <div className={`insurance-checkbox ${tab === "" ? "d-none" : ""}`}>
             <input type="checkbox" />
             <span>
-              I have reviewed and agreed to the disclosure and
+              I have reviewed and agreed to the disclosure and{' '}
               <Link to='/terms&condition'>privacy policy</Link>
             </span>
           </div>

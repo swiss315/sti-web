@@ -53,7 +53,7 @@ function Swissinsurance() {
             </div>
             <div className="report-inputgroup">
               <label>Phone Number</label>
-              <input type="text" />
+              <input type="number" />
             </div>
             <div className="report-inputgroup">
               <label>Residential Address</label>
@@ -69,7 +69,7 @@ function Swissinsurance() {
             </div>
             <div className="report-inputgroup">
               <label>Next Of Kin Phone Number</label>
-              <input type="text" />
+              <input type="number" />
             </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Disability</label>
@@ -117,8 +117,7 @@ function Swissinsurance() {
           <div className={`insurance-checkbox `}>
             <input type="checkbox" />
             <span>
-              I have reviewed and agreed to the disclosure and{" "}
-              <Link to='/terms&condition'>privacy policy</Link>
+              I have reviewed and agreed to the disclosure and <Link to='/terms&condition'>privacy policy</Link>
             </span>
           </div>
           <div className={`insurance-button`}>
