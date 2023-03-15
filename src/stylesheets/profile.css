@@ -95,7 +95,7 @@
     border: 1px solid rgba(1, 7, 31, 0.12);
     border-radius: 4px;
     width: 100%;
-    padding: 0.65rem 0rem;
+    padding: 0.65rem;
 }
 
 .profile-input {
@@ -136,7 +136,14 @@
 }
 
 .edit-profile-button > button {
-    padding: 12px 50px;
+    /* padding: 12px 50px; */
+    background-color: #FF9C26;
+    border-radius: 8px;
+    border: 0px;
+    color: white;
+    font-weight: 600;
+    width: 191px;
+    height: 39px;
 }
 
 @media only screen and (max-width: 1280px) {

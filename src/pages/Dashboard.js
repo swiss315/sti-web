@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import { Cookies } from "react-cookie";
 
 import '../stylesheets/dashboard.css'
 
@@ -7,10 +8,13 @@ import marineinsurance from "../assets/images/marineinsurance.png";
 import {ReactComponent as Searchicon} from "../assets/icons/searchicon.svg";
 
 function Dashboard() {
+  const cookie = new Cookies();
+    let userdata = cookie.get("user");
+    userdata = JSON.parse(atob(userdata));
   return (
     <div className='dashboard-content'>
       <p>
-        Hi <span>Khalid</span>,
+        Hi <span>{userdata.first_name}</span>,
       </p>
       <h2 className='dashboard-greetings'>
         Good Morning!

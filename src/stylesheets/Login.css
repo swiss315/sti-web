@@ -10,7 +10,7 @@ input{
 }
 .forgot-password a{
     float: right;
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
     font-size: 14px;
     font-weight: 500;
 }

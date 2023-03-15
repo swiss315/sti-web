@@ -1,53 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import "../stylesheets/Login.css";
 import { ReactComponent as Email } from "../assets/icons/emailicon.svg";
 import { ReactComponent as Password } from "../assets/icons/passwordicon.svg";
+import { useAgent_Login } from "../hooks/login";
+import Loader from "../components/Loader";
 
-import validate from "../validation/validateInfo";
-import useForm from "../validation/useForm";
-// import Logo from "../../Images/LogoSTI.svg";
-// import Log from "../../Images/Vector1.svg";
-// import { Envelope } from '@fortawesome/fontawesome-svg-core'
 
-const Login = ({ submitForm }) => {
-  const { handleChange, errors } = useForm(
-    submitForm,
-    validate
-  );
+const Login = () => {
+  const [data, setData] = useState({
+    'email': '',
+    'password': ''
+  })
+
+  const { login, error, isLoading } = useAgent_Login()
+
+  const Login = async() => {
+    await login(data)
+  }
+
   return (
     <div className="onboard">
-      {/* <div className="onboarding">
-        <div className="navbar">
-          <div className="logo">
-            <a href="/">
-              {" "}
-              <img src={Logo} alt="" />
-            </a>
-          </div>
-          <div className="menu">
-            <a href="#">
-              {" "}
-              <li>Home</li>
-            </a>
-            <a href="#">
-              <li>About us</li>
-            </a>
-            <a href="#">
-              <li>Contact Us</li>
-            </a>
-            <a href="#" className="log">
-              <img src={Log} alt="" />
-              <li>Login</li>
-            </a>
-            <a href="#" className="sig">
-              {" "}
-              <li>Sign Up</li>
-            </a>
-          </div>
-        </div>
-      </div> */}
       <Navbar />
       <div className="sides side-edit">
         <div className="sides1">
@@ -55,7 +29,7 @@ const Login = ({ submitForm }) => {
             Welcome Back <span>Customer!</span>
           </h2>
         </div>
-        <div className="sides2">
+        <form className="sides2">
           <div className="input-group">
             <label>
               <Email />
@@ -65,9 +39,8 @@ const Login = ({ submitForm }) => {
               name="email"
               type="email"
               className=""
-              onChange={handleChange}
+              onChange={(e) => {setData({...data, 'email': e.target.value})}}
             />
-            {errors.email && <p>{errors.email}</p>}
           </div>
           <div className="input-group">
             <label>
@@ -78,19 +51,20 @@ const Login = ({ submitForm }) => {
               name="password"
               type="password"
               className=""
-              onChange={handleChange}
+              onChange={(e) => {setData({...data, 'password': e.target.value})}}
             />
-            {errors.password && <p>{errors.password}</p>}
+            {/* {errors.password && <p>{errors.password}</p>} */}
           </div>
           <div className="forgot-password">
             <Link className="forgot">Forgot Password?</Link>
           </div>
+          <p>{error}</p>
           <div className="button">
-            <Link to="/dashboard">
-              <button>Login</button>
+            <Link>
+              <button onClick={Login}>{isLoading ? <Loader /> : 'Login'}</button>
             </Link>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

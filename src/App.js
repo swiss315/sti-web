@@ -5,6 +5,7 @@ import Agentsignup from './pages/Agent-signup';
 import  About from './pages/Customer_signup';
 import Dashboardlayout from './pages/Dashboardlayout';
 import  Login from './pages/Login';
+import { PrivateRoutes } from './hooks/protectedroutes';
 
 
 
@@ -17,7 +18,9 @@ function App() {
           <Route path='/agent-signup' exact element={<Agentsignup/>} />
           <Route path='/customer-signup' exact element={<About/>} />
           <Route path='/login' exact element={<Login/>} />
-          <Route path='/*' exact element={<Dashboardlayout/>} />
+          <Route element={<PrivateRoutes />}>
+            <Route path='/*' exact element={<Dashboardlayout/>} />
+          </Route>
         </Routes>
         
       </Router>
