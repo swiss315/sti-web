@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../stylesheets/profile.css";
@@ -7,42 +7,42 @@ import { ReactComponent as Editicon } from "../assets/icons/Edit.svg";
 import { ReactComponent as Termsicon } from "../assets/icons/termsicon.svg";
 import { ReactComponent as Privacyicon } from "../assets/icons/privacyicon.svg";
 import { ReactComponent as Redlogouticon } from "../assets/icons/redlogout.svg";
-import { useProfile } from "../hooks/profile";
-import { Cookies } from "react-cookie";
-import Loader from "../components/Loader";
+// import { useProfile } from "../hooks/profile";
+// import { Cookies } from "react-cookie";
+// import Loader from "../components/Loader";
 
 function Profile() {
     const [show, setShow] = useState(false);
     const click = useRef("");
     const [filename, setFilename] = useState();
-    const { profile, updateprofile, isLoading } = useProfile();
-    const cookie = new Cookies();
-    let userdata = cookie.get("user");
-    userdata = JSON.parse(atob(userdata));
-    const [profiledata, setData] = useState({
-        first_name: userdata.first_name || "",
-        middle_name: userdata.middle_name || "",
-        last_name: userdata.last_name || "",
-        bvn: userdata.bvn,
-        phone_no: userdata.phone_no || "",
-        address: userdata.address || "",
-        gender: userdata.gender || "",
-        date_of_birth: userdata.date_of_birth || "",
-        email: userdata.email || "",
-    });
+    // const { profile, updateprofile, isLoading } = useProfile();
+    // const cookie = new Cookies();
+    // let userdata = cookie.get("user");
+    // userdata = JSON.parse(atob(userdata));
+    // const [profiledata, setData] = useState({
+    //     first_name: userdata.first_name || "",
+    //     middle_name: userdata.middle_name || "",
+    //     last_name: userdata.last_name || "",
+    //     bvn: userdata.bvn,
+    //     phone_no: userdata.phone_no || "",
+    //     address: userdata.address || "",
+    //     gender: userdata.gender || "",
+    //     date_of_birth: userdata.date_of_birth || "",
+    //     email: userdata.email || "",
+    // });
 
     const file = () => {
         click.current.click();
     };
 
-    const updateProfile = async (e) => {
-        e.preventDefault();
-        await updateprofile(profiledata, setShow);
-    };
+    // const updateProfile = async (e) => {
+    //     e.preventDefault();
+    //     await updateprofile(profiledata, setShow);
+    // };
 
-    useEffect(() => {
-        profile();
-    }, [profile]);
+    // useEffect(() => {
+    //     profile();
+    // }, [profile]);
 
     return (
         <div>
@@ -53,10 +53,13 @@ function Profile() {
                 <div className={`profile-container ${show ? "d-none" : ""}`}>
                     <div className="profile-box">
                         <div></div>
-                        <span>
+                        {/* <span>
                             {isLoading
                                 ? "User"
                                 : userdata.first_name + " " + userdata.last_name}
+                        </span> */}
+                        <span>
+                            Daniel Okeke
                         </span>
                         <span
                             className="profile-edit-button"
@@ -100,6 +103,56 @@ function Profile() {
                         Update your profile picture and personal details
                     </p>
                     <form className="profile-form-group">
+                        <div className="profile-input-group">
+                            <div className="profile-input">
+                                <label>First Name</label>
+                                <input
+                                    name="first_name"
+                                    type="text"
+                                    
+                                />
+                            </div>
+                            <div className="profile-input">
+                                <label>Last Name</label>
+                                <input
+                                    name="last_name"
+                                    type="text"
+                                    
+                                />
+                            </div>
+                        </div>
+                        <div className="profile-input">
+                            <label>Email Address</label>
+                            <input
+                                name="email"
+                                type="email"
+                               
+                            />
+                        </div>
+                        <div className="profile-input">
+                            <label>Phone Number</label>
+                            <input
+                                name="number"
+                                type="number"
+                                
+                            />
+                        </div>
+                        <div className="profile-input">
+                            <label>Address</label>
+                            <textarea
+                                name="address"
+                                row={2}
+                                type="text"
+                                
+                            />
+                        </div>
+                        <div className="edit-profile-button">
+                            <button >
+                                Save Changes
+                            </button>
+                        </div>
+                    </form>
+                    {/* <form className="profile-form-group">
                         <div className="profile-input-group">
                             <div className="profile-input">
                                 <label>First Name</label>
@@ -163,7 +216,7 @@ function Profile() {
                                 {isLoading ? <Loader /> : "Save Changes"}
                             </button>
                         </div>
-                    </form>
+                    </form> */}
                 </div>
             </div>
         </div>
