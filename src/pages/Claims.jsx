@@ -1,33 +1,36 @@
 import React, { useRef, useState } from "react";
-
 import "../stylesheets/report.css";
-
+import Loader from "../components/Loader";
 import { ReactComponent as Uploadicon } from "../assets/icons/uploadicon.svg";
-// import TrackClaim from '../pages/TrackClaim';
-
 import "../stylesheets/Claims.css";
-// import { FaUserAlt } from "react-icons/fa";
-// import Bell from "../assets/icons/Bell.svg";
-// import { Link } from "react-router-dom";
+import { useClaim } from "../hooks/claim";
 
 const Claims = () => {
   const [tab, setTab] = useState("Report");
   const click = useRef("");
   const [filename, setFilename] = useState();
+  const { claim, trackclaim, isquoteLoading, error } = useClaim()
+  const [individualdata, setIndividualData] = useState({
+    "description": "",
+    "claim_type": "",
+    "policy_number": "",
+    "loss_estimate": "", 
+    "cost_estimate": "",
+    "pictures": [],
+})
+const [trackdata, setTrackdata] = useState({
+  claim_number: ''
+})
 
+const onchangeaction = (e) => {
+  setIndividualData({...individualdata, [e.target.name]: e.target.value})
+ }
   const file = () => {
     click.current.click();
   };
 
   return (
     <div className="general-claims">
-      {/* <div className="claims-header">
-       <Link to='/home'> <AiOutlineArrowLeft /> </Link>
-         <div className="sign-update">
-          <FaUserAlt />
-          <img className="bell" src={Bell} alt="" />
-        </div> 
-      </div> */}
       <div className="myclaims">
         <h4>My Claims</h4>
       </div>
@@ -46,36 +49,26 @@ const Claims = () => {
             Track a claim
           </div>
         </div>
-        {/* <div className="claim-report">
-          <Link to="/claim">
-            <button className="button1">Report A Claim</button>{" "}
-          </Link>
-          <Link to="">
-            {" "}
-            <button className="button2">Track A Claim</button>{" "}
-          </Link>
-        </div> */}
         <form className={`claim-form `}>
           <div className={` ${tab === "Report" ? '' : 'd-none'}`}>
           <div className="claim-type">
             <label htmlFor="">Claim Type</label>
-            {/* <input type="text" placeholder="Select preferred type" /> */}
-            <select class=" use_user4" name="Claim Type">
-              <option value="none" selected>
+            <select className=" use_user4" name="claim_type" onChange={onchangeaction}>
+              <option defaultValue="" >
                 Select preferred type
               </option>
-              <option value="male">Type1</option>
-              <option value="female">Type2</option>
-              <option value="other">Type3</option>
+              <option value="marine">Marine Insurance</option>
+              <option value="travel">Easy Travel Insurance</option>
+              <option value="all_risk">All Risk</option>
             </select>
           </div>
           <div className="claim-type">
             <label htmlFor="">Policy Number</label>
-            <input type="number" />
+            <input type="number" name="policy_number" onChange={onchangeaction}/>
           </div>
           <div className="claim-type">
             <label htmlFor="">Description of claims</label>
-            <input className="describe" type="text" />
+            <textarea rows={2} className="describe" type="text" name="description" onChange={onchangeaction}/>
           </div>
           <div className="claim-type">
             <label htmlFor="">Date Of Loss</label>
@@ -83,11 +76,11 @@ const Claims = () => {
           </div>
           <div className="claim-type">
             <label htmlFor="">Estimate Claim Loss</label>
-            <input type="text" />
+            <input type="text" name="cost_estimate" onChange={onchangeaction}/>
           </div>
           <div className="claim-type">
             <label htmlFor="">Lost Estimate</label>
-            <input type="text" />
+            <input type="text" name="loss_estimate" onChange={onchangeaction}/>
           </div>
           <div
             className="claim-type"
@@ -156,16 +149,21 @@ const Claims = () => {
             </p>
           </div>
           <div className="claim-submit">
-            <button>Submit</button>
+            <button onClick={async(e) => {e.preventDefault(); await claim(individualdata)}}>{isquoteLoading ? <Loader /> : 'Submit'}</button>
           </div>
+          {error === null ? '' : error.map((err) => {
+            return (
+              <p className="claim-error">{err}</p>
+            )
+          })}
           </div>
           <div className={`${tab === "Track" ? '' : 'd-none'}`} >
           <div className="claim-type">
           <label htmlFor="">Claim Type</label>
-          <input type="text" placeholder="Select preferred type"/>
+          <input type="text" placeholder="Select preferred type" onChange={(e) => setTrackdata({...trackdata, claim_number:  e.target.value})}/>
         </div>
         <div className="claim-submit">
-          <button>Track Your Claim</button>
+          <button onClick={(e) => {e.preventDefault(); trackclaim(trackdata)}}>{isquoteLoading ? <Loader /> : 'Track Your Claim'}</button>
         </div>
           </div>
         </form>

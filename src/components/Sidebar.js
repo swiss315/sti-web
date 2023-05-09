@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-// import { Cookies } from "react-cookie";
+import { Cookies } from "react-cookie";
 
 import '../stylesheets/sidebar.css'
 
@@ -12,25 +12,24 @@ import {ReactComponent as Reporticon} from "../assets/icons/report&incidenticon.
 import {ReactComponent as Passwordicon} from "../assets/icons/cpasswordicon.svg";
 import {ReactComponent as Helpicon} from "../assets/icons/help&feedbackicon.svg";
 import {ReactComponent as Logouticon} from "../assets/icons/logouticon.svg";
+import { useLogout } from '../hooks/logout';
 
 
 
 function Sidebar({setSidebar, sidebar}) {
-    // const cookie = new Cookies();
-    // let userdata = cookie.get("user");
-    // userdata = JSON.parse(atob(userdata));
+    const cookie = new Cookies();
+    let userdata = cookie.get("user");
+    userdata = JSON.parse(atob(userdata));
+    const { logout } = useLogout()
 
-  return (
+    return (
     <div>
         <div className='sidbar-info'>
-            {/* <p className='sidbar-info-name'>
-                Welcome, <span>{userdata.first_name + " " + userdata.last_name}</span>
-            </p> */}
             <p className='sidbar-info-name'>
-                Welcome, <span>Daniel</span>
+                Welcome, <span>{userdata.first_name + " " + userdata.last_name}</span>
             </p>
             <p className='sidebar-info-wallet'>
-                Wallet Balance: <span>NGN20000</span>
+                Wallet Balance: <span>NGN{userdata.wallet_balance}</span>
             </p>
         </div>
         <div className='sidebar-menu'>
@@ -77,7 +76,7 @@ function Sidebar({setSidebar, sidebar}) {
                 </span>
             </Link>
             <div className='logout'>
-                <Link to='/login'>
+                <Link to='/login' onClick={() => logout()}>
                     <Logouticon />
                     <span>
                         Logout

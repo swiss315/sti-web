@@ -1,36 +1,37 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-// import { Cookies } from "react-cookie";
+import { Cookies } from "react-cookie";
 
 import '../stylesheets/dashboard.css'
 
 import marineinsurance from "../assets/images/marineinsurance.png";
-import {ReactComponent as Searchicon} from "../assets/icons/searchicon.svg";
+import { ReactComponent as Searchicon } from "../assets/icons/searchicon.svg";
 
 function Dashboard() {
-  // const cookie = new Cookies();
-  //   let userdata = cookie.get("user");
-  //   userdata = JSON.parse(atob(userdata));
+  const cookie = new Cookies();
+  let userdata = cookie.get("user");
+  let userpolicy = cookie.get("policy");
+  userdata = JSON.parse(atob(userdata));
+  userpolicy = JSON.parse(atob(userpolicy));
+  console.log(userdata);
+  console.log(userpolicy);
   return (
     <div className='dashboard-content'>
-      {/* <p>
-        Hi <span>{userdata.first_name}</span>,
-      </p> */}
       <p>
-        Hi <span>Daniel</span>,
+        Hi <span>{userdata.first_name}</span>,
       </p>
       <h2 className='dashboard-greetings'>
         Good Morning!
       </h2>
       <div className='search-container'>
         <div className='input-group'>
-            <label>
-                <Searchicon />
-                <span>
-                Search
-                </span>
-            </label>
-            <input name='firstname' type='text' className='' />
+          <label>
+            <Searchicon />
+            <span>
+              Search
+            </span>
+          </label>
+          <input name='firstname' type='text' className='' />
         </div>
       </div>
       <div className='insurance-tab-container'>
@@ -54,36 +55,50 @@ function Dashboard() {
         </Link>
       </div>
       <div className='insurance-tab-content'>
-          <div className='tab-box' style={{ backgroundImage: `url(${marineinsurance})` }}>
-            <div>
-              <h2>
-                Marine Insurance
-              </h2>
-              <p>
-                2 policies
-              </p>
-            </div>
+        {userpolicy.my_policies.swiss.length === 0 ? '' : <div className='tab-box' style={{ backgroundImage: `url(${marineinsurance})` }}>
+          <div>
+            <h2>
+              Swiss Insurance
+            </h2>
+            <p>
+              {userpolicy.my_policies.swiss.length} policies
+            </p>
           </div>
-          <div className='tab-box' style={{ backgroundImage: `url(${marineinsurance})` }}>
-            <div>
-              <h2>
-                Marine Insurance
-              </h2>
-              <p>
-                2 policies
-              </p>
-            </div>
+        </div>
+        }
+        {userpolicy.my_policies.vehicle.length === 0 ? '' : <div className='tab-box' style={{ backgroundImage: `url(${marineinsurance})` }}>
+          <div>
+            <h2>
+              Vehicle Insurance
+            </h2>
+            <p>
+              {userpolicy.my_policies.vehicle.length} policies
+            </p>
           </div>
-          <div className='tab-box' style={{ backgroundImage: `url(${marineinsurance})` }}>
-            <div>
-              <h2>
-                Marine Insurance
-              </h2>
-              <p>
-                2 policies
-              </p>
-            </div>
+        </div>
+        }
+        {userpolicy.my_policies.travel.length === 0 ? '' : <div className='tab-box' style={{ backgroundImage: `url(${marineinsurance})` }}>
+          <div>
+            <h2>
+              Travel Insurance
+            </h2>
+            <p>
+              {userpolicy.my_policies.travel.length} policies
+            </p>
           </div>
+        </div>
+        }
+        {userpolicy.my_policies.all_risk.length === 0 ? '' : <div className='tab-box' style={{ backgroundImage: `url(${marineinsurance})` }}>
+          <div>
+            <h2>
+            All risk Insurance
+            </h2>
+            <p>
+              {userpolicy.my_policies.all_risk.length} policies
+            </p>
+          </div>
+        </div>
+        }
       </div>
     </div>
   )

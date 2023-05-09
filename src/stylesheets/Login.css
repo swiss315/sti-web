@@ -19,6 +19,8 @@ input{
     background-color: #FF9C26;
     border: none;
     width: 100%;
+    font-weight: 600;
+    color: white;
     padding: 1rem;
     border-radius: 10px;
 }
@@ -29,6 +31,11 @@ input{
     padding: 16rem 14rem;
 } */
 
+.login_error {
+    font-size: 13px;
+    font-style: italic;
+    color: red;
+}
 /* style added */
 
 .side-edit{

@@ -12,31 +12,36 @@ export const useAgent_Login = () => {
     const { dispatch } = useAuthContext()
     
     let Navigate = useNavigate()
-    const maxAge = 1 * 24 * 60 * 60
+    const maxAge = 1 * 2 * 60 * 60
 
     const login = async (data) => {
         setIsLoading(true)
         setError(null)
 
-        await axios.post(`${API}/login`, data ,
+        const user = { user : data }
+
+        await axios.post(`${API}/users/login`, user ,
         {
             headers: {
                 'Content-Type': 'application/json'
             }
         } ).then((response) => {
-            // console.log(response.data.data.token)
-            let user = response.data.data
+            console.log(response.data)
+            let user = response.data.user
+            let policy = response.data.policy_data
+            let token = response.data.user.token
             user = btoa(JSON.stringify(user))
+            policy = btoa(JSON.stringify(policy))
             setIsLoading(false)
-            let token = response.data.data.token
             cookies.set("xhrTOKEN" , token, { path: '/', maxAge: maxAge, sameSite: 'lax', secure: true })
+            cookies.set("policy" , policy, { path: '/', maxAge: maxAge, sameSite: 'lax', secure: true })
             cookies.set("user" , user, { path: '/', maxAge: maxAge, sameSite: 'lax', secure: true })
             dispatch({type : 'LOGIN' ,  token: token})
             Navigate('/dashboard')
         }).catch((err) => {
             setIsLoading(false)
-            setError(err.response.data.message)
-            console.log(err.response.data.message)
+            setError(err.response.data.errors)
+            console.log(err.response.data.errors)
         })
     }
     

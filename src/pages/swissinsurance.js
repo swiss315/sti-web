@@ -1,13 +1,88 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-
 import "../stylesheets/insuranceregister.css";
-
+import Modal from 'react-bootstrap/Modal';
 import { ReactComponent as Uploadicon } from "../assets/icons/uploadicon.svg";
+import { useSwisspolicy } from "../hooks/buy_swisspolicy";
+import Loader from "../components/Loader";
+
+function Summary(props) {
+  return (
+    <Modal
+      {...props}
+      size="xs"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Summary
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div>
+          <div className="summary-list">
+            <p>First Name</p>
+            <p>{props.individual.first_name}</p>
+          </div>
+          <div className="summary-list">
+            <p>Last Name</p>
+            <p>{props.individual.last_name}</p>
+          </div>
+          <div className="summary-list">
+            <p>Email</p>
+            <p>{props.individual.email}</p>
+          </div>
+          <div className="summary-list">
+            <p>Phone No</p>
+            <p>{props.individual.phone}</p>
+          </div>
+          <div className="summary-list">
+            <p>Premium Payable</p>
+            <p>{props.quote.price}</p>
+          </div>
+            <button className="summary-button" >
+              Submit
+            </button>
+        </div>
+      </Modal.Body>
+    </Modal>
+  );
+}
 
 function Swissinsurance() {
   const click = useRef("");
   const [filename, setFilename] = useState();
+  const [modalShow, setModalShow] = useState(false);
+  const { swissquote, isquoteLoading, getswissquote } = useSwisspolicy()
+  const [individualdata, setIndividualData] = useState({
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "gender": "", 
+    "date_of_birth": "",
+    "phone": "",
+    "house_address": "",
+    "account_number": "",
+    "marital_status": "",
+    "picture": "",
+    "next_of_kin": "",
+    "next_of_kin_phone": "",
+    "next_of_kin_address": "",
+    "disability": ""
+})
+const [swissdata, setSwissData] = useState(
+  {
+        "period":""
+        }
+)
+const [quote, setQuote] = useState({
+  'date_of_birth': ''
+})
+
+const onchangeaction = (e) => {
+  setIndividualData({...individualdata, [e.target.name]: e.target.value})
+ }
 
   const file = () => {
     click.current.click();
@@ -26,67 +101,56 @@ function Swissinsurance() {
             </div>
             <div className="report-inputgroup">
               <label>First Name</label>
-              <input type="text" />
+              <input type="text" name="first_name" onChange={onchangeaction}/>
             </div>
             <div className="report-inputgroup">
               <label>Last Name</label>
-              <input type="text" />
+              <input type="text" name="last_name" onChange={onchangeaction}/>
             </div>
             <div className="report-inputgroup">
               <label>Email Address</label>
-              <input type="email" />
+              <input type="email" name="email" onChange={onchangeaction}/>
             </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Gender</label>
-              <select>
-                <option defaultValue="">select</option>
-                <option value="lime">Lime</option>
-                <option  value="coconut">
-                  Coconut
-                </option>
-                <option value="mango">Mango</option>
+              <select name="gender" onChange={onchangeaction}>
+                <option defaultValue=''>Select</option>
+                  <option value="male">male</option>
+                  <option value="female">female</option>
               </select>
             </div>
             <div className="report-inputgroup">
               <label>Date Of Birth</label>
-              <input type="date" />
+              <input type="date" name="date_of_birth" onChange={(e) => {setQuote({...quote, [e.target.name]: e.target.value}); setIndividualData({...individualdata, [e.target.name]: e.target.value})}}/>
             </div>
             <div className="report-inputgroup">
               <label>Phone Number</label>
-              <input type="number" />
+              <input type="number" name="phone" onChange={onchangeaction} />
             </div>
             <div className="report-inputgroup">
               <label>Residential Address</label>
-              <textarea rows={2} />
+              <textarea rows={2} name="house_address" onChange={onchangeaction}/>
             </div>
             <div className="report-inputgroup">
               <label>Next Of Kin</label>
-              <input type="text" />
+              <input type="text" name="next_of_kin" onChange={onchangeaction}/>
             </div>
             <div className="report-inputgroup">
               <label>Next Of Kin Address</label>
-              <textarea rows={2} />
+              <textarea rows={2} name="next_of_kin_address" onChange={onchangeaction}/>
             </div>
             <div className="report-inputgroup">
               <label>Next Of Kin Phone Number</label>
-              <input type="number" />
+              <input type="number" name="next_of_kin_phone" onChange={onchangeaction}/>
             </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Disability</label>
-              <select>
-                <option selected>select</option>
-                <option value="grapefruit">Grapefruit</option>
-                <option value="lime">Lime</option>
-                <option selected value="coconut">
-                  Coconut
-                </option>
-                <option value="mango">Mango</option>
-              </select>
+              <input type="text" name="disability" onChange={onchangeaction}/>
             </div>
-            <div className="report-inputgroup">
+            {/* <div className="report-inputgroup">
               <label>Describe Disability</label>
               <textarea rows={2} />
-            </div>
+            </div> */}
             <div className="report-inputgroup">
               <label>Upload Passport</label>
               <input
@@ -121,10 +185,11 @@ function Swissinsurance() {
             </span>
           </div>
           <div className={`insurance-button`}>
-            <button >Submit</button>
+            <button onClick={(e) => {e.preventDefault(); swissquote(quote, setModalShow)}}>{isquoteLoading ? <Loader /> :'submit'}</button>
           </div>
         </form>
       </div>
+      <Summary show={modalShow} individual={individualdata} swiss={swissdata} quote={getswissquote} onHide={() => setModalShow(false)} />
     </div>
   );
 }

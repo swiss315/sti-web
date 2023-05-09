@@ -1,19 +1,151 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-
+import Modal from 'react-bootstrap/Modal';
 import "../stylesheets/insuranceregister.css";
-
 import { ReactComponent as Uploadicon } from "../assets/icons/uploadicon.svg";
+import { useVechicleBrand } from "../hooks/vehiclebrand";
+import { useBuyvehiclepolicy } from "../hooks/buy_vehiclepolicy";
+import Loader from "../components/Loader";
+
+function Summary(props) {
+  return (
+    <Modal
+      {...props}
+      size="xs"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Summary
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div>
+          <div className="summary-list">
+            <p>First Name</p>
+            <p>{props.individual.first_name}</p>
+          </div>
+          <div className="summary-list">
+            <p>Last Name</p>
+            <p>{props.individual.last_name}</p>
+          </div>
+          <div className="summary-list">
+            <p>Phone No</p>
+            <p>{props.individual.phone}</p>
+          </div>
+          <div className="summary-list">
+            <p>Gender</p>
+            <p>{props.individual.gender}</p>
+          </div>
+          <div className="summary-list">
+            <p>Residential Address</p>
+            <p>{props.individual.house_address}</p>
+          </div>
+          <div className="summary-list">
+            <p>Mailing Address</p>
+            <p>{props.individual.mailing_address}</p>
+          </div>
+          <div className="summary-list">
+            <p>Next of Kin</p>
+            <p>{props.individual.next_of_kin}</p>
+          </div>
+          <div className="summary-list">
+            <p>Premium Payable</p>
+            <p>{props.quote.price}</p>
+          </div>
+            <button className="summary-button" >
+              Submit
+            </button>
+        </div>
+      </Modal.Body>
+    </Modal>
+  );
+}
 
 function Motorinsuranceregister() {
   const [type, setType] = useState('Individual');
   const [tab, setTab] = useState("");
   const click = useRef("");
   const [filename, setFilename] = useState();
+  const {vehiclebrand, brandtypes, vehicles, brandtype, isLoading } = useVechicleBrand()
+  const [individualdata, setIndividualData] = useState({
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "gender": "", 
+      "phone": "",
+      "house_address": "",
+      "account_number": "",
+      "marital_status": "",
+      "picture": "",
+      "identification_means": "",
+      "next_of_kin": "",
+      "next_of_kin_phone": "",
+      "next_of_kin_address": "",
+      "employer": "",
+      "employer_address": "",
+      "customer_type": "",
+      "company_name": null,
+      "mailing_address": "",
+      "tin_number": "",
+      "office_address": "",
+      "contact_person": "" 
+  })
+  const [vechicledata, setVechicleData] = useState(
+    {
+					"period":"",
+					"policy_type":"",
+					"enhanced_third_party":"",
+					"private_commercial":"", 
+					"motor_cycle_policy":null,
+					"make":"",
+					"body_type":"",
+					"year":"",
+					"home_address":"",
+					"registration_number":"",
+					"chasis_number":"",
+					"engine_number":"",
+					"vehicle_value":"",
+					"pictures":[]
+					}
+  )
+  const [years, setYears] = useState([])
+  const [modalShow, setModalShow] = useState(false);
+  const [quote, setQuote] = useState({
+    'vehicle_value': '',
+    'private_commercial': '',
+    'third_party_type': '',
+    'policy_type': '',
+    'vehicle_type': ''
+  })
+
+  const { vehiclequote, getvehiclequote, isquoteLoading } = useBuyvehiclepolicy()
 
   const file = () => {
     click.current.click();
   };
+
+  const vehicleid = async(e) => {
+    setVechicleData({...vechicledata, make : e.target.value}); 
+    const id = e.currentTarget.options[e.currentTarget.options.selectedIndex].getAttribute('data-key'); 
+    await brandtypes(id)
+  }
+
+  const year = function yearlist(startYear = 2008) {
+    const endDate = new Date().getFullYear();
+    let years = [];
+  
+    while (startYear <= endDate) {
+      years.push(startYear);
+      startYear++;
+    }
+    setYears(years)
+}
+  useEffect(() => {
+    vehiclebrand();
+    year()
+  }, [vehiclebrand])
 
   return (
     <div className="report-content">
@@ -39,61 +171,57 @@ function Motorinsuranceregister() {
             <div className={`individual ${type === 'Individual' ? 'd-block' : 'd-none'}`}>
               <div className="report-inputgroup">
                 <label>First Name</label>
-                <input type="text" />
+                <input type="text" name='first_name' onChange={(e) => setIndividualData({...individualdata, first_name : e.target.value})}/>
               </div>
               <div className="report-inputgroup">
                 <label>Last Name</label>
-                <input type="text" />
+                <input type="text" onChange={(e) => setIndividualData({...individualdata, last_name : e.target.value})}/>
               </div>
               <div className="report-inputgroup">
                 <label>Email Address</label>
-                <input type="email" />
+                <input type="email" onChange={(e) => setIndividualData({...individualdata, email : e.target.value})}/>
               </div>
               <div className="report-inputgroup insurance-selectgroup">
                 <label>Gender</label>
-                <select>
-                  <option value="grapefruit">Grapefruit</option>
-                  <option value="lime">Lime</option>
-                  <option selected value="coconut">
-                    Coconut
-                  </option>
-                  <option value="mango">Mango</option>
+                <select onChange={(e) => setIndividualData({...individualdata, gender : e.target.value})}>
+                  <option >Select</option>
+                  <option value="male">male</option>
+                  <option value="female">female</option>
                 </select>
               </div>
               <div className="report-inputgroup">
                 <label>Phone Number</label>
-                <input type="number" />
+                <input type="number" onChange={(e) => setIndividualData({...individualdata, phone : e.target.value})}/>
               </div>
               <div className="report-inputgroup">
                 <label>Residential Address</label>
-                <textarea rows={2} />
+                <textarea rows={2} onChange={(e) => setIndividualData({...individualdata, house_address : e.target.value})} />
               </div>
               <div className="report-inputgroup insurance-selectgroup">
                 <label>Marital Status</label>
-                <select>
-                  <option value="grapefruit">Grapefruit</option>
-                  <option value="lime">Lime</option>
-                  <option selected value="coconut">
-                    Coconut
-                  </option>
-                  <option value="mango">Mango</option>
+                <select onChange={(e) => setIndividualData({...individualdata, marital_status : e.target.value})}>
+                  <option >Select</option>
+                  <option value="Single">Single</option>
+                  <option value="Married">Married</option>
+                  <option value="Divorced">Divorced</option>
+                  <option value="Widow">Widow</option>
                 </select>
               </div>
               <div className="report-inputgroup">
                 <label>Next Of Kin</label>
-                <input type="text" />
+                <input type="text" onChange={(e) => setIndividualData({...individualdata, next_of_kin : e.target.value})} />
               </div>
               <div className="report-inputgroup">
                 <label>Next Of Kin Address</label>
-                <textarea rows={2} />
+                <textarea rows={2}  onChange={(e) => setIndividualData({...individualdata, next_of_kin_address : e.target.value})}/>
               </div>
               <div className="report-inputgroup">
                 <label>Next Of Kin Phone Number</label>
-                <input type="number" />
+                <input type="number" onChange={(e) => setIndividualData({...individualdata, next_of_kin_phone : e.target.value})}/>
               </div>
               <div className="report-inputgroup">
                 <label>Mailing Address</label>
-                <textarea rows={2} />
+                <textarea rows={2} onChange={(e) => setIndividualData({...individualdata, mailing_address : e.target.value})}/>
               </div>
               <div className="report-inputgroup">
                 <label>Upload Means Of Identification</label>
@@ -187,78 +315,73 @@ function Motorinsuranceregister() {
             </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Private/Commercial</label>
-              <select>
-                <option value="grapefruit">Grapefruit</option>
-                <option value="lime">Lime</option>
-                <option selected value="coconut">
-                  Coconut
-                </option>
-                <option value="mango">Mango</option>
+              <select onChange={(e) => {setVechicleData({...vechicledata, private_commercial : e.target.value}); setQuote({...quote, private_commercial: e.target.value})}}>
+                <option >Select</option>
+                <option value="private">Private</option>
+                <option value="commercial">Commercial</option>
+                <option value="motor_cycle">Motor Cycle</option>
               </select>
             </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Policy Type</label>
-              <select>
-                <option value="grapefruit">Grapefruit</option>
-                <option value="lime">Lime</option>
-                <option selected value="coconut">
-                  Coconut
-                </option>
-                <option value="mango">Mango</option>
+              <select onChange={(e) => {setVechicleData({...vechicledata, policy_type : e.target.value}); setQuote({...quote, policy_type : e.target.value}); setQuote({...quote, third_party_type : e.target.value})}}>
+                <option >Select</option>
+                <option value="third_party_only">3rd Party Only</option>
+                <option value="comprehensive">Comprehensive</option>
               </select>
             </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Vehicle Make</label>
-              <select>
-                <option value="grapefruit">Grapefruit</option>
-                <option value="lime">Lime</option>
-                <option selected value="coconut">
-                  Coconut
-                </option>
-                <option value="mango">Mango</option>
+              <select onChange={vehicleid}>
+                <option >Select</option>
+                {vehicles.map((vehicle, index) => {
+                  return (
+                    <option key={index} data-key={vehicle.id} value={vehicle.name}>{vehicle.name}</option>
+                  )
+                })}
               </select>
             </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Body Type</label>
-              <select>
-                <option value="grapefruit">Grapefruit</option>
-                <option value="lime">Lime</option>
-                <option selected value="coconut">
-                  Coconut
-                </option>
-                <option value="mango">Mango</option>
+              <select onChange={(e) => {setVechicleData({...vechicledata, body_type: e.target.value}); setQuote({...quote, vehicle_type : e.target.value})}}>
+                <option>{isLoading ? 'loading...' : 'Select'}</option>
+                {
+                  brandtype.map((brand, index) => {
+                    return (
+                      <option key={index} value={brand.name}>{brand.name}</option>
+                    )
+                  })
+                }
               </select>
             </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Year</label>
-              <select>
-                <option value="grapefruit">Grapefruit</option>
-                <option value="lime">Lime</option>
-                <option selected value="coconut">
-                  Coconut
-                </option>
-                <option value="mango">Mango</option>
+              <select onChange={(e) => setVechicleData({...vechicledata, year: e.target.value})}>
+                <option>Select year</option>
+                {
+                  years.map((year, index) => {
+                    return (
+                      <option key={index} value={year}>{year}</option>
+                    )
+                  })
+                }
               </select>
             </div>
             <div className="report-inputgroup">
               <label>Registration Number</label>
-              <input type="text" />
+              <input type="text" onChange={(e) => setVechicleData({...vechicledata, registration_number: e.target.value})}/>
             </div>
             <div className="report-inputgroup">
               <label>Chasis Number</label>
-              <input type="text" />
-            </div>
-            <div className="report-inputgroup">
-              <label>Chasis Number</label>
-              <input type="text" />
+              <input type="text" onChange={(e) => setVechicleData({...vechicledata, chasis_number: e.target.value})}/>
             </div>
             <div className="report-inputgroup">
               <label>Engine Number</label>
-              <input type="text" />
+              <input type="text" onChange={(e) => setVechicleData({...vechicledata, engine_number: e.target.value})}/>
             </div>
             <div className="report-inputgroup">
               <label>Vehicle Value</label>
-              <input type="text" />
+              <input type="number" onChange={(e) => {setVechicleData({...vechicledata, vehicle_value: e.target.value}); setQuote({...quote, vehicle_value: e.target.value})}} />
             </div>
             <div className="report-inputgroup">
               <label>Front View Of Vehicle</label>
@@ -356,11 +479,12 @@ function Motorinsuranceregister() {
               <Link onClick={(e) => setTab("")}>Back</Link>
             </div>
             <div className="insurance-button">
-              <button>submit</button>
+              <button onClick={(e) => {e.preventDefault(); vehiclequote(quote, setModalShow)}}>{isquoteLoading ? <Loader/> : 'Submit'}</button>
             </div>
           </div>
         </form>
       </div>
+      <Summary show={modalShow} individual={individualdata} vehicle={vechicledata} quote={getvehiclequote} onHide={() => setModalShow(false)}/>
     </div>
   );
 }

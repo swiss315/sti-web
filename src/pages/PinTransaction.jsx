@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../stylesheets/Claims.css";
+import { useTransaction } from "../hooks/transactoion";
 
 const PinTransaction = () => {
+  const { transaction, data } = useTransaction()
+
+  function convertDate(date) {
+    const fullyear = new Date(date);
+    let year = fullyear.getFullYear();
+    let month = fullyear.getMonth() + 1;
+    let day = fullyear.getDate();
+    day = day.toString().padStart(2, "0");
+
+    month = month.toString().padStart(2, "0");
+    const formattedToday = day + "/" + month + "/" + year;
+    return formattedToday;
+  }
+  useEffect(() => {
+    transaction()
+  }, [transaction])
   return (
     <div className="general-claims">
-      {/* <div className="claims-header">
-        <AiOutlineArrowLeft />
-        <div className="sign-update">
-          <FaUserAlt />
-          <img className="bell" src={Bell} alt="" />
-        </div>
-      </div> */}
       <div className="myclaims">
         <h4>Transaction History</h4>
       </div>
@@ -18,66 +28,27 @@ const PinTransaction = () => {
         <thead>
           <tr>
             <th className="ref">Reference No</th>
-            <th className="ref">Policy</th>
-            <th className="ref">Insurance claim</th>
+            <th className="ref">Policy Number</th>
             <th className="ref">Amount</th>
+            <th className="ref">Status</th>
             <th className="ref">Date</th>
           </tr>
         </thead>
-
         <tbody>
-          <tr>
-            <th>ST273864</th>
-            <th>Marine</th>
-            <th>Dummy Text</th>
-            <th>NGN500,000</th>
-            <th>20/6/23</th>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <th>ST273864</th>
-            <th>Marine</th>
-            <th>Dummy Text</th>
-            <th>NGN500,000</th>
-            <th>20/6/23</th>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <th>ST273864</th>
-            <th>Marine</th>
-            <th>Dummy Text</th>
-            <th>NGN500,000</th>
-            <th>20/6/23</th>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <th>ST273864</th>
-            <th>Marine</th>
-            <th>Dummy Text</th>
-            <th>NGN500,000</th>
-            <th>20/6/23</th>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <th>ST273864</th>
-            <th>Marine</th>
-            <th>Dummy Text</th>
-            <th>NGN500,000</th>
-            <th>20/6/23</th>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <th>ST273864</th>
-            <th>Marine</th>
-            <th>Dummy Text</th>
-            <th>NGN500,000</th>
-            <th>20/6/23</th>
-          </tr>
+          {
+            data.map((data, index) => {
+              return (
+                <tr>
+                  <th>{data.reference}</th>
+                  <th>{data.policy_number}</th>
+                  <th>{data.amount}</th>
+                  <th>{data.status}</th>
+                  <th>{convertDate(data.updated_at)}</th>
+                </tr>
+              )
+            })
+          }
+          
         </tbody>
       </table>
     </div>

@@ -16,17 +16,17 @@ export const useProfile = () => {
         const cookies = new Cookies();
         let token = cookies.get('xhrTOKEN')
 
-        await axios.get(`${API}/profile`,
+        await axios.get(`${API}/user`,
         {
             headers: {
-                'Authorization': `Bearer ${token}`, 
+                'Authorization': `Token ${token}`, 
                 'Content-Type': 'application/json'
             }
         } ).then((response) => {
-            console.log(response.data.data)
+            // console.log(response.data)
             setIsLoading(false)
-            setData(response.data.data)
-            let user = response.data.data
+            setData(response.data)
+            let user = response.data.user
             user = btoa(JSON.stringify(user))
             cookies.set("user", user, { path: '/', maxAge: maxAge, sameSite: 'lax', secure: true });
         }).catch((err) => {
@@ -43,24 +43,31 @@ export const useProfile = () => {
         const cookies = new Cookies();
         let token = cookies.get('xhrTOKEN')
 
-        await axios.post(`${API}/profile`, profiledata,
+        const data = {
+            user: profiledata
+        }
+
+        console.log(data);
+
+        await axios.put(`${API}/user`, data,
         {
             headers: {
-                'Authorization': `Bearer ${token}`, 
+                'Authorization': `Token ${token}`, 
                 'Content-Type': 'application/json'
             }
         } ).then((response) => {
             setIsLoading(false)
-            let user = response.data.data
-            user = btoa(JSON.stringify(user))
-            cookies.set("user", user, { path: '/', maxAge: maxAge, sameSite: 'lax', secure: true });
+            console.log(response);
+            // let user = response.data.data
+            // user = btoa(JSON.stringify(user))
+            // cookies.set("user", user, { path: '/', maxAge: maxAge, sameSite: 'lax', secure: true });
             setShow(false)
         }).catch((err) => {
             setIsLoading(false)
             setError(err.response.data.message)
             console.log(err.response.data.message)
         })
-    }, [maxAge])
+    }, [])
     
     return { profile, updateprofile, data, isLoading, error }
 }

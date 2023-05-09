@@ -9,10 +9,12 @@ import Loader from "../components/Loader";
 
 
 const Login = () => {
-  const [data, setData] = useState({
-    'email': '',
-    'password': ''
-  })
+  const [data, setData] = useState( {
+        'email': '',
+        'password': ''
+      }
+  )
+
 
   const { login, error, isLoading } = useAgent_Login()
 
@@ -39,7 +41,7 @@ const Login = () => {
               name="email"
               type="email"
               className=""
-              onChange={(e) => {setData({...data, 'email': e.target.value})}}
+              onChange={(e) => {setData({ ...data, email : e.target.value})}}
             />
           </div>
           <div className="input-group">
@@ -53,12 +55,11 @@ const Login = () => {
               className=""
               onChange={(e) => {setData({...data, 'password': e.target.value})}}
             />
-            {/* {errors.password && <p>{errors.password}</p>} */}
           </div>
           <div className="forgot-password">
             <Link className="forgot">Forgot Password?</Link>
           </div>
-          <p>{error}</p>
+          <p className="login_error">{error}</p>
           <div className="button">
             <Link>
               <button onClick={Login}>{isLoading ? <Loader /> : 'Login'}</button>
