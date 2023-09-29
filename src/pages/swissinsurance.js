@@ -185,7 +185,7 @@ const onchangeaction = (e) => {
             </span>
           </div>
           <div className={`insurance-button`}>
-            <button onClick={(e) => {e.preventDefault(); swissquote(quote, setModalShow), setSwissData({...swissdata, period: '3month'})}}>{isquoteLoading ? <Loader /> :'submit'}</button>
+            <button onClick={(e) => {e.preventDefault(); swissquote(quote, setModalShow); setSwissData({...swissdata, period: '3month'})}}>{isquoteLoading ? <Loader /> :'submit'}</button>
           </div>
         </form>
       </div>
