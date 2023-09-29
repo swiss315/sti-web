@@ -56,7 +56,7 @@ function Summary(props) {
 
 function Allrisk() {
   const [tab, setTab] = useState("");
-  const [type, setType] = useState('');
+  // const [type, setType] = useState('');
   const click = useRef("");
   const [modalShow, setModalShow] = useState(false);
   const { riskquote, getriskquote, isquoteLoading } = useRiskPolicy();
