@@ -9,6 +9,7 @@ export const useLogout = () => {
         cookies.remove('xhrToken')
         cookies.remove('user')
         cookies.remove('policy')
+        cookies.remove('userinfo')
         dispatch({type: 'LOGOUT'})
     }
 

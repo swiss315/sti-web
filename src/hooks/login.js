@@ -28,14 +28,20 @@ export const useAgent_Login = () => {
         } ).then((response) => {
             console.log(response.data)
             let user = response.data.user
+            let userinfo = {
+                wallet: response.data.wallet_balance,
+                is_agent: response.data.is_agent
+            }
             let policy = response.data.policy_data
             let token = response.data.user.token
             user = btoa(JSON.stringify(user))
+            userinfo = btoa(JSON.stringify(userinfo))
             policy = btoa(JSON.stringify(policy))
             setIsLoading(false)
             cookies.set("xhrTOKEN" , token, { path: '/', maxAge: maxAge, sameSite: 'lax', secure: true })
             cookies.set("policy" , policy, { path: '/', maxAge: maxAge, sameSite: 'lax', secure: true })
             cookies.set("user" , user, { path: '/', maxAge: maxAge, sameSite: 'lax', secure: true })
+            cookies.set("userinfo" , userinfo, { path: '/', maxAge: maxAge, sameSite: 'lax', secure: true })
             dispatch({type : 'LOGIN' ,  token: token})
             Navigate('/dashboard')
         }).catch((err) => {

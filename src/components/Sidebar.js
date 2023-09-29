@@ -14,13 +14,14 @@ import {ReactComponent as Helpicon} from "../assets/icons/help&feedbackicon.svg"
 import {ReactComponent as Logouticon} from "../assets/icons/logouticon.svg";
 import { useLogout } from '../hooks/logout';
 
-
-
 function Sidebar({setSidebar, sidebar}) {
     const cookie = new Cookies();
     let userdata = cookie.get("user");
+    let userinfo = cookie.get("userinfo");
     userdata = JSON.parse(atob(userdata));
+    userinfo = JSON.parse(atob(userinfo));
     const { logout } = useLogout()
+    console.log(userdata);
 
     return (
     <div>
@@ -29,16 +30,18 @@ function Sidebar({setSidebar, sidebar}) {
                 Welcome, <span>{userdata.first_name + " " + userdata.last_name}</span>
             </p>
             <p className='sidebar-info-wallet'>
-                Wallet Balance: <span>NGN{userdata.wallet_balance}</span>
+                Wallet Balance: <span>NGN{userinfo.wallet}</span>
             </p>
         </div>
         <div className='sidebar-menu'>
-            <Link to="/claim" onClick={() => setSidebar(!sidebar) } >
+            {
+                userinfo.is_agent ? <Link to="/claim" onClick={() => setSidebar(!sidebar) } >
                 <Claimicon />
                 <span>
                     Claims
                 </span>
-            </Link>
+            </Link> : ''
+            }
             <Link to="/pin" onClick={() => setSidebar(!sidebar) }>
                 <Mypinsicon />
                 <span className='mypin'>

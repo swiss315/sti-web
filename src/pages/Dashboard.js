@@ -50,9 +50,6 @@ function Dashboard() {
         <Link to='/marine-insurance' className={`insurance-type-tab`}>
           Marine Insurance
         </Link>
-        <Link className={`insurance-type-tab `} >
-          Contractors All Risk Insurance
-        </Link>
       </div>
       <div className='insurance-tab-content'>
         {userpolicy.my_policies.swiss.length === 0 ? '' : <div className='tab-box' style={{ backgroundImage: `url(${marineinsurance})` }}>
