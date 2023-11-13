@@ -9,25 +9,22 @@
     background-color:  #011152;
     height: 100vh;
     position: relative;
-}
-
-.maincontent {
-    background-color: white;
-    padding: 2rem 4rem 0rem;
     overflow: auto;
 }
 
-/* .logocontainer {
-    display: flex;
-    justify-content: space-between;
-    margin: 1rem 1rem;
-} */
-
-.closeicon {
-    margin: auto 0rem;
+.content {
+    background-color: white;
+    padding: 2rem 4rem 0;
+    overflow: auto;
 }
 
-.sidbarcollapse {
+
+
+.close-icon {
+    margin: auto 0;
+}
+
+.collapsible {
     display: grid;
     width: 100vw;
     grid-template-columns: 0px auto;
@@ -35,11 +32,11 @@
     /* overflow: hidden; */
 }
 
-.maincontent > .dashboard-nav > .sidebar-container {
+.content > .dashboard-nav > .sidebar-container {
     display: none;
 }
 
-.maincontent > .dashboard-nav {
+.content > .dashboard-nav {
     justify-content: flex-end;
 }
 
@@ -60,7 +57,7 @@
     margin: 0rem 1rem;
 }
 
-.sidbarcollapse > .sidebar {
+.collapsible > .sidebar {
     visibility: hidden;
 }
 
@@ -69,7 +66,7 @@
         grid-template-columns: 260px auto;
     }
 
-    .sidbarcollapse {
+    .collapsible {
         overflow: scroll;
     }
 }
@@ -83,7 +80,7 @@
         margin: 2rem 4rem;
     }
 
-    .sidbarcollapse {
+    .collapsible {
         overflow: scroll;
     }
     
@@ -92,7 +89,7 @@
 
 
 @media only screen and (max-width: 992px) {
-    .maincontent {
+    .content {
         padding: 2rem 2rem 0rem;
     }
 }

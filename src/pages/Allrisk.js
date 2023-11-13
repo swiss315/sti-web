@@ -150,14 +150,14 @@ const numberdays = (date) => {
               <label>IMEI</label>
               <input type="text" onChange={(e) => setAllRiskData({...allriskdata, imei: e.target.value})}/>
             </div>
-            <div className="report-inputgroup insurance-selectgroup">
-              <label>Type</label>
-              <select name="customer_type" onChange={onchangeaction}>
-              <option defaultValue='Select'>Select</option>
-                <option value="1">Individual</option>
-                <option value="2">Coperate</option>
-              </select>
-            </div>
+            {/*<div className="report-inputgroup insurance-selectgroup">*/}
+            {/*  <label>Type</label>*/}
+            {/*  <select name="customer_type" onChange={onchangeaction}>*/}
+            {/*  <option defaultValue='Select'>Select</option>*/}
+            {/*    <option value="1">Individual</option>*/}
+            {/*    <option value="2">Coperate</option>*/}
+            {/*  </select>*/}
+            {/*</div>*/}
             <div className="report-inputgroup insurance-selectgroup">
               <label>Prefix</label>
               <select name="title" onChange={onchangeaction}>

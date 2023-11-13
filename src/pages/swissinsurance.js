@@ -7,6 +7,12 @@ import { useSwisspolicy } from "../hooks/buy_swisspolicy";
 import Loader from "../components/Loader";
 
 function Summary(props) {
+  const { buySwissPolicy, isLoading } = useSwisspolicy()
+
+  const buySwissInsurance = async () => {
+    await buySwissPolicy(props.individual, props.swiss)
+  }
+
   return (
     <Modal
       {...props}
@@ -41,8 +47,8 @@ function Summary(props) {
             <p>Premium Payable</p>
             <p>{props.quote.price}</p>
           </div>
-            <button className="summary-button" >
-              Submit
+            <button className="summary-button" onClick={buySwissInsurance} >
+              {isLoading ? <Loader /> : 'Submit'}
             </button>
         </div>
       </Modal.Body>
@@ -84,6 +90,20 @@ const onchangeaction = (e) => {
   setIndividualData({...individualdata, [e.target.name]: e.target.value})
  }
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    setFilename(e.target.files[0].name);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64String = e.target.result;
+        setIndividualData({...individualdata, picture: base64String});
+        // console.log(base64String)
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const file = () => {
     click.current.click();
   };
@@ -95,9 +115,23 @@ const onchangeaction = (e) => {
           <div
             className={`insurance-card-container `}
           >
-            <div className="report-inputgroup">
+            <div className="report-inputgroup insurance-selectgroup">
               <label>Period</label>
-              <input type="date" />
+              <select name="period" onChange={(e) => setSwissData({...swissdata, [e.target.name]: e.currentTarget.value})}>
+                <option defaultValue=''>Select</option>
+                <option value="1 month">1 month</option>
+                <option value="2 month">2 month</option>
+                <option value="3 month">3 month</option>
+                <option value="4 month">4 month</option>
+                <option value="5 month">5 month</option>
+                <option value="6 month">6 month</option>
+                <option value="7 month">7 month</option>
+                <option value="8 month">8 month</option>
+                <option value="9 month">9 month</option>
+                <option value="10 month">10 month</option>
+                <option value="11 month">11 month</option>
+                <option value="12 month">12 month</option>
+              </select>
             </div>
             <div className="report-inputgroup">
               <label>First Name</label>
@@ -147,18 +181,16 @@ const onchangeaction = (e) => {
               <label>Disability</label>
               <input type="text" name="disability" onChange={onchangeaction}/>
             </div>
-            {/* <div className="report-inputgroup">
+            <div className="report-inputgroup">
               <label>Describe Disability</label>
               <textarea rows={2} />
-            </div> */}
+            </div>
             <div className="report-inputgroup">
               <label>Upload Passport</label>
               <input
                 type="file"
                 ref={click}
-                onChange={(e) => {
-                  setFilename(e.target.files[0].name);
-                }}
+                onChange={handleImageUpload}
                 hidden
               />
               <div className="upload-input">

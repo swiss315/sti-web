@@ -44,15 +44,15 @@ function Dashboardlayout() {
 
 
   return (
-    <div className={` ${sidebar ? "sidbarcollapse" : "dashboardlayout"}`}>
+    <div className={` ${sidebar ? "collapsible" : "dashboardlayout"}`}>
         <div className='sidebar'>
             <div className='logocontainer'>
                 <Logoicon />
-                <Closeicon className='closeicon' onClick={handleclick} />
+                <Closeicon className='close-icon' onClick={handleclick} />
             </div>
             <Sidebar sidebar={sidebar} setSidebar={setSidebar} />
         </div>
-        <div className={` ${sidebar ? "maincontentexpand" : "maincontent"}`}>
+        <div className={` ${sidebar ? "maincontentexpand" : "content"}`}>
           <div className='dashboard-nav'>
             <div className='sidebar-container'>
               {

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import "../stylesheets/Claims.css";
-import { useTransaction } from "../hooks/transactoion";
+import { useTransaction } from "../hooks/transaction";
 
 const PinTransaction = () => {
-  const { transaction, data } = useTransaction()
+  const { transaction, data: allData } = useTransaction()
 
   function convertDate(date) {
     const fullyear = new Date(date);
@@ -34,22 +34,30 @@ const PinTransaction = () => {
             <th className="ref">Date</th>
           </tr>
         </thead>
-        <tbody>
-          {
-            data.map((data, index) => {
-              return (
-                <tr>
-                  <th>{data.reference}</th>
-                  <th>{data.policy_number}</th>
-                  <th>{data.amount}</th>
-                  <th>{data.status}</th>
-                  <th>{convertDate(data.updated_at)}</th>
-                </tr>
-              )
-            })
-          }
-          
-        </tbody>
+        {allData.length === 0 ? <tbody>
+            <tr>
+              <th className="text-center p-5" colSpan={6}>
+                No Data Found
+              </th>
+            </tr>
+            </tbody> :
+            <tbody>
+            {
+              allData.map((data, index) => {
+                return (
+                    <tr key={index}>
+                      <th>{data.reference}</th>
+                      <th>{data.policy_number}</th>
+                      <th>{data.amount}</th>
+                      <th>{data.status}</th>
+                      <th>{convertDate(data.updated_at)}</th>
+                    </tr>
+                )
+              })
+            }
+
+            </tbody>
+        }
       </table>
     </div>
   );

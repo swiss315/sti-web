@@ -8,6 +8,12 @@ import { useBuyvehiclepolicy } from "../hooks/buy_vehiclepolicy";
 import Loader from "../components/Loader";
 
 function Summary(props) {
+  const {buyVehicle, isLoading: isBuyLoading } = useBuyvehiclepolicy()
+
+  const buyVehicleInsurance = async () => {
+     await buyVehicle(props.individual, props.vehicle)
+  }
+
   return (
     <Modal
       {...props}
@@ -54,8 +60,8 @@ function Summary(props) {
             <p>Premium Payable</p>
             <p>{props.quote.price}</p>
           </div>
-            <button className="summary-button" >
-              Submit
+            <button className="summary-button"  onClick={buyVehicleInsurance}>
+               {isBuyLoading ? <Loader /> : 'Submit'}
             </button>
         </div>
       </Modal.Body>
@@ -67,7 +73,13 @@ function Motorinsuranceregister() {
   const [type, setType] = useState('Individual');
   const [tab, setTab] = useState("");
   const click = useRef("");
-  const [filename, setFilename] = useState();
+  const frontClick = useRef("");
+  const backClick = useRef("");
+  const leftClick = useRef("");
+  const rightClick = useRef("");
+  const clickId = useRef("");
+  const [filename, setFilename] = useState({});
+  const VerifyData = useRef(false)
   const {vehiclebrand, brandtypes, vehicles, brandtype, isLoading } = useVechicleBrand()
   const [individualdata, setIndividualData] = useState({
       "first_name": "",
@@ -86,7 +98,7 @@ function Motorinsuranceregister() {
       "employer": "",
       "employer_address": "",
       "customer_type": "",
-      "company_name": null,
+      "company_name": "",
       "mailing_address": "",
       "tin_number": "",
       "office_address": "",
@@ -124,6 +136,89 @@ function Motorinsuranceregister() {
 
   const file = () => {
     click.current.click();
+  };
+  console.log(filename, individualdata)
+  const checkField = (individualdata) => {
+    const {
+      first_name,
+      last_name,
+      email,
+      gender,
+      phone,
+      house_address,
+      marital_status,
+      next_of_kin,
+      next_of_kin_address,
+      next_of_kin_phone,
+      mailing_address,
+      identification_means,
+    } = individualdata;
+
+    return (
+        first_name.trim() !== "" &&
+        last_name.trim() !== "" &&
+        email.trim() !== "" &&
+        gender.trim() !== "" &&
+        phone.trim() !== "" &&
+        house_address.trim() !== "" &&
+        marital_status.trim() !== "" &&
+        next_of_kin.trim() !== "" &&
+        next_of_kin_address.trim() !== "" &&
+        next_of_kin_phone.trim() !== "" &&
+        mailing_address.trim() !== "" &&
+        identification_means
+    );
+  }
+
+  const verifyField = checkField(individualdata);
+
+  if (verifyField) {
+    // All fields are filled
+    VerifyData.current = true
+    console.log("All fields are filled.", VerifyData.current);
+  } else {
+    // Some fields are empty
+    console.log("Some fields are empty.");
+  }
+
+  const handleTabChange = () => {
+    if (VerifyData.current) {
+      setTab("next");
+    }
+  };
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    setFilename({...filename, identification_means : e.target.files[0].name});
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64String = e.target.result;
+        setIndividualData({...individualdata, identification_means: base64String});
+        // console.log(base64String)
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleVehicleImage = (e) => {
+    const file = e.target.files[0];
+    setFilename({...filename, [e.target.name] : e.target.files[0].name});
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64String = e.target.result;
+        const currentState = vechicledata;
+
+        // Create a copy of the object and update the array
+        const updatedState = {
+          ...currentState,
+          myArray: [...currentState.pictures, base64String],
+        };
+        setVechicleData(updatedState);
+        // console.log(base64String)
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const vehicleid = async(e) => {
@@ -183,7 +278,7 @@ function Motorinsuranceregister() {
               </div>
               <div className="report-inputgroup insurance-selectgroup">
                 <label>Gender</label>
-                <select onChange={(e) => setIndividualData({...individualdata, gender : e.target.value})}>
+                <select onChange={(e) => setIndividualData({...individualdata, gender : e.currentTarget.value})}>
                   <option >Select</option>
                   <option value="male">male</option>
                   <option value="female">female</option>
@@ -199,7 +294,7 @@ function Motorinsuranceregister() {
               </div>
               <div className="report-inputgroup insurance-selectgroup">
                 <label>Marital Status</label>
-                <select onChange={(e) => setIndividualData({...individualdata, marital_status : e.target.value})}>
+                <select onChange={(e) => setIndividualData({...individualdata, marital_status : e.currentTarget.value})}>
                   <option >Select</option>
                   <option value="Single">Single</option>
                   <option value="Married">Married</option>
@@ -224,21 +319,20 @@ function Motorinsuranceregister() {
                 <textarea rows={2} onChange={(e) => setIndividualData({...individualdata, mailing_address : e.target.value})}/>
               </div>
               <div className="report-inputgroup">
-                <label>Upload Means Of Identification</label>
+                <label>Upload Means Of Identifications</label>
                 <input
                   type="file"
-                  ref={click}
-                  onChange={(e) => {
-                    setFilename(e.target.files[0].name);
-                  }}
+                  name='identification_means'
+                  ref={clickId}
+                  onChange={handleImageUpload}
                   hidden
                 />
                 <div className="upload-input">
                   <Uploadicon />
-                  <p>{filename}</p>
+                  <p>{filename.identification_means}</p>
                   <p>
                     Choose File from your device{" "}
-                    <span onClick={file}>here</span>
+                    <span onClick={() => clickId.current.click() }>here</span>
                   </p>
                 </div>
               </div>
@@ -277,14 +371,13 @@ function Motorinsuranceregister() {
                 <input
                   type="file"
                   ref={click}
-                  onChange={(e) => {
-                    setFilename(e.target.files[0].name);
-                  }}
+                  name='identification_means'
+                  onChange={handleImageUpload}
                   hidden
                 />
                 <div className="upload-input">
                   <Uploadicon />
-                  <p>{filename}</p>
+                  <p>{filename.identification_means}</p>
                   <p>
                     Choose File from your device{" "}
                     <span onClick={file}>here</span>
@@ -302,7 +395,7 @@ function Motorinsuranceregister() {
             </span>
           </div>
           <div className={`insurance-next ${tab === "next" ? "d-none" : ""}`}>
-            <div onClick={(e) => setTab("next")}>Next</div>
+            <div onClick={handleTabChange}>Next</div>
           </div>
           <div
             className={`insurance-card-container ${
@@ -387,17 +480,16 @@ function Motorinsuranceregister() {
               <label>Front View Of Vehicle</label>
               <input
                 type="file"
-                ref={click}
-                onChange={(e) => {
-                  setFilename(e.target.files[0].name);
-                }}
+                ref={frontClick}
+                name='front_view'
+                onChange={handleVehicleImage}
                 hidden
               />
               <div className="upload-input">
                 <Uploadicon />
-                <p>{filename}</p>
+                <p>{filename.front_view}</p>
                 <p>
-                  Choose File from your device <span onClick={file}>here</span>
+                  Choose File from your device <span onClick={() => frontClick.current.click()}>here</span>
                 </p>
               </div>
             </div>
@@ -405,17 +497,16 @@ function Motorinsuranceregister() {
               <label>Back View Of Vehicle</label>
               <input
                 type="file"
-                ref={click}
-                onChange={(e) => {
-                  setFilename(e.target.files[0].name);
-                }}
+                ref={backClick}
+                name='back_view'
+                onChange={handleVehicleImage}
                 hidden
               />
               <div className="upload-input">
                 <Uploadicon />
-                <p>{filename}</p>
+                <p>{filename.back_view}</p>
                 <p>
-                  Choose File from your device <span onClick={file}>here</span>
+                  Choose File from your device <span onClick={() => backClick.current.click()}>here</span>
                 </p>
               </div>
             </div>
@@ -423,17 +514,16 @@ function Motorinsuranceregister() {
               <label>Left View Of Vehicle</label>
               <input
                 type="file"
-                ref={click}
-                onChange={(e) => {
-                  setFilename(e.target.files[0].name);
-                }}
+                ref={leftClick}
+                name='left_view'
+                onChange={handleVehicleImage}
                 hidden
               />
               <div className="upload-input">
                 <Uploadicon />
-                <p>{filename}</p>
+                <p>{filename.left_view}</p>
                 <p>
-                  Choose File from your device <span onClick={file}>here</span>
+                  Choose File from your device <span onClick={() => leftClick.current.click()}>here</span>
                 </p>
               </div>
             </div>
@@ -441,17 +531,16 @@ function Motorinsuranceregister() {
               <label>Right View Of Vehicle</label>
               <input
                 type="file"
-                ref={click}
-                onChange={(e) => {
-                  setFilename(e.target.files[0].name);
-                }}
+                ref={rightClick}
+                name='right_view'
+                onChange={handleVehicleImage}
                 hidden
               />
               <div className="upload-input">
                 <Uploadicon />
-                <p>{filename}</p>
+                <p>{filename.right_view}</p>
                 <p>
-                  Choose File from your device <span onClick={file}>here</span>
+                  Choose File from your device <span onClick={() => rightClick.current.click()}>here</span>
                 </p>
               </div>
             </div>

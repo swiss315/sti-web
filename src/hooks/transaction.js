@@ -4,8 +4,8 @@ import { API } from '../helper/action'
 import { Cookies } from 'react-cookie';
 
 export const useTransaction = () => {
-    const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(null)
+    const [error, setError] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
     const [data, setData] = useState([])
 
     const transaction = useCallback(async () => {
@@ -25,6 +25,7 @@ export const useTransaction = () => {
             // console.log(response.data.history)
             setData(response.data.history)
             setIsLoading(false)
+            // return response.data.history
         }).catch((err) => {
             setIsLoading(false)
             setError(err.response.data.message)

@@ -18,8 +18,11 @@ function Sidebar({setSidebar, sidebar}) {
     const cookie = new Cookies();
     let userdata = cookie.get("user");
     let userinfo = cookie.get("userinfo");
-    userdata = JSON.parse(atob(userdata));
-    userinfo = JSON.parse(atob(userinfo));
+    if(userdata && userinfo) {
+        userdata = JSON.parse(atob(userdata));
+        userinfo = JSON.parse(atob(userinfo));
+    }
+
     const { logout } = useLogout()
     console.log(userdata);
 
