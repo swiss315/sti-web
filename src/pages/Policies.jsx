@@ -54,8 +54,7 @@ import {usePolicy} from "../hooks/Policy";
 
 const Policies = () => {
   const cookie = new Cookies();
-  let userpolicy = cookie.get("policy");
-  userpolicy = JSON.parse(atob(userpolicy));
+  let userpolicy = {}
 console.log(userpolicy);
 const { getPolicies } = usePolicy()
 
@@ -74,28 +73,28 @@ const { getPolicies } = usePolicy()
               <Link className="insurance_link" to='/motor' >
                 <img className="insurance_img" src={motor} alt="insurance_images" />
                 <div className="text">
-                  <p>{userpolicy.my_policies.vehicle.length} policies</p>
+                  <p>{userpolicy?.my_policies?.vehicle?.length} policies</p>
                   <h3>Motor Insurance</h3>
                 </div>
               </Link>
               <Link className="insurance_link" to='/travel' >
                 <img className="insurance_img" src={easy} alt="insurance_images" />
                 <div className="text">
-                  <p>{userpolicy.my_policies.travel.length} policies</p>
+                  <p>{userpolicy?.my_policies?.travel?.length} policies</p>
                   <h3>Easy Travel Insurance</h3>
                 </div>
               </Link>
               <Link className="insurance_link" to='/risk' >
                 <img className="insurance_img" src={all} alt="insurance_images" />
                 <div className="text">
-                  <p>{userpolicy.my_policies.all_risk.length} policies</p>
+                  <p>{userpolicy?.my_policies?.all_risk?.length} policies</p>
                   <h3>All Risk Insurance</h3>
                 </div>
               </Link>
               <Link className="insurance_link" to='/swiss' >
                 <img className="insurance_img" src={swiss} alt="insurance_images" />
                 <div className="text">
-                  <p>{userpolicy.my_policies.swiss.length} policies</p>
+                  <p>{userpolicy?.my_policies?.swiss?.length} policies</p>
                   <h3>Swiss-F Insurance</h3>
                 </div>
               </Link>
