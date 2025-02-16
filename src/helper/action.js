@@ -1,1 +1,3 @@
-export const API = 'http://206.189.119.166:8040/api'
+export const baseURL = 'https://cms.noibilism.com'
+
+export const API = 'https://cms.noibilism.com/api/v1'

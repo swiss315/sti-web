@@ -163,8 +163,9 @@ margin-top: 3rem;
 }
 .transaction-table tr th{
     padding: 1rem;
-    font-size: 16px;
+    font-size: 14px;
     border-bottom: 1px solid #003DC90D;
+    font-weight: 500;
 }
 .ref{
     font-weight: 100;
@@ -230,6 +231,11 @@ margin-top: 3rem;
 .password-form{
     padding: 2rem 12rem;
 }
+
+    .transaction-table tr th {
+        padding: 0.5rem;
+        font-size: 11px;
+    }
 }
 @media screen and (min-width: 1201px){
 .claim-track{
@@ -254,5 +260,5 @@ margin-top: 3rem;
 }
 
 @media only screen and (max-width: 500px) {
- 
+
 }

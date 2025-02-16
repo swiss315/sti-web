@@ -40,27 +40,19 @@ function Navbar() {
             </div>
         </div> */}
         <div className='Navbar-2'>
-            <div className='logocontainer'>
+            <Link to={'/'} className='logocontainer'>
                 <Logo />
-            </div>
-            {/* <form className='searchbox'>
-                <div className='input-group'>
-                    <input type='text' placeholder='Search for products' name='search' className='searchinput'/>
-                    <button>
-                        <Searchicon/>
-                    </button>
-                </div>
-            </form> */}
+            </Link>
             <div className='navbar-menu-container'>
                 <div className='navbar-menu'>
-                    <Link>Home</Link>
-                    <Link>About Us</Link>
-                    <Link>Contact Us</Link>
-                    <Link to='/login' className='login-button'>
-                        <Loginbuttonicon /> 
-                        <span>Login</span> 
+                    {/*<Link>Home</Link>*/}
+                    {/*<Link>About Us</Link>*/}
+                    {/*<Link>Contact Us</Link>*/}
+                    <Link to='/login' className='login-button !flex items-center'>
+                        <Loginbuttonicon />
+                        <span>Login</span>
                     </Link>
-                    <Link to='/' className='register-button'>
+                    <Link to='/onboarding' className='register-button'>
                         Register
                     </Link>
                 </div>

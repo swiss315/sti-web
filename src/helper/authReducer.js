@@ -7,7 +7,8 @@ const cookies = new Cookies();
 export const AuthContext = createContext("");
 
 export const initialState = {
-    isAuth: cookies.get('xhrTOKEN') ? true : false,
+    // isAuth: cookies.get('xhrTOKEN') ? true : false,
+    isAuth: true,
     token: "",
 };
 

@@ -30,59 +30,65 @@ function Sidebar({setSidebar, sidebar}) {
     <div>
         <div className='sidbar-info'>
             <p className='sidbar-info-name'>
-                Welcome, <span>{userdata.first_name + " " + userdata.last_name}</span>
+                Welcome, <span>{userdata?.first_name + " " + userdata?.last_name}</span>
             </p>
             <p className='sidebar-info-wallet'>
-                Wallet Balance: <span>NGN{userinfo.wallet}</span>
+                Wallet Balance: <span>NGN{userinfo?.wallet}</span>
             </p>
         </div>
         <div className='sidebar-menu'>
             {
-                userinfo.is_agent ? <Link to="/claim" onClick={() => setSidebar(!sidebar) } >
+                userinfo?.is_agent ? <Link to="/claim" onClick={() => setSidebar(!sidebar) } >
                 <Claimicon />
                 <span>
                     Claims
                 </span>
             </Link> : ''
             }
-            <Link to="/pin" onClick={() => setSidebar(!sidebar) }>
+            <Link className={'!flex items-center'} to="/pin" onClick={() => setSidebar(!sidebar) }>
                 <Mypinsicon />
                 <span className='mypin'>
                     My Pins
                 </span>
             </Link>
-            <Link to="/policies" onClick={() => setSidebar(!sidebar) }>
+            <Link className={'!flex items-center'} to="/policies" onClick={() => setSidebar(!sidebar) }>
                 <Activepolicies />
                 <span>
                     Active Policies
                 </span>
             </Link>
-            <Link to='/transactionhistory' onClick={() => setSidebar(!sidebar) }>
+            <Link className={'!flex items-center'} to='/claim' onClick={() => setSidebar(!sidebar)}>
+                <Transactionicon/>
+                <span>
+                    Claims
+                </span>
+            </Link>
+            <Link className={'!flex items-center'} to='/transactionhistory' onClick={() => setSidebar(!sidebar) }>
                 <Transactionicon />
                 <span>
                     Transaction History
                 </span>
             </Link>
-            <Link to='/report' onClick={() => setSidebar(!sidebar) }>
+            <Link className={'!flex items-center'} to='/report' onClick={() => setSidebar(!sidebar) }>
                 <Reporticon />
                 <span>
-                    Report and Incident
+                    Report an Incident
                 </span>
             </Link>
-            <Link to='/changepassword' onClick={() => setSidebar(!sidebar) }>
+            <Link className={'!flex items-center'} to='/changepassword' onClick={() => setSidebar(!sidebar) }>
                 <Passwordicon />
                 <span>
                     Change Password
                 </span>
             </Link>
-            <Link to='/feedback' onClick={() => setSidebar(!sidebar) }>
+            <Link className={'!flex items-center'} to='/feedback' onClick={() => setSidebar(!sidebar) }>
                 <Helpicon />
                 <span>
                     Help & Feedback
                 </span>
             </Link>
             <div className='logout'>
-                <Link to='/login' onClick={() => logout()}>
+                <Link className={'!flex items-center'} to='/login' onClick={() => logout()}>
                     <Logouticon />
                     <span>
                         Logout

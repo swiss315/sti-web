@@ -77,13 +77,15 @@
     }
 
     .maincontentexpand {
-        margin: 2rem 4rem;
+        margin: 2rem 1rem;
     }
+
+
 
     .collapsible {
         overflow: scroll;
     }
-    
+
 }
 
 
@@ -101,9 +103,9 @@
         margin: 2rem 2rem;
     }
 
-   
+
 }
 
 @media only screen and (max-width: 500px) {
-    
+
 }

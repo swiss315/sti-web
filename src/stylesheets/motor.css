@@ -9,9 +9,9 @@
     box-sizing: border-box;
     scroll-behavior: smooth;
     font-family:'Manrope', sans-serif;
-    
-    
-    
+
+
+
 }
 
 .motor{
@@ -25,7 +25,7 @@
 .motor_container{
     width: 100%;
     padding: 4.5rem 6rem;
-    
+
 }
 
 .policy_heading{
@@ -74,7 +74,7 @@
 .transaction{
     display: flex;
     flex-direction: row;
-    
+
 }
 .dot{
     align-self: start;
@@ -112,14 +112,19 @@
 
 
 @media screen and (max-width: 1024px){
-    
+
     html{
         font-size: 85%;
+    }
+
+    .motor_container {
+        width: 100%;
+        padding: 4.5rem 2rem;
     }
 }
 
 @media screen and (max-width: 885px){
-    
+
     html{
         font-size: 80%;
     }
@@ -130,12 +135,12 @@
     .transaction{
         padding-bottom: 1.5rem;
     }
-    
+
 }
 
 
 @media screen and (max-width: 850px){
-    
+
     .motor_container{
     padding: 2.8rem 4.5rem;
     }
@@ -144,7 +149,7 @@
 
 
 @media screen and (max-width: 640px){
-    
+
     html{
         font-size: 68%;
     }
@@ -160,7 +165,7 @@
 }
 
 @media screen and (max-width: 550px){
-    
+
     html{
         font-size: 70%;
     }
