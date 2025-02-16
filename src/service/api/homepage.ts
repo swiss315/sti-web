@@ -40,7 +40,11 @@ export const useHomePage = () => {
             const response = await unauthorized.get(PARTNERS);
             console.log(response)
             if (response.statusText === 'OK') {
-                setData({...data, partners: response.data.topics})
+                setData((prevData) => ({
+                    ...prevData,
+                    partners: response.data.topics
+                }));
+                // setData({...data, partners: response.data.topics})
             }
         } catch (e) {
             console.log(e)
@@ -52,7 +56,10 @@ export const useHomePage = () => {
             const response = await unauthorized.get(PRESS_RELEASE);
             console.log(response)
             if (response.statusText === 'OK') {
-                setData({...data, pressRelease: response.data.topics})
+                setData((prevData) => ({
+                    ...prevData,
+                    pressRelease: response.data.topics
+                }));
             }
         } catch (e) {
             console.log(e)
@@ -64,7 +71,10 @@ export const useHomePage = () => {
             const response = await unauthorized.get(SERVICE);
             console.log(response)
             if (response.statusText === 'OK') {
-                setData({...data, service: response.data.topics})
+                setData((prevData) => ({
+                    ...prevData,
+                    service: response.data.topics
+                }));
             }
         } catch (e) {
             console.log(e)
