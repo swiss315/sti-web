@@ -273,11 +273,11 @@ export const Homepage = () => {
                         We are catalysts for change, trusted by customers ranging
                         from individuals to leading industry players.
                     </p>
-                    <div className="flex w-full pt-5">
+                    <div className="flex w-full flex-wrap pt-5">
                         {
                             data.partners.map((image, index) => (
                                 <div>
-                                    <img src={image.photo_file} alt={index} key={index}/>
+                                    <img src={image.photo_file} alt={index} key={index} className={'max-w-min'}/>
                                 </div>
                             ))
                         }
