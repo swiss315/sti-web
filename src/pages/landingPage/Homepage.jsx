@@ -35,7 +35,7 @@ export function shortenSentence(sentence: string, wordLimit = 25) {
 
 export const Homepage = () => {
     const {getHomeBarner, getContact, getLogo, getService, getPartners, getPressRelease, data} = useHomePage()
-
+    console.log(data)
     useEffect(() => {
         Promise.all([
             getHomeBarner(),
