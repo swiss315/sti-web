@@ -142,58 +142,58 @@ export const Homepage = () => {
 
                                 ))
                             }
-                            <div className="card product w-1/3 md:w-1/4">
-                                <div>
-                                    <img src={Family} alt="family" className="w-full"/>
-                                </div>
-                                <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">
-                                    <h1 className="xl:text-lg text-sm">Family Wellbeing Insurance </h1>
-                                    <p className="title-color font-light text-xs xl:text-sm ">
-                                        Accident could be an unfortunate misfortune in different forms. It is more
-                                        worrisome when it concerns the continued existence of our loved ones living
-                                        their daily normal life.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="card product w-1/3 md:w-1/4">
-                                <div>
-                                    <img src={Marine} alt="marine" className="w-full"/>
-                                </div>
-                                <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">
-                                    <h1 className="xl:text-lg text-sm">Marine Insurance </h1>
-                                    <p className="title-color font-light text-xs xl:text-sm ">
-                                        The insurance issued here is to provide indemnity for loss or damage to goods
-                                        being conveyed by sea or air into or
-                                        outside the country.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="card product w-1/3 md:w-1/4">
-                                <div>
-                                    <img src={Motor} alt="motor" className="w-full"/>
-                                </div>
-                                <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">
-                                    <h1 className="xl:text-lg text-sm">Motor Insurance </h1>
-                                    <p className="title-color font-light text-xs xl:text-sm ">
-                                        Accident could be an unfortunate misfortune in different forms. It is more
-                                        worrisome when it concerns the continued existence of our loved ones living
-                                        their daily normal life.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="card product w-1/3 md:w-1/4">
-                                <div>
-                                    <img src={Family} alt="gas" className="w-full"/>
-                                </div>
-                                <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">
-                                    <h1 className="xl:text-lg text-sm">Oil & Gas Insurance</h1>
-                                    <p className="title-color font-light text-xs xl:text-sm ">
-                                        Oil & Energy insurance can be defined as the insurance of all operations and
-                                        assets relating to the exploration, exploitation, drilling, refining, storage
-                                        and transportation of oil, gas or other energy resources.
-                                    </p>
-                                </div>
-                            </div>
+                            {/*<div className="card product w-1/3 md:w-1/4">*/}
+                            {/*    <div>*/}
+                            {/*        <img src={Family} alt="family" className="w-full"/>*/}
+                            {/*    </div>*/}
+                            {/*    <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">*/}
+                            {/*        <h1 className="xl:text-lg text-sm">Family Wellbeing Insurance </h1>*/}
+                            {/*        <p className="title-color font-light text-xs xl:text-sm ">*/}
+                            {/*            Accident could be an unfortunate misfortune in different forms. It is more*/}
+                            {/*            worrisome when it concerns the continued existence of our loved ones living*/}
+                            {/*            their daily normal life.*/}
+                            {/*        </p>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+                            {/*<div className="card product w-1/3 md:w-1/4">*/}
+                            {/*    <div>*/}
+                            {/*        <img src={Marine} alt="marine" className="w-full"/>*/}
+                            {/*    </div>*/}
+                            {/*    <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">*/}
+                            {/*        <h1 className="xl:text-lg text-sm">Marine Insurance </h1>*/}
+                            {/*        <p className="title-color font-light text-xs xl:text-sm ">*/}
+                            {/*            The insurance issued here is to provide indemnity for loss or damage to goods*/}
+                            {/*            being conveyed by sea or air into or*/}
+                            {/*            outside the country.*/}
+                            {/*        </p>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+                            {/*<div className="card product w-1/3 md:w-1/4">*/}
+                            {/*    <div>*/}
+                            {/*        <img src={Motor} alt="motor" className="w-full"/>*/}
+                            {/*    </div>*/}
+                            {/*    <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">*/}
+                            {/*        <h1 className="xl:text-lg text-sm">Motor Insurance </h1>*/}
+                            {/*        <p className="title-color font-light text-xs xl:text-sm ">*/}
+                            {/*            Accident could be an unfortunate misfortune in different forms. It is more*/}
+                            {/*            worrisome when it concerns the continued existence of our loved ones living*/}
+                            {/*            their daily normal life.*/}
+                            {/*        </p>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+                            {/*<div className="card product w-1/3 md:w-1/4">*/}
+                            {/*    <div>*/}
+                            {/*        <img src={Family} alt="gas" className="w-full"/>*/}
+                            {/*    </div>*/}
+                            {/*    <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">*/}
+                            {/*        <h1 className="xl:text-lg text-sm">Oil & Gas Insurance</h1>*/}
+                            {/*        <p className="title-color font-light text-xs xl:text-sm ">*/}
+                            {/*            Oil & Energy insurance can be defined as the insurance of all operations and*/}
+                            {/*            assets relating to the exploration, exploitation, drilling, refining, storage*/}
+                            {/*            and transportation of oil, gas or other energy resources.*/}
+                            {/*        </p>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                         </div>
                         <div>
                             <p className="title-color font-light text-xs xl:text-sm ">Ready to explore? <span
@@ -276,34 +276,36 @@ export const Homepage = () => {
                     <div className="flex w-full pt-5">
                         {
                             data.partners.map((image, index) => (
-                                <img src={image.photo_file} alt={index} key={index}/>
+                                <div>
+                                    <img src={image.photo_file} alt={index} key={index}/>
+                                </div>
                             ))
                         }
-                        <div>
-                            <Firs/>
-                        </div>
+                        {/*<div>*/}
+                        {/*    <Firs/>*/}
+                        {/*</div>*/}
 
-                        <div>
-                            <Cheveron/>
-                        </div>
+                        {/*<div>*/}
+                        {/*    <Cheveron/>*/}
+                        {/*</div>*/}
 
-                        <div>
-                            <Intel/>
-                        </div>
+                        {/*<div>*/}
+                        {/*    <Intel/>*/}
+                        {/*</div>*/}
 
-                        <div>
-                            <Npa/>
-                        </div>
+                        {/*<div>*/}
+                        {/*    <Npa/>*/}
+                        {/*</div>*/}
 
-                        {/*cbn logo*/}
-                        <div>
-                            <Cbn/>
-                        </div>
+                        {/*/!*cbn logo*!/*/}
+                        {/*<div>*/}
+                        {/*    <Cbn/>*/}
+                        {/*</div>*/}
 
-                        {/*total logo*/}
-                        <div>
-                            <Total/>
-                        </div>
+                        {/*/!*total logo*!/*/}
+                        {/*<div>*/}
+                        {/*    <Total/>*/}
+                        {/*</div>*/}
                     </div>
                 </section>
 
@@ -342,64 +344,64 @@ export const Homepage = () => {
 
             ))
                             }
-                            <div className="card product w-5/12 md:w-1/3">
-                                <div>
-                                    <img src={Press} alt="family" className="w-full"/>
-                                </div>
-                                <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">
-                                    <p className="text-xs xl:text-sm font-light text-custom-purple uppercase">
-                                        02 December 2024
-                                    </p>
-                                    <h1 className="title-color font-bold text-sm xl:text-lg">STI PLC Set September 27
-                                        Date
-                                        For 23rd AGM, Grows PAT By 569% </h1>
-                                    <p className="title-color font-light text-xs xl:text-sm ">
-                                        Sovereign Trust Insurance Plc has announced that its 23rd Annual General Meeting
-                                        will hold on Thursday.......
-                                    </p>
-                                    <p className="text-red-500 cursor-pointer text-xs xl:text-sm">
-                                        Read More ...
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="card product w-5/12 md:w-1/3">
-                                <div>
-                                    <img src={Press2} alt="marine" className="w-full"/>
-                                </div>
-                                <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">
-                                    <p className="text-xs xl:text-sm font-light text-custom-purple uppercase">
-                                        02 December 2024
-                                    </p>
-                                    <h1 className="title-color font-bold text-sm xl:text-lg">STI Promotes Academic
-                                        Excellence In Primary Schools - Donates School Bags Et All </h1>
-                                    <p className="title-color font-light text-xs xl:text-sm ">
-                                        Sovereign Trust Insurance Plc recently demonstrated another noble gesture in
-                                        line with its Corporate Social Responsibility by giving out school bags
-                                    </p>
-                                    <p className="text-red-500 cursor-pointer text-xs xl:text-sm">
-                                        Read More ...
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="card product w-5/12 md:w-1/3">
-                                <div>
-                                    <img src={Press3} alt="motor" className="w-full"/>
-                                </div>
-                                <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">
-                                    <p className="text-xs xl:text-sm font-light text-custom-purple uppercase">
-                                        02 December 2024
-                                    </p>
-                                    <h1 className="title-color font-bold text-sm xl:text-lg">2022 Sovereign Trust
-                                        Insurance
-                                        Financial Condition Report</h1>
-                                    <p className="title-color font-light text-xs xl:text-sm ">
-                                        Click here to view the Financial Condition Report for 2022
-                                    </p>
-                                    <p className="text-red-500 cursor-pointer text-xs xl:text-sm">
-                                        Read More ...
-                                    </p>
-                                </div>
-                            </div>
+                            {/*<div className="card product w-5/12 md:w-1/3">*/}
+                            {/*    <div>*/}
+                            {/*        <img src={Press} alt="family" className="w-full"/>*/}
+                            {/*    </div>*/}
+                            {/*    <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">*/}
+                            {/*        <p className="text-xs xl:text-sm font-light text-custom-purple uppercase">*/}
+                            {/*            02 December 2024*/}
+                            {/*        </p>*/}
+                            {/*        <h1 className="title-color font-bold text-sm xl:text-lg">STI PLC Set September 27*/}
+                            {/*            Date*/}
+                            {/*            For 23rd AGM, Grows PAT By 569% </h1>*/}
+                            {/*        <p className="title-color font-light text-xs xl:text-sm ">*/}
+                            {/*            Sovereign Trust Insurance Plc has announced that its 23rd Annual General Meeting*/}
+                            {/*            will hold on Thursday.......*/}
+                            {/*        </p>*/}
+                            {/*        <p className="text-red-500 cursor-pointer text-xs xl:text-sm">*/}
+                            {/*            Read More ...*/}
+                            {/*        </p>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+                            {/*<div className="card product w-5/12 md:w-1/3">*/}
+                            {/*    <div>*/}
+                            {/*        <img src={Press2} alt="marine" className="w-full"/>*/}
+                            {/*    </div>*/}
+                            {/*    <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">*/}
+                            {/*        <p className="text-xs xl:text-sm font-light text-custom-purple uppercase">*/}
+                            {/*            02 December 2024*/}
+                            {/*        </p>*/}
+                            {/*        <h1 className="title-color font-bold text-sm xl:text-lg">STI Promotes Academic*/}
+                            {/*            Excellence In Primary Schools - Donates School Bags Et All </h1>*/}
+                            {/*        <p className="title-color font-light text-xs xl:text-sm ">*/}
+                            {/*            Sovereign Trust Insurance Plc recently demonstrated another noble gesture in*/}
+                            {/*            line with its Corporate Social Responsibility by giving out school bags*/}
+                            {/*        </p>*/}
+                            {/*        <p className="text-red-500 cursor-pointer text-xs xl:text-sm">*/}
+                            {/*            Read More ...*/}
+                            {/*        </p>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+                            {/*<div className="card product w-5/12 md:w-1/3">*/}
+                            {/*    <div>*/}
+                            {/*        <img src={Press3} alt="motor" className="w-full"/>*/}
+                            {/*    </div>*/}
+                            {/*    <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">*/}
+                            {/*        <p className="text-xs xl:text-sm font-light text-custom-purple uppercase">*/}
+                            {/*            02 December 2024*/}
+                            {/*        </p>*/}
+                            {/*        <h1 className="title-color font-bold text-sm xl:text-lg">2022 Sovereign Trust*/}
+                            {/*            Insurance*/}
+                            {/*            Financial Condition Report</h1>*/}
+                            {/*        <p className="title-color font-light text-xs xl:text-sm ">*/}
+                            {/*            Click here to view the Financial Condition Report for 2022*/}
+                            {/*        </p>*/}
+                            {/*        <p className="text-red-500 cursor-pointer text-xs xl:text-sm">*/}
+                            {/*            Read More ...*/}
+                            {/*        </p>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                         </div>
                         <div>
                             <p className="title-color font-light text-xs xl:text-sm">Ready to explore? <span
