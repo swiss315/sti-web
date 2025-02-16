@@ -24,6 +24,15 @@ import Press3 from '../../assets/images/press3.png'
 import {NavBar} from "../../components/hompeage/NavBar";
 import {useHomePage} from "../../service/api/homepage.ts";
 
+export function shortenSentence(sentence: string, wordLimit = 25) {
+    if (sentence) {
+        const words = sentence.split(' ');
+        return words.length > wordLimit
+            ? words.slice(0, wordLimit).join(' ') + '...'
+            : sentence;
+    } else return 'null';
+}
+
 export const Homepage = () => {
     const {getHomeBarner, getContact, getLogo, getService, getPartners, getPressRelease, data} = useHomePage()
 
@@ -118,15 +127,15 @@ export const Homepage = () => {
                     <div className="flex flex-col gap-y-10 items-center">
                         <div className="flex flex-wrap md:flex-nowrap justify-center gap-5 w-11/12 xl:w-9/12 mx-auto">
                             {
-                                data.service.map((service, index) => (
+                                data.service.map((services, index) => (
                                     <div key={index} className="card product w-1/3 md:w-1/4">
                                         <div>
-                                            <img src={service.photo_file} alt="family" className="w-full"/>
+                                            <img src={services.photo_file} alt="family" className="w-full"/>
                                         </div>
                                         <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">
-                                            <h1 className="xl:text-lg text-sm">{service.title}</h1>
+                                            <h1 className="xl:text-lg text-sm">{services.title}</h1>
                                             <p className="title-color font-light text-xs xl:text-sm ">
-                                                {service.details}
+                                                {shortenSentence(services.details)}
                                             </p>
                                         </div>
                                     </div>
@@ -323,7 +332,7 @@ export const Homepage = () => {
                         </p>
                         <h1 className="title-color font-bold text-sm xl:text-lg">{news.title} </h1>
                         <p className="title-color font-light text-xs xl:text-sm ">
-                            {news.details}
+                            {shortenSentence(news.details)}
                         </p>
                         <p className="text-red-500 cursor-pointer text-xs xl:text-sm">
                             Read More ...
