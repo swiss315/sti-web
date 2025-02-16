@@ -41,11 +41,9 @@ export const useHomePage = () => {
             console.log(response)
             if (response.statusText === 'OK') {
                 setData({...data, partners: response.data.topics})
-                return true;
             }
         } catch (e) {
             console.log(e)
-            return false;
         }
     }
 
@@ -55,11 +53,9 @@ export const useHomePage = () => {
             console.log(response)
             if (response.statusText === 'OK') {
                 setData({...data, pressRelease: response.data.topics})
-                return true;
             }
         } catch (e) {
             console.log(e)
-            return false
         }
     }
 
@@ -69,11 +65,9 @@ export const useHomePage = () => {
             console.log(response)
             if (response.statusText === 'OK') {
                 setData({...data, service: response.data.topics})
-                return true;
             }
         } catch (e) {
             console.log(e)
-            return false
         }
     }
     return {

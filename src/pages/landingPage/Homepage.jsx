@@ -39,9 +39,9 @@ export const Homepage = () => {
     useEffect(() => {
         Promise.all([
             getHomeBarner(),
-            getPressRelease(),
             getLogo(),
             getContact(),
+            getPressRelease(),
             getService(),
             getPartners()
 
