@@ -70,7 +70,7 @@ export const NavBar = () => {
 
                 <div
                     className="w-1/2 hidden md:flex text-xs lg:text-sm xl:text-sm items-center justify-evenly gap-1 text-black no-underline">
-                    <Link to={'/aboutus'} className={'text-black no-underline'}>
+                    <Link to={'/'} className={'text-black no-underline'}>
                         Home
                     </Link>
                     {/*<Link to={'/aboutus'} className={'text-black no-underline'}>*/}

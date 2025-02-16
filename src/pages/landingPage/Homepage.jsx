@@ -25,7 +25,7 @@ import {NavBar} from "../../components/hompeage/NavBar";
 import {useHomePage} from "../../service/api/homepage.ts";
 
 export const Homepage = () => {
-    const {getHomeBarner, getContact, getLogo, getService, getPartners, getPressRelease} = useHomePage()
+    const {getHomeBarner, getContact, getLogo, getService, getPartners, getPressRelease, data} = useHomePage()
 
     useEffect(() => {
         Promise.all([
@@ -117,6 +117,22 @@ export const Homepage = () => {
                     </div>
                     <div className="flex flex-col gap-y-10 items-center">
                         <div className="flex flex-wrap md:flex-nowrap justify-center gap-5 w-11/12 xl:w-9/12 mx-auto">
+                            {
+                                data.service.map((service, index) => (
+                                    <div key={index} className="card product w-1/3 md:w-1/4">
+                                        <div>
+                                            <img src={service.photo_file} alt="family" className="w-full"/>
+                                        </div>
+                                        <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">
+                                            <h1 className="xl:text-lg text-sm">{service.title}</h1>
+                                            <p className="title-color font-light text-xs xl:text-sm ">
+                                                {service.details}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                ))
+                            }
                             <div className="card product w-1/3 md:w-1/4">
                                 <div>
                                     <img src={Family} alt="family" className="w-full"/>
@@ -249,6 +265,11 @@ export const Homepage = () => {
                         from individuals to leading industry players.
                     </p>
                     <div className="flex w-full pt-5">
+                        {
+                            data.partners.map((image, index) => (
+                                <img src={image.photo_file} alt={index} key={index}/>
+                            ))
+                        }
                         <div>
                             <Firs/>
                         </div>
@@ -290,6 +311,28 @@ export const Homepage = () => {
                     <div className="flex flex-col gap-y-10 items-center">
                         <div
                             className="flex justify-center md:justify-start flex-wrap md:flex-nowrap gap-5 md:gap-5 w-11/12 xl:w-10/12 mx-auto">
+                            {
+                                data.pressRelease.map((news, index) => (
+                                <div key={index} className="card product w-5/12 md:w-1/3">
+                                <div>
+                                <img src={news.photo_file} alt="family" className="w-full"/>
+                    </div>
+                    <div className="px-3 py-4 pb-5 xl:pb-10 flex flex-col gap-y-5">
+                        <p className="text-xs xl:text-sm font-light text-custom-purple uppercase">
+                            {news.date}
+                        </p>
+                        <h1 className="title-color font-bold text-sm xl:text-lg">{news.title} </h1>
+                        <p className="title-color font-light text-xs xl:text-sm ">
+                            {news.details}
+                        </p>
+                        <p className="text-red-500 cursor-pointer text-xs xl:text-sm">
+                            Read More ...
+                        </p>
+                    </div>
+            </div>
+
+            ))
+                            }
                             <div className="card product w-5/12 md:w-1/3">
                                 <div>
                                     <img src={Press} alt="family" className="w-full"/>
