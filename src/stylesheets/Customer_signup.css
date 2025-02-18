@@ -7,9 +7,9 @@
     box-sizing: border-box;
     scroll-behavior: smooth;
     font-family:'Manrope', sans-serif;
-    
-    
-    
+
+
+
 }
 
 .customer_signup{
@@ -26,7 +26,7 @@
     justify-content: space-evenly;
     align-items: center;
     padding: 4.5rem 5rem;
-    
+
 }
 
 
@@ -35,21 +35,21 @@
     flex: 0.5;
     font-weight: 700;
     font-size: 32px;
-    line-height: 150%;    
+    line-height: 150%;
     align-self: flex-start;
     color: #01071F;
 }
 
 .form-h{
     align-self: center;
-    margin-top: 1.5rem;    
+    margin-top: 1.5rem;
     display: flex;
     justify-content: center;
 }
 
 
 .input-h{
-    
+
     color: #373A47E5;
     width:510px;
     background: white;
@@ -58,7 +58,7 @@
     border-radius: 8px;
     display: flex;
     align-items: center;
-    
+
 }
 .input-h label{
     cursor: pointer;
@@ -82,6 +82,7 @@
     flex: 1;
     padding: 5px 0;
     margin: 0 0.5rem;
+    outline: none;
 }
 .icon{
     margin-right: 5px;
@@ -96,7 +97,7 @@
 .input_wrap p{
     color: rgb(248, 65, 65);
     font-size: 0.8rem;
-    
+
 }
 
 .form_btn{
@@ -130,7 +131,7 @@
         width: 100%;
         padding: 3.2rem 5rem ;
     }
-   
+
 }
 
 @media screen and (max-width: 914px){
@@ -141,7 +142,7 @@
         flex-direction: column;
         width: 100%;
 
-        
+
 
     }
     .form-h{
@@ -180,7 +181,7 @@
     .form_btn{
         font-size: 1.5rem;
         width: fit-content !important;
-        
-        
+
+
     }
 }

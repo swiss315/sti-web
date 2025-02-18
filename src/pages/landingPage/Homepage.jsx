@@ -1,12 +1,12 @@
 import React, {useEffect} from "react";
 import {ReactComponent as BackgroundSvg} from "../../assets/svgs/backgroundimage.svg";
 import {ReactComponent as LandingVehicle} from "../../assets/svgs/landing-vehicle.svg";
-import {ReactComponent as Firs} from "../../assets/svgs/brands/firs.svg";
-import {ReactComponent as Cheveron} from "../../assets/svgs/brands/cheveron.svg";
-import {ReactComponent as Intel} from "../../assets/svgs/brands/intel.svg";
-import {ReactComponent as Npa} from "../../assets/svgs/brands/npa.svg";
-import {ReactComponent as Cbn} from "../../assets/svgs/brands/cbn.svg";
-import {ReactComponent as Total} from "../../assets/svgs/brands/total.svg";
+// import {ReactComponent as Firs} from "../../assets/svgs/brands/firs.svg";
+// import {ReactComponent as Cheveron} from "../../assets/svgs/brands/cheveron.svg";
+// import {ReactComponent as Intel} from "../../assets/svgs/brands/intel.svg";
+// import {ReactComponent as Npa} from "../../assets/svgs/brands/npa.svg";
+// import {ReactComponent as Cbn} from "../../assets/svgs/brands/cbn.svg";
+// import {ReactComponent as Total} from "../../assets/svgs/brands/total.svg";
 import {ReactComponent as Footer30Logo} from "../../assets/svgs/footer-30-logo.svg";
 import {ReactComponent as FooterLogo} from "../../assets/svgs/footer-logo.svg";
 import {ReactComponent as ArrowLeft} from "../../assets/svgs/arrow-left.svg";
@@ -14,13 +14,13 @@ import {ReactComponent as Strike} from "../../assets/svgs/strike.svg";
 import {ReactComponent as AppStore} from "../../assets/svgs/app-store.svg";
 import {ReactComponent as PlayStore} from "../../assets/svgs/play-store.svg";
 
-import Family from '../../assets/images/family.png'
-import Marine from '../../assets/images/marine.png'
-import Motor from '../../assets/images/motor.png'
+// import Family from '../../assets/images/family.png'
+// import Marine from '../../assets/images/marine.png'
+// import Motor from '../../assets/images/motor.png'
 import MainBuilding from '../../assets/images/mainBuilding.png'
-import Press from '../../assets/images/press1.png'
-import Press2 from '../../assets/images/press2.png'
-import Press3 from '../../assets/images/press3.png'
+// import Press from '../../assets/images/press1.png'
+// import Press2 from '../../assets/images/press2.png'
+// import Press3 from '../../assets/images/press3.png'
 import {NavBar} from "../../components/hompeage/NavBar";
 import {useHomePage} from "../../service/api/homepage.ts";
 
@@ -34,7 +34,7 @@ export function shortenSentence(sentence: string, wordLimit = 25) {
 }
 
 export const Homepage = () => {
-    const {getHomeBarner, getContact, getLogo, getService, getPartners, getPressRelease, data} = useHomePage()
+    const {getHomeBarner, getContact, getLogo, getService, getPartners, getAboutUs, getPressRelease, data} = useHomePage()
     console.log(data)
     useEffect(() => {
         Promise.all([
@@ -43,8 +43,8 @@ export const Homepage = () => {
             getContact(),
             getPressRelease(),
             getService(),
-            getPartners()
-
+            getPartners(),
+            getAboutUs()
         ])
     }, []);
     return (<>

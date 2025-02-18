@@ -4,42 +4,47 @@ import Navbar from "../../components/Navbar";
 import "../../stylesheets/Login.css";
 import { ReactComponent as Email } from "../../assets/icons/emailicon.svg";
 import { ReactComponent as Password } from "../../assets/icons/passwordicon.svg";
-import { useAgent_Login } from "../../hooks/login";
 import Loader from "../../components/Loader";
-import {useAuthContext} from "../../hooks/context";
+import {handleLoginRequest} from "../../service/Constant/action.ts";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../service/reducers/rootReducer.ts";
 
 
 const Login = () => {
-  const {dispatch} = useAuthContext()
+  const dispatch = useDispatch();
   let Navigate = useNavigate()
-
+  const AuthState = useSelector((state: RootState) => state.auth);
+  const {loading, error} = AuthState;
   const [data, setData] = useState( {
-        'email': '',
-        'password': ''
+        'email': 'pyjof@mailinator.com',
+        'password': 'password'
       }
   )
 
-
-  const { login, error, isLoading } = useAgent_Login()
-
   const Login = async(e) => {
     e.preventDefault()
-    dispatch({type: 'LOGIN', token: 'verified'})
+    // dispatch({type: 'LOGIN', token: 'verified'})
+    // showToast('Success', 'response.data.message', 'success');
 
-    Navigate('/dashboard')
-    await login(data)
+    dispatch(handleLoginRequest({
+      payload: data,
+      navigate: Navigate
+    }))
+
+    // Navigate('/dashboard')
+    // await login(data)
   }
 
   return (
     <div className="onboard">
       <Navbar />
-      <div className="sides side-edit">
-        <div className="sides1">
+      <div className="sides side-edit mx-auto">
+        <div className="sides1 w-5/12">
           <h2>
             Welcome Back <span>Customer!</span>
           </h2>
         </div>
-        <form className="sides2" onSubmit={Login}>
+        <form className="sides2 w-6/12" onSubmit={Login} >
           <div className="input-group">
             <label>
               <Email />
@@ -49,7 +54,11 @@ const Login = () => {
               name="email"
               type="email"
               className=""
-              onChange={(e) => {setData({ ...data, email : e.target.value})}}
+              value={data.email}
+              onChange={(e) => {setData((prevData) => ({
+                ...prevData,
+                email: e.target.value
+              }))}}
             />
           </div>
           <div className="input-group">
@@ -61,7 +70,11 @@ const Login = () => {
               name="password"
               type="password"
               className=""
-              onChange={(e) => {setData({...data, 'password': e.target.value})}}
+              value={data.password}
+              onChange={(e) => {setData((prevData) => ({
+                ...prevData,
+                password: e.target.value
+              }))}}
             />
           </div>
           <div className="forgot-password">
@@ -70,7 +83,7 @@ const Login = () => {
           <p className="login_error">{error}</p>
           <div className="button">
 
-              <button>{isLoading ? <Loader /> : 'Login'}</button>
+              <button>{loading ? <Loader /> : 'Login'}</button>
 
           </div>
         </form>

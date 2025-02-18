@@ -1,29 +1,55 @@
 import { useState, useEffect } from 'react';
+import {handleRegisterRequest} from "../service/Constant/action.ts";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 const useForm = (callback, validate) => {
+  const dispatch = useDispatch();
+  const Navigate = useNavigate()
   const [values, setValues] = useState({
-    firstName: '',
-    lastName: '',
-    Email: '',
+    firstname: '',
+    lastname: '',
+    gender: '',
+    email: '',
+    phone: '',
     password: '',
-    confirmPassword: ''
   });
   const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting] = useState(false);
+
+  const validatePhoneNumber = (phoneNumber: string) => {
+    const digitsOnly = phoneNumber.replace(/\D/g, '');
+    const expectedLength = 11;
+    if (digitsOnly.length === expectedLength) {
+      setValues({...values, phone: phoneNumber});
+      setErrors({...errors, phone: ''});
+    } else {
+      setErrors({...errors, phone: 'Invalid Phone Number'});
+    }
+  };
+
 
   const handleChange = e => {
     const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value
-    });
+    if (name === 'phone') {
+      validatePhoneNumber(value);
+    } else {
+      setValues({
+        ...values,
+        [name]: value
+      });
+    }
   };
 
   const handleSubmit = e => {
     e.preventDefault();
+    dispatch(handleRegisterRequest({
+      payload: values,
+      navigate: Navigate
+    }));
 
-    setErrors(validate(values));
-    setIsSubmitting(true);
+    // setErrors(validate(values));
+    // setIsSubmitting(true);
   };
 
   useEffect(

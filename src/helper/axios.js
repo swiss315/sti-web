@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import store from "../service/Constant/store.ts";
-import { baseURL } from "./action.js";
+import {API, baseURL} from "./action.js";
 // import {handleLogout} from "../service/Constant/action";
 
 interface ErrorResponse {
@@ -12,9 +12,25 @@ interface ErrorResponse {
 export const unauthorized = axios.create({
   baseURL: baseURL,
 });
+
+export const unauthorizedGateRequest = axios.create({
+    baseURL: API, // Change `API` to `baseURL`
+});
+
 export const authorized = axios.create({
   baseURL: baseURL,
 });
+
+unauthorizedGateRequest.interceptors.request.use(
+    (config) => {
+        console.log('Request URL:', config.baseURL + config.url);
+        console.log('Request Headers:', config.headers);
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
 
 
 unauthorized.interceptors.request.use(

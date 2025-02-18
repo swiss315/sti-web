@@ -1,4 +1,4 @@
-import {CONTACT, HOME_BANNER, LOGO, PARTNERS, PRESS_RELEASE, SERVICE} from "./routePath.js";
+import {ABOUTUS, CONTACT, HOME_BANNER, LOGO, PARTNERS, PRESS_RELEASE, SERVICE} from "./routePath.js";
 import { unauthorized} from "../../helper/axios.js";
 import {useState} from "react";
 
@@ -80,6 +80,22 @@ export const useHomePage = () => {
             console.log(e)
         }
     }
+
+
+    const getAboutUs = async () => {
+        try {
+            const response = await unauthorized.get(ABOUTUS);
+            console.log(response)
+            if (response.statusText === 'OK') {
+                setData((prevData) => ({
+                    ...prevData,
+                    service: response.data.topics
+                }));
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
     return {
         getHomeBarner,
         getContact,
@@ -88,5 +104,6 @@ export const useHomePage = () => {
         getPartners,
         getService,
         data,
+        getAboutUs
     }
 }

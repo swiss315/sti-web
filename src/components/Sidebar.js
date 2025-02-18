@@ -12,7 +12,7 @@ import {ReactComponent as Reporticon} from "../assets/icons/report&incidenticon.
 import {ReactComponent as Passwordicon} from "../assets/icons/cpasswordicon.svg";
 import {ReactComponent as Helpicon} from "../assets/icons/help&feedbackicon.svg";
 import {ReactComponent as Logouticon} from "../assets/icons/logouticon.svg";
-import { useLogout } from '../hooks/logout';
+// import { useLogout } from '../hooks/logout';
 
 function Sidebar({setSidebar, sidebar}) {
     const cookie = new Cookies();
@@ -23,7 +23,7 @@ function Sidebar({setSidebar, sidebar}) {
         userinfo = JSON.parse(atob(userinfo));
     }
 
-    const { logout } = useLogout()
+    // const { logout } = useLogout()
     console.log(userdata);
 
     return (
@@ -88,7 +88,7 @@ function Sidebar({setSidebar, sidebar}) {
                 </span>
             </Link>
             <div className='logout'>
-                <Link className={'!flex items-center'} to='/login' onClick={() => logout()}>
+                <Link className={'!flex items-center'} to='/login' >
                     <Logouticon />
                     <span>
                         Logout

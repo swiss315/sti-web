@@ -4,17 +4,24 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CookiesProvider } from "react-cookie";
-import { AuthContextProvider } from "./helper/authReducer";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {PersistGate} from "redux-persist/integration/react";
+import {Provider} from "react-redux";
+import Store, {persistor} from "./service/Constant/store.ts";
+import {ToastProvider} from "./service/context/NotificationContext.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AuthContextProvider>
       <CookiesProvider>
-        <App />
+          <Provider store={Store}>
+              <PersistGate persistor={persistor}>
+                  <ToastProvider>
+                      <App/>
+                  </ToastProvider>
+              </PersistGate>
+          </Provider>
       </CookiesProvider>
-    </AuthContextProvider>
   </React.StrictMode>
 );
 

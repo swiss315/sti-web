@@ -1,5 +1,5 @@
 import "../../../stylesheets/Customer_signup.css";
-import React from "react";
+import React, {useState} from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { BsKey, BsTelephone } from "react-icons/bs";
 // import  {useState} from 'react'
@@ -7,20 +7,20 @@ import { HiOutlineUser } from "react-icons/hi";
 import validate from "../../../validation/validateInfo";
 import useForm from "../../../validation/useForm";
 import Navbar from '../../../components/Navbar.js'
-
-
-
-
-
+import {useSelector} from "react-redux";
+import {RootState} from "../../../service/reducers/rootReducer.ts";
+import CustomButton from "../../../components/form/customButton";
+import {areAllKeysFilled} from "../../../utils/formValidator";
 
 const About = ({ submitForm }) => {
+  const AuthState = useSelector((state: RootState) => state.auth);
+  const {loading} = AuthState;
   const { handleChange, handleSubmit, values, errors } = useForm(
     submitForm,
     validate
   );
 
-  // const onSubmit = () => {}
-  // onSubmit={handleSubmit(onSubmit)}
+  const formFiled = areAllKeysFilled(values)
 
   return (
     <div className="customer_signup">
@@ -30,60 +30,94 @@ const About = ({ submitForm }) => {
         Sign Up <br />
         Below
       </h2>
-      81
       <h2 className="h2 h21">Sign Up Below</h2>
 
       <div className="form-h">
-        <form className="customer_signup">
+        <form className="customer_signup" onSubmit={handleSubmit}>
           <div className="input_wrap">
             <div className="input-h">
-              <label htmlFor="firstName">
+              <label htmlFor="firstname">
                 <HiOutlineUser className="icon" />
                 First Name
               </label>
               <input
-                id="firstName"
-                name="firstName"
+                id="firstname"
+                name="firstname"
                 type="text"
-                value={values.firstName}
+                value={values.firstname}
                 onChange={handleChange}
               />
             </div>
-            {errors.firstName && <p>{errors.firstName}</p>}
+            {errors.firstname && <p>{errors.firstname}</p>}
+          </div>
+
+          <div className="input_wrap">
+            <div className="input-h">
+              <label htmlFor="lastname">
+                <HiOutlineUser className="icon" />
+                Last Name
+              </label>
+              <input
+                id="lastname"
+                name="lastname"
+                type="text"
+                value={values.lastname}
+                onChange={handleChange}
+              />
+            </div>
+            {errors.lasnName && <p>{errors.lastname}</p>}
           </div>
 
           <div className="input_wrap">
             <div className="input-h">
               <label htmlFor="lastName">
-                <HiOutlineUser className="icon" />
-                Last Name
+                <HiOutlineUser className="icon"/>
+                Gender
               </label>
-              <input
-                id="lastName"
-                name="lastName"
-                type="text"
-                value={values.lastName}
-                onChange={handleChange}
-              />
+              <select className={'w-full outline-0'} id={'gender'} name={'gender'} value={values.gender} onChange={handleChange}>
+                <option>Select gender</option>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+              {/*<input*/}
+              {/*    id="lastName"*/}
+              {/*    name="lastName"*/}
+              {/*    type="text"*/}
+              {/*    value={values.lastName}*/}
+              {/*    onChange={handleChange}*/}
+              {/*/>*/}
             </div>
             {errors.lastName && <p>{errors.lastName}</p>}
           </div>
 
           <div className="input_wrap">
             <div className="input-h">
-              <label htmlFor="Email">
+              <label htmlFor="email">
                 <AiOutlineMail className="icon" />
                 Email
               </label>
               <input
-                id="Email"
-                name="Email"
-                type="Email"
-                value={values.Email}
+                id="email"
+                name="email"
+                type="email"
+                value={values.email}
                 onChange={handleChange}
               />
             </div>
-            {errors.Email && <p>{errors.Email}</p>}
+            {errors.email && <p>{errors.email}</p>}
+          </div>
+
+
+          <div className="input_wrap">
+            <div className="input-h">
+              <label htmlFor="phone">
+                <BsTelephone className="icon"/>
+                Phone Number
+              </label>
+              <input id="phone" name="phone" type="text"
+                     onChange={handleChange}/>
+            </div>
+            {errors.phone && <p>{errors.phone}</p>}
           </div>
 
           <div className="input_wrap">
@@ -120,19 +154,10 @@ const About = ({ submitForm }) => {
             {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
           </div>
 
-          <div className="input_wrap">
-            <div className="input-h">
-              <label htmlFor="phone">
-                <BsTelephone className="icon" />
-                Phone Number
-              </label>
-              <input id="phone" name="phone"  />
-            </div>
-          </div>
-
-          <button className="form_btn" onClick={handleSubmit} type="submit">
-                Sign Up
-          </button>
+          <CustomButton isLoading={loading} className="form_btn"  children={'Sign Up'} disabled={!formFiled}/>
+          {/*<button className="form_btn" onClick={handleSubmit} type="submit">*/}
+          {/*  Sign Up*/}
+          {/*</button>*/}
         </form>
       </div>
     </div>

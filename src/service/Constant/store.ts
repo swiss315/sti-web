@@ -1,15 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
-// import rootReducer from './reducers/rootReducer';
+import storage from 'redux-persist/lib/storage';
+
 // @ts-ignore
 import rootSaga from '../sagas/saga.ts';
-// import toastMiddleware from './constants/toastMiddlewares';
+
 // @ts-ignore
 import rootReducer from "../reducers/rootReducer.ts";
-// import { initialState as authInitialState } from './reducers/authReducer';
-// import { initialState as userInitialState } from './reducers/userReducer';
+// @ts-ignore
+import toastMiddleware from "./toastMiddlewares.ts";
 
 // const EXPIRATION_TIME = 2 * 60 * 60 * 1000;
 
@@ -31,7 +31,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       thunk: false,
       serializableCheck: false,
-    }).concat(sagaMiddleware),
+    }).concat(sagaMiddleware, toastMiddleware),
 });
 
 sagaMiddleware.run(rootSaga);
