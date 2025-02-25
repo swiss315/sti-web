@@ -38,15 +38,15 @@ const Login = () => {
   return (
     <div className="onboard">
       <Navbar />
-      <div className="sides side-edit mx-auto">
-        <div className="sides1 w-5/12">
+      <div className="sides side-edit">
+        <div className="sides1">
           <h2>
             Welcome Back <span>Customer!</span>
           </h2>
         </div>
-        <form className="sides2 w-6/12" onSubmit={Login} >
-          <div className="input-group">
-            <label>
+        <form className="sides2 " onSubmit={Login} >
+          <div className=" input-group">
+            <label className={'flex gap-2 items-center'}>
               <Email />
               <span>Email</span>
             </label>
@@ -62,7 +62,7 @@ const Login = () => {
             />
           </div>
           <div className="input-group">
-            <label>
+            <label className={'flex gap-2 items-center'}>
               <Password />
               <span>Password</span>
             </label>
@@ -78,9 +78,9 @@ const Login = () => {
             />
           </div>
           <div className="forgot-password">
-            <Link className="forgot">Forgot Password?</Link>
+            <Link className="forgot" to={'/forgot-password'}>Forgot Password?</Link>
           </div>
-          <p className="login_error">{error}</p>
+          {/*<p className="login_error">{error}</p>*/}
           <div className="button">
 
               <button>{loading ? <Loader /> : 'Login'}</button>

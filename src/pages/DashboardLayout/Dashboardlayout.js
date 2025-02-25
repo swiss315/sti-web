@@ -33,6 +33,7 @@ import Terms from '../Termsandprivacy/Terms';
 import Privacy from '../Termsandprivacy/Privacy';
 import Risk from "../Insurrance/risk";
 import Travel from "../Insurrance/travel";
+import BuyHealth from "../Insurrance/buyPolicy/buy_healthpolicy";
 
 function Dashboardlayout() {
   const [sidebar, setSidebar] = useState(true);
@@ -90,6 +91,7 @@ function Dashboardlayout() {
               <Route path="motor-insurance"  element={<Motorinsuranceregister />} />
               <Route path="swiss-insurance"  element={<Swissinsurance />} />
               <Route path="marine-insurance"  element={<Marineinsurance />} />
+              <Route path="health-insurance" element={<BuyHealth/>}/>
               <Route path="notification"  element={<Notifications/>} />
               <Route path="all-risk"  element={<Allrisk />} />
               <Route path="travel-insurance"  element={<Travelinsurance />} />

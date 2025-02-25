@@ -8,33 +8,44 @@ import { ReactComponent as Termsicon } from "../../assets/icons/termsicon.svg";
 import { ReactComponent as Privacyicon } from "../../assets/icons/privacyicon.svg";
 import { ReactComponent as Redlogouticon } from "../../assets/icons/redlogout.svg";
 import { useProfile } from "../../hooks/profile";
-import { Cookies } from "react-cookie";
 import Loader from "../../components/Loader";
+import {useSelector} from "react-redux";
+import {RootState} from "../../service/reducers/rootReducer.ts";
+import {areAllKeysFilled} from "../../utils/formValidator";
+import CustomButton from "../../components/form/customButton";
 
 function Profile() {
     const [show, setShow] = useState(false);
     const click = useRef("");
     const [filename, setFilename] = useState();
-    const { profile, updateprofile, isLoading } = useProfile();
-    const cookie = new Cookies();
-    let userdata = cookie.get("user");
-    userdata = userdata ? JSON.parse(atob(userdata)) : {};
+    const { profile, updateProfile, isLoading } = useProfile();
+    const AuthState = useSelector((state: RootState) => state.auth);
+    const {userData: userdata} = AuthState
+    console.log(userdata)
     const [profiledata, setData] = useState({
-        first_name: userdata.first_name || "",
-        last_name: userdata.last_name || "",
-        phone_no: userdata.phone || "",
+        firstname: userdata.firstname || "",
+        lastname: userdata.lastname || "",
+        phone: userdata.phone || "",
         address: userdata.address || "",
         email: userdata.email || "",
+        gender: userdata.gender || "",
+        state: userdata.state || "",
+        city: userdata.city || "",
+        dob: userdata.dob.split("T")[0] || "",
     });
 
     const file = () => {
         click.current.click();
     };
 
-    const updateProfile = async (e) => {
+    const updateUserProfile = async (e) => {
         e.preventDefault();
-        await updateprofile(profiledata, setShow);
+        const response = await updateProfile(profiledata, setShow);
+        if(response) {
+            setShow(!show)
+        }
     };
+    const isValid = areAllKeysFilled(profiledata)
 
     useEffect(() => {
         profile();
@@ -50,13 +61,13 @@ function Profile() {
                     <div className="profile-box">
                         <div></div>
                         <span>
-                                { userdata.first_name + " " + userdata.last_name}
+                                { userdata.firstname + " " + userdata.lastname}
                         </span>
                         <span
-                            className="profile-edit-button"
+                            className="profile-edit-button !flex gap-2 items-center"
                             onClick={() => setShow(!show)}
                         >
-                            <Editicon /> Edit Profile
+                            <Editicon /> <span>Edit Profile</span>
                         </span>
                     </div>
                     <div className="profile-menu">
@@ -98,23 +109,48 @@ function Profile() {
                             <div className="profile-input">
                                 <label>First Name</label>
                                 <input
-                                    name="first_name"
+                                    name="firstname"
                                     type="text"
                                     onChange={(e) => {
-                                        setData({ ...profiledata, first_name: e.target.value });
+                                        setData({ ...profiledata, firstname: e.target.value });
                                     }}
-                                    value={profiledata.first_name}
+                                    value={profiledata.firstname}
                                 />
                             </div>
                             <div className="profile-input">
                                 <label>Last Name</label>
                                 <input
-                                    name="last_name"
+                                    name="lastname"
                                     type="text"
                                     onChange={(e) => {
-                                        setData({ ...profiledata, last_name: e.target.value });
+                                        setData({ ...profiledata, lastname: e.target.value });
                                     }}
-                                    value={profiledata.last_name}
+                                    value={profiledata.lastname}
+                                />
+                            </div>
+                        </div>
+                        <div className="profile-input-group">
+                            <div className="profile-input">
+                                <label>Gender</label>
+
+                                <select className={''} id={'gender'} name={'gender'}
+                                        value={profiledata.gender} onChange={(e) => {
+                                    setData({...profiledata, gender: e.target.value});
+                                }}>
+                                    <option>Select gender</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </div>
+                            <div className="profile-input">
+                                <label>DOB</label>
+                                <input
+                                    name="dob"
+                                    type="date"
+                                    onChange={(e) => {
+                                        setData({...profiledata, dob: e.target.value});
+                                    }}
+                                    value={profiledata.dob}
                                 />
                             </div>
                         </div>
@@ -134,12 +170,37 @@ function Profile() {
                             <input
                                 name="number"
                                 type="number"
-                                value={profiledata.phone_no}
+                                value={profiledata.phone}
                                 onChange={(e) => {
-                                    setData({ ...profiledata, phone_no: e.target.value });
+                                    setData({ ...profiledata, phone: e.target.value });
                                 }}
                             />
                         </div>
+                        <div className="profile-input-group">
+                            <div className="profile-input">
+                                <label>State</label>
+                                <input
+                                    name="firstname"
+                                    type="text"
+                                    onChange={(e) => {
+                                        setData({...profiledata, state: e.target.value});
+                                    }}
+                                    value={profiledata.state}
+                                />
+                            </div>
+                            <div className="profile-input">
+                                <label>City</label>
+                                <input
+                                    name="lastname"
+                                    type="text"
+                                    onChange={(e) => {
+                                        setData({...profiledata, city: e.target.value});
+                                    }}
+                                    value={profiledata.city}
+                                />
+                            </div>
+                        </div>
+
                         <div className="profile-input">
                             <label>Address</label>
                             <textarea
@@ -152,10 +213,14 @@ function Profile() {
                                 }}
                             />
                         </div>
+                        <CustomButton isLoading={isLoading} className="form_btn" children={'Save Changes'}
+                                      disabled={!isValid} onClick={updateUserProfile}/>
                         <div className="edit-profile-button">
-                            <button onClick={updateProfile}>
-                                {isLoading ? <Loader /> : "Save Changes"}
-                            </button>
+
+
+                            {/*<button onClick={updateProfile}>*/}
+                            {/*    {isLoading ? <Loader /> : "Save Changes"}*/}
+                            {/*</button>*/}
                         </div>
                     </form>
                 </div>

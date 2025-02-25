@@ -52,3 +52,38 @@ input{
 .sides2 {
     margin: auto 0rem;
 }
+
+.input-group {
+    border: 0.8px solid #A2A4A5;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 0rem 0.5rem;
+    margin: 1.2rem 0rem;
+    display: flex;
+    padding-right: 0rem;
+}
+
+.input-group > label {
+    border-right: 0.8px solid #A2A4A5;
+    padding-right: 0.5rem;
+    color: rgba(55, 58, 71, 0.89);
+    text-transform: capitalize;
+    font-weight: 400;
+    font-size: 14px;
+    display: inline-flex;
+    margin: auto 0rem;
+}
+
+.input-group > label > svg {
+    height: 15px;
+    margin-right: 0.5rem;
+}
+
+.input-group > input, .input-group > input:focus-visible {
+    border: 0px;
+    outline: 0px;
+    padding: 0.8rem 0.5rem;
+    color: rgba(55, 58, 71, 0.89);
+    vertical-align: middle;
+    flex: 1;
+}

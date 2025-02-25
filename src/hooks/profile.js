@@ -2,72 +2,54 @@ import { useCallback, useState } from 'react'
 import axios from 'axios'
 import { API } from '../helper/action'
 import { Cookies } from 'react-cookie';
+import {getUserProfile, putUpdateUserProfile} from "../service/services/authServices";
+import {useDispatch} from "react-redux";
+import {handleSaveUserData} from "../service/Constant/action.ts";
+import {useToast} from "../service/context/NotificationContext";
 
 export const useProfile = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
     const [data, setData] = useState({})
-    const maxAge = 1 * 24 * 60 * 60
+    const dispatch = useDispatch()
+    const {showToast} = useToast();
 
     const profile = useCallback(async () => {
-        setIsLoading(true)
-        setError(null)
-
-        const cookies = new Cookies();
-        let token = cookies.get('xhrTOKEN')
-
-        await axios.get(`${API}/user`,
-        {
-            headers: {
-                'Authorization': `Token ${token}`, 
-                'Content-Type': 'application/json'
+        try {
+            const response = await getUserProfile();
+            console.log(response)
+            if (response.data.status) {
+                dispatch(handleSaveUserData(response?.data?.response))
+                return response
             }
-        } ).then((response) => {
-            // console.log(response.data)
-            setIsLoading(false)
-            setData(response.data)
-            let user = response.data.user
-            user = btoa(JSON.stringify(user))
-            cookies.set("user", user, { path: '/', maxAge: maxAge, sameSite: 'lax', secure: true });
-        }).catch((err) => {
-            setIsLoading(false)
-            setError(err.response.data.message)
-            console.log(err.response.data.message)
-        })
-    }, [maxAge])
-
-    const updateprofile = useCallback(async (profiledata, setShow) => {
-        setIsLoading(true)
-        setError(null)
-
-        const cookies = new Cookies();
-        let token = cookies.get('xhrTOKEN')
-
-        const data = {
-            user: profiledata
+        } catch (e) {
+            console.log(e)
+            return e
         }
 
-        console.log(data);
 
-        await axios.put(`${API}/user`, data,
-        {
-            headers: {
-                'Authorization': `Token ${token}`, 
-                'Content-Type': 'application/json'
-            }
-        } ).then((response) => {
-            setIsLoading(false)
-            console.log(response);
-            // let user = response.data.data
-            // user = btoa(JSON.stringify(user))
-            // cookies.set("user", user, { path: '/', maxAge: maxAge, sameSite: 'lax', secure: true });
-            setShow(false)
-        }).catch((err) => {
-            setIsLoading(false)
-            setError(err.response.data.message)
-            console.log(err.response.data.message)
-        })
+
+
     }, [])
-    
-    return { profile, updateprofile, data, isLoading, error }
+
+    const updateProfile = useCallback(async (profiledata, setShow) => {
+        setIsLoading(true)
+        try {
+            const response = await putUpdateUserProfile(profiledata);
+            console.log(response)
+            if (response.data.success) {
+                setIsLoading(false)
+                dispatch(handleSaveUserData(response?.data?.response))
+                showToast('Success', response.data.message, 'success');
+                return true
+            }
+        } catch (e) {
+            setIsLoading(false)
+            console.log(e)
+            showToast('Error', e.response.data.message, 'error');
+            return false
+        }
+    }, [])
+
+    return { profile, updateProfile, data, isLoading, error }
 }

@@ -36,11 +36,11 @@
 }
 
 .sidebar-menu > a > span, .logout > a > span {
-    padding-left: 2.2rem;
+    padding-left: 2rem;
 }
 
 .sidebar-menu > a > .mypin {
-    padding-left: 2.55rem;
+    padding-left: 2rem;
 }
 
 .logout {
@@ -63,5 +63,5 @@
 }
 
 @media only screen and (max-width: 500px) {
-    
+
 }

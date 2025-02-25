@@ -1,3 +1,10 @@
 export const LOGIN = '/customer/login';
 export const REGISTER = '/customer/register';
 export const VERIFY_OTP = '/customer/verify-code';
+export const FORGOT_PASSWORD = '/customer/forgot-password';
+export const RESET_PASSWORD = '/customer/verify-reset-password';
+export const UPDATE_RESET_PASSWORD = '/customer/update-password';
+export const DASHBOARD = '/customer/dashboard';
+export const PROFILE = '/customer/profile';
+export const UPDATE_PROFILE = '/customer/profile/update';
+export const UPDATE_PASSWORD = '/customer/password/update';

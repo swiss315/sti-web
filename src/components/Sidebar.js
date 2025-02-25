@@ -12,16 +12,14 @@ import {ReactComponent as Reporticon} from "../assets/icons/report&incidenticon.
 import {ReactComponent as Passwordicon} from "../assets/icons/cpasswordicon.svg";
 import {ReactComponent as Helpicon} from "../assets/icons/help&feedbackicon.svg";
 import {ReactComponent as Logouticon} from "../assets/icons/logouticon.svg";
+import {useSelector} from "react-redux";
+import {RootState} from "../service/reducers/rootReducer.ts";
 // import { useLogout } from '../hooks/logout';
 
 function Sidebar({setSidebar, sidebar}) {
-    const cookie = new Cookies();
-    let userdata = cookie.get("user");
-    let userinfo = cookie.get("userinfo");
-    if(userdata && userinfo) {
-        userdata = JSON.parse(atob(userdata));
-        userinfo = JSON.parse(atob(userinfo));
-    }
+    const AuthState = useSelector((state: RootState) => state.auth);
+    const {userData: userdata} = AuthState
+    console.log(userdata)
 
     // const { logout } = useLogout()
     console.log(userdata);
@@ -30,21 +28,19 @@ function Sidebar({setSidebar, sidebar}) {
     <div>
         <div className='sidbar-info'>
             <p className='sidbar-info-name'>
-                Welcome, <span>{userdata?.first_name + " " + userdata?.last_name}</span>
+                Welcome, <span>{userdata?.firstname + " " + userdata?.lastname}</span>
             </p>
-            <p className='sidebar-info-wallet'>
-                Wallet Balance: <span>NGN{userinfo?.wallet}</span>
-            </p>
+            {/*<p className='sidebar-info-wallet'>*/}
+            {/*    Wallet Balance: <span>NGN{userinfo?.wallet}</span>*/}
+            {/*</p>*/}
         </div>
         <div className='sidebar-menu'>
-            {
-                userinfo?.is_agent ? <Link to="/claim" onClick={() => setSidebar(!sidebar) } >
+            <Link className={'!flex items-center'} to="/claim" onClick={() => setSidebar(!sidebar) } >
                 <Claimicon />
                 <span>
                     Claims
                 </span>
-            </Link> : ''
-            }
+            </Link>
             <Link className={'!flex items-center'} to="/pin" onClick={() => setSidebar(!sidebar) }>
                 <Mypinsicon />
                 <span className='mypin'>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import "../../stylesheets/Login.css";
@@ -11,11 +11,13 @@ import CustomButton from "../../components/form/customButton";
 
 const VerifyOtp = () => {
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false)
     let Navigate = useNavigate()
     const AuthState = useSelector((state: RootState) => state.auth);
     const {userData} = AuthState
     console.log(userData)
     const VerifyOtps = async (e) => {
+        setLoading(true)
         const payload = {
             "code": e,
             "email": userData.email
@@ -24,6 +26,8 @@ const VerifyOtp = () => {
             payload: payload,
             navigate: Navigate
         }))
+        setLoading(false)
+
     }
 
     return (
@@ -40,7 +44,7 @@ const VerifyOtp = () => {
                     <p className={' text-sm pb-3'}>Enter the reset code sent to your email </p>
                     <form className="customer_signup" >
                         <PinInput onComplete={VerifyOtps}/>
-                        <CustomButton isLoading={false} className="form_btn" children={'Verify Otp'}
+                        <CustomButton isLoading={loading} className="form_btn" onClick={VerifyOtps} children={'Verify Otp'}
                                       disabled={false}/>
                         <p className={' text-sm pt-3'}>Enter the reset code sent to your email </p>
 

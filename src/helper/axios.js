@@ -14,11 +14,15 @@ export const unauthorized = axios.create({
 });
 
 export const unauthorizedGateRequest = axios.create({
-    baseURL: API, // Change `API` to `baseURL`
+    baseURL: API,
 });
 
 export const authorized = axios.create({
   baseURL: baseURL,
+});
+
+export const authorizedGateRequest = axios.create({
+    baseURL: API,
 });
 
 unauthorizedGateRequest.interceptors.request.use(
@@ -28,8 +32,27 @@ unauthorizedGateRequest.interceptors.request.use(
         return config;
     },
     (error) => {
+        console.log('error 33', error)
+
         return Promise.reject(error);
     }
+);
+
+authorizedGateRequest.interceptors.request.use(
+    async (config: InternalAxiosRequestConfig<any>) => {
+        const state = store.getState();
+        const {token} = state.auth;
+        console.log('hhhh', token)
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+
+        return config;
+    },
+    (error: ErrorResponse) => {
+        console.log('error 33', error)
+        return Promise.reject(error);
+    },
 );
 
 
@@ -47,9 +70,8 @@ unauthorized.interceptors.request.use(
 authorized.interceptors.request.use(
   async (config: InternalAxiosRequestConfig<any>) => {
     const state = store.getState();
-    // const { token } = state.auth;
-    const token = 'kkkk'
-
+    const { token } = state.auth;
+      console.log('hhhh', token)
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

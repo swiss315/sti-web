@@ -9,6 +9,7 @@ import {Homepage} from "./pages/landingPage/Homepage";
 import {ChairmanStatement} from "./pages/landingPage/chairman";
 import {WhoWeAre} from "./components/aboutUs/whoweare";
 import VerifyOtp from "./pages/Onboarding/VerifyOtp";
+import ForgetPassword from "./pages/Onboarding/ForgetPassword";
 
 
 
@@ -22,7 +23,9 @@ function App() {
             <Route path='/aboutus/:id' exact element={<ChairmanStatement/>}/>
             <Route path={'/onboarding'} exact element={<Home/>}/>
             <Route path='/login' exact element={<Login/>}/>
-            <Route path='/verify-otp' exact element={<VerifyOtp/>}/>
+              <Route path='/forgot-password' exact element={<ForgetPassword/>}/>
+
+              <Route path='/verify-otp' exact element={<VerifyOtp/>}/>
 
               {/*<Route path='/agent-signup' exact element={<Agentsignup/>} />*/}
             <Route path='/customer-signup' exact element={<About/>} />
