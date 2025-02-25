@@ -19,6 +19,7 @@ const About = ({ submitForm }) => {
     submitForm,
     validate
   );
+  console.log(errors.confirmPassword)
 
   const formFiled = areAllKeysFilled(values)
 

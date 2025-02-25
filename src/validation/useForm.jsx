@@ -31,18 +31,29 @@ const useForm = (callback, validate) => {
 
   const handleChange = e => {
     const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value
+    });
+    console.log(name, value)
+    if (name === 'confirmPassword') {
+      // console.log('hhh')
+      if (values.password !== value) {
+        setErrors((prevData) => ({
+          ...prevData,
+          confirmPassword: 'Passwords do not match'
+        }))
+      }
+    }
+
     if (name === 'phone') {
       validatePhoneNumber(value);
-    } else {
-      setValues({
-        ...values,
-        [name]: value
-      });
     }
   };
 
   const handleSubmit = e => {
     e.preventDefault();
+
     dispatch(handleRegisterRequest({
       payload: values,
       navigate: Navigate

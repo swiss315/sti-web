@@ -17,7 +17,11 @@ const ForgetPassword = () => {
     const dispatch = useDispatch();
     let Navigate = useNavigate()
     const [tabs, setTabs] = useState('email')
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState({
+        emailLoading: false,
+        verifyLoading: false,
+        updatePassword: false
+    })
     const AuthState = useSelector((state: RootState) => state.auth);
     const [errors, setError] = useState({});
     const [passwordData, setPasswordData] = useState({
@@ -39,7 +43,7 @@ const ForgetPassword = () => {
             // Live validation when typing in confirm password
             if (name === 'confirmPassword' && updatedData.newPassword !== value) {
                 // setError({);
-                setData((prevData) => ({
+                setError((prevData) => ({
                     ...prevData,
                     confirmPassword: 'Passwords do not match'
                 }))
@@ -53,46 +57,80 @@ const ForgetPassword = () => {
 
     const postFogotPassword = async (e) => {
     e.preventDefault()
-        setLoading(true)
+        // setLoading(true)
+        setLoading((prevData) => ({
+            ...prevData,
+            emailLoading: true
+        }))
         const payload = {
             "email": data.email,
         }
         const res = await requestForgotPassword(payload)
         if (res) {
+            setLoading((prevData) => ({
+                ...prevData,
+                emailLoading: false
+            }))
+            // setLoading(false)
             setTabs('verify')
         } else  {
-            setLoading(false)
+            setLoading((prevData) => ({
+                ...prevData,
+                emailLoading: false
+            }))
 
         }
     }
 
     const VerifyOtps = async (e) => {
-        setLoading(true)
+        setLoading((prevData) => ({
+            ...prevData,
+            verifyLoading: true
+        }))
+
         const payload = {
             "code": e,
             "email": data.email,
         }
         const res = await requestPostResetPassword(payload)
         if (res) {
+            setLoading((prevData) => ({
+                ...prevData,
+                verifyLoading: false
+            }))
             setTabs('update')
+        } else {
+            setLoading((prevData) => ({
+                ...prevData,
+                verifyLoading: false
+            }))
         }
-        setLoading(false)
+
 
     }
 
     const updatePassword = async (e) => {
         e.preventDefault()
-        setLoading(true)
+        setLoading((prevData) => ({
+            ...prevData,
+            updatePassword: true
+        }))
         const payload = {
             "email": data.email,
             'password': passwordData.newPassword
         }
         const res = await requestUpdatePassword(payload)
         if (res) {
-            setTabs('update')
+            setLoading((prevData) => ({
+                ...prevData,
+                updatePassword: false
+            }))
+            Navigate('/login')
         }
-        setLoading(false)
-
+        setLoading((prevData) => ({
+            ...prevData,
+            updatePassword: false
+        }))
     }
 
     return (
@@ -129,7 +167,7 @@ const ForgetPassword = () => {
                             </div>
 
                             <div className="button">
-                                <CustomButton isLoading={loading} className="form_btn" children={'Send Reset Code'}
+                                <CustomButton isLoading={loading.emailLoading} className="form_btn" children={'Send Reset Code'}
                                               disabled={!areAllKeysFilled(data)}/>
 
                                 <p className={'text-sm my-3 text-[#4F525D]'}>Remember your password now? Click the login
@@ -150,7 +188,7 @@ const ForgetPassword = () => {
                             <p className={' text-sm pb-3'}>Enter the reset code sent to your email </p>
                             <form className="customer_signup">
                                 <PinInput onComplete={VerifyOtps}/>
-                                <CustomButton isLoading={loading} className="form_btn" onClick={VerifyOtps}
+                                <CustomButton isLoading={loading.verifyLoading} className="form_btn" onClick={VerifyOtps}
                                               children={'Verify Otp'}
                                               disabled={false}/>
                                 <p className={' text-sm pt-3'}>Enter the reset code sent to your email </p>
@@ -203,8 +241,11 @@ const ForgetPassword = () => {
                             </div>
 
                             <div className="button">
-
-                                <button className={'my-3'}>{loading ? <Loader/> : 'Send Reset Code'}</button>
+                                <CustomButton isLoading={loading.updatePassword} className="form_btn"
+                                              onClick={updatePassword}
+                                              children={'Update Password'}
+                                              disabled={false}/>
+                                {/*<button className={'my-3'}>{loading.updatePassword ? <Loader/> : 'Send Reset Code'}</button>*/}
                                 <p className={'text-sm text-[#4F525D]'}>Remember your password now? Click the login
                                     button above</p>
 

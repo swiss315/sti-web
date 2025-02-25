@@ -15,7 +15,7 @@ const VerifyOtp = () => {
     let Navigate = useNavigate()
     const AuthState = useSelector((state: RootState) => state.auth);
     const {userData} = AuthState
-    console.log(userData)
+    // console.log(userData)
     const VerifyOtps = async (e) => {
         setLoading(true)
         const payload = {

@@ -35,6 +35,10 @@ const {showToast} = useToast()
         try {
             const response = await postUpdateResetPassword(data);
             console.log(response)
+
+            if (response.data.success) {
+                showToast('Success', response.data.message, 'success')
+            }
             return !!response.data.success;
         } catch (e) {
             console.log(e)
