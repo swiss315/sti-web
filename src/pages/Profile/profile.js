@@ -31,7 +31,7 @@ function Profile() {
         gender: userdata.gender || "",
         state: userdata.state || "",
         city: userdata.city || "",
-        dob: userdata.dob.split("T")[0] || "",
+        dob: userdata?.dob?.includes("T") ? userdata.dob.split("T")[0] : "",
     });
 
     const file = () => {

@@ -41,24 +41,24 @@ function Sidebar({setSidebar, sidebar}) {
                     Claims
                 </span>
             </Link>
-            <Link className={'!flex items-center'} to="/pin" onClick={() => setSidebar(!sidebar) }>
-                <Mypinsicon />
-                <span className='mypin'>
-                    My Pins
-                </span>
-            </Link>
+            {/*<Link className={'!flex items-center'} to="/pin" onClick={() => setSidebar(!sidebar) }>*/}
+            {/*    <Mypinsicon />*/}
+            {/*    <span className='mypin'>*/}
+            {/*        My Pins*/}
+            {/*    </span>*/}
+            {/*</Link>*/}
             <Link className={'!flex items-center'} to="/policies" onClick={() => setSidebar(!sidebar) }>
                 <Activepolicies />
                 <span>
                     Active Policies
                 </span>
             </Link>
-            <Link className={'!flex items-center'} to='/claim' onClick={() => setSidebar(!sidebar)}>
-                <Transactionicon/>
-                <span>
-                    Claims
-                </span>
-            </Link>
+            {/*<Link className={'!flex items-center'} to='/claim' onClick={() => setSidebar(!sidebar)}>*/}
+            {/*    <Transactionicon/>*/}
+            {/*    <span>*/}
+            {/*        Claims*/}
+            {/*    </span>*/}
+            {/*</Link>*/}
             <Link className={'!flex items-center'} to='/transactionhistory' onClick={() => setSidebar(!sidebar) }>
                 <Transactionicon />
                 <span>
