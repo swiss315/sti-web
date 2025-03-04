@@ -1,4 +1,13 @@
-import {ABOUTUS, CONTACT, HOME_BANNER, LOGO, PARTNERS, PRESS_RELEASE, SERVICE} from "./routePath.js";
+import {
+    ABOUT_US,
+    ABOUT_US_DETAILS,
+    CONTACT,
+    HOME_BANNER,
+    LOGO,
+    PARTNERS,
+    PRESS_RELEASE,
+    SERVICE
+} from "./routePath.js";
 import { unauthorized} from "../../helper/axios.js";
 import {useState} from "react";
 
@@ -7,7 +16,11 @@ export const useHomePage = () => {
         partners: [],
         pressRelease: [],
         service: [],
+        aboutUs: [],
+        aboutUsContent: null
     })
+    const [loading, setLoading] = useState(false);
+    const [contentLoading, setContentLoading] = useState(false);
     const getHomeBarner = async () => {
         try {
             const response = await unauthorized.get(HOME_BANNER);
@@ -84,15 +97,36 @@ export const useHomePage = () => {
 
     const getAboutUs = async () => {
         try {
-            const response = await unauthorized.get(ABOUTUS);
+            setLoading(true)
+            const response = await unauthorized.get(ABOUT_US);
             console.log(response)
             if (response.statusText === 'OK') {
                 setData((prevData) => ({
                     ...prevData,
-                    service: response.data.topics
+                    aboutUs: response.data.topics
                 }));
+                setLoading(false)
             }
         } catch (e) {
+            setLoading(false)
+            console.log(e)
+        }
+    }
+
+    const getAboutUsContent = async (id) => {
+        try {
+            setContentLoading(true);
+            const response = await unauthorized.get(`${ABOUT_US_DETAILS}/${id}/en`);
+            console.log(response)
+            if (response.statusText === 'OK') {
+                setData((prevData) => ({
+                    ...prevData,
+                    aboutUsContent: response.data.topic[0].details === null ? 'Null' : response.data.topic[0].details
+                }));
+                setContentLoading(false);
+            }
+        } catch (e) {
+            setContentLoading(false);
             console.log(e)
         }
     }
@@ -104,6 +138,9 @@ export const useHomePage = () => {
         getPartners,
         getService,
         data,
-        getAboutUs
+        getAboutUs,
+        getAboutUsContent,
+        contentLoading,
+        loading
     }
 }

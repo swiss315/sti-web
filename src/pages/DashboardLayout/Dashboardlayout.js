@@ -34,6 +34,7 @@ import Privacy from '../Termsandprivacy/Privacy';
 import Risk from "../Insurrance/risk";
 import Travel from "../Insurrance/travel";
 import BuyHealth from "../Insurrance/buyPolicy/buy_healthpolicy";
+import Health from "../Insurrance/Health";
 
 function Dashboardlayout() {
   const [sidebar, setSidebar] = useState(true);
@@ -82,6 +83,7 @@ function Dashboardlayout() {
               <Route path="changepassword" index element={<PinPassword />} />
               <Route path='policies' element={<Policies/>} />
               <Route path='motor' element={<Motor/>} />
+              <Route path='health' element={<Health/>}/>
               <Route path='swiss' element={<Swiss/>} />
               <Route path='travel' element={<Travel/>}/>
               <Route path='risk' element={<Risk/>}/>

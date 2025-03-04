@@ -1,23 +1,37 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {ReactComponent as ArrowLeft} from "../../assets/svgs/arrow-left.svg";
 import {ReactComponent as Location} from "../../assets/svgs/location.svg";
 import {ReactComponent as Logo} from "../../assets/svgs/logo.svg";
 import {Link} from "react-router-dom";
+import {useHomePage} from "../../service/api/homepage.ts";
 // import {Menu, MenuButton, MenuItem, MenuItems} from "@headlessui/react";
 
 
 export const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const titleMap = {
-        'who-we-are': 'Who we are',
-        'chairman-speech': 'Chairman’s Statement',
-        'international-highlight': 'International Statements',
-        'financial-highlight': 'Financial Highlights',
-        'reinsurance-treaty': 'Reinsurance Treaty Cover',
-        'board-of-directors': 'Board Of Directors',
-        'management': 'Management',
-        'our-client': 'Our Client',
-    };
+    const [isOpenProduct, setIsOpenProduct] = useState(false);
+
+    // const titleMap = {
+    //     'who-we-are': 'Who we are',
+    //     'chairman-speech': 'Chairman’s Statement',
+    //     'international-highlight': 'International Statements',
+    //     'financial-highlight': 'Financial Highlights',
+    //     'reinsurance-treaty': 'Reinsurance Treaty Cover',
+    //     'board-of-directors': 'Board Of Directors',
+    //     'management': 'Management',
+    //     'our-client': 'Our Client',
+    // };
+
+    const {
+        getAboutUs,
+        data
+    } = useHomePage()
+    console.log(data.aboutUs)
+    useEffect(() => {
+        Promise.all([
+            getAboutUs()
+        ])
+    }, []);
     return (
         <>
             <section className="flex justify-center items-center gap-5 py-2 px-4 bg-custom-purple w-full">
@@ -73,9 +87,6 @@ export const NavBar = () => {
                     <Link to={'/'} className={'text-black no-underline'}>
                         Home
                     </Link>
-                    {/*<Link to={'/aboutus'} className={'text-black no-underline'}>*/}
-                    {/*    About us*/}
-                    {/*</Link>*/}
                     <div className="relative inline-block text-left">
                         {/* Button */}
                         <button
@@ -94,16 +105,66 @@ export const NavBar = () => {
                                 className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5"
                             >
                                 <div className="py-1">
-                                    {Object.entries(titleMap).map(([path, title]) => (
+                                    {/*{Object.entries(titleMap).map(([path, title]) => (*/}
+                                    {/*    <Link*/}
+                                    {/*        to={path === 'who-we-are' ? '/aboutus' : `/aboutus/${path}`}*/}
+                                    {/*        key={path}*/}
+                                    {/*        className="block px-4 no-underline py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"*/}
+                                    {/*    >*/}
+                                    {/*        {title}*/}
+                                    {/*    </Link>*/}
+                                    {/*))}*/}
+
+                                    {data.aboutUs.map((path, title) => (
                                         <Link
-                                            to={path === 'who-we-are' ? '/aboutus' : `/aboutus/${path}`}
-                                            key={path}
+                                            to={path.title === 'About Us' ? '/aboutus' : `/aboutus/${encodeURIComponent(path.title)}?id=${path.id}`}
+                                            key={title}
                                             className="block px-4 no-underline py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                                         >
-                                            {title}
+                                            {path.title}
                                         </Link>
                                     ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                    <div className="relative inline-block text-left">
+                        {/* Button */}
+                        <button
+                            onMouseEnter={() => setIsOpenProduct(true)}
+                            onClick={() => setIsOpenProduct(!isOpenProduct)} // Optional: Click to toggle as well
+                            className="rounded-md bg-white px-4 py-2  "
+                        >
+                            Products
+                        </button>
 
+                        {/* Dropdown menu */}
+                        {isOpenProduct && (
+                            <div
+                                onMouseEnter={() => setIsOpenProduct(true)} // Keep open when hovering
+                                onMouseLeave={() => setIsOpenProduct(false)} // Close when leaving the dropdown
+                                className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5"
+                            >
+                                <div className="py-1">
+                                    {/*{Object.entries(titleMap).map(([path, title]) => (*/}
+                                    {/*    <Link*/}
+                                    {/*        to={path === 'who-we-are' ? '/aboutus' : `/aboutus/${path}`}*/}
+                                    {/*        key={path}*/}
+                                    {/*        className="block px-4 no-underline py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"*/}
+                                    {/*    >*/}
+                                    {/*        {title}*/}
+                                    {/*    </Link>*/}
+                                    {/*))}*/}
+
+                                    {data.aboutUs.map((path, title) => (
+                                        <Link
+                                            to={path.title === 'About Us' ? '/aboutus' : `/aboutus/${encodeURIComponent(path.title)}?id=${path.id}`}
+                                            key={title}
+                                            className="block px-4 no-underline py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                        >
+                                            {path.title}
+                                        </Link>
+                                    ))}
                                 </div>
                             </div>
                         )}
@@ -118,6 +179,9 @@ export const NavBar = () => {
                     </Link>
                     <Link to={'/aboutus'} className={'text-black no-underline'}>
                         Contact Us
+                    </Link>
+                    <Link to={'/aboutus'} className={'text-black no-underline'}>
+                        Whistle Blower
                     </Link>
                     <Link to={'/aboutus'} className={'text-black no-underline'}>
                         Information Center

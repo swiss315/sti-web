@@ -35,7 +35,7 @@ function Dashboard() {
       case "All Risk Insurance":
         return "all-risk";
       case "Vehicle Insurance":
-        return "vehicle-insurance";
+        return "motor-insurance";
       case "Health Insurance":
         return "health-insurance";
       case "Home Insurance":

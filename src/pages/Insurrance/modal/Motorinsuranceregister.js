@@ -568,7 +568,7 @@ function Motorinsuranceregister() {
               <Link onClick={(e) => setTab("")}>Back</Link>
             </div>
             <div className="insurance-button">
-              <button onClick={(e) => {e.preventDefault(); vehiclequote(quote, setModalShow)}}>{isquoteLoading ? <Loader/> : 'Submit'}</button>
+              <button onClick={(e) => {e.preventDefault(); setModalShow(true)}}>{isquoteLoading ? <Loader/> : 'Submit'}</button>
             </div>
           </div>
         </form>

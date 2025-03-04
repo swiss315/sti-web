@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import React, {useEffect} from "react";
 // import Motor from "./Motor";
 import all from '../../assets/all.png'
-// import marine from '../assets/marine.png';
+import health from '../../assets/health1.jpg';
 import motor from '../../assets/motor.png';
 import easy from '../../assets/easy.png';
 import swiss from '../../assets/swiss.png';
@@ -76,6 +76,13 @@ const { getPolicies } = usePolicy()
                   <p>{userpolicy?.my_policies?.vehicle?.length} policies</p>
                   <h3>Motor Insurance</h3>
                 </div>
+              </Link>
+              <Link className="insurance_link" to='/health'>
+                  <img className="insurance_img" src={health} alt="insurance_images"/>
+                  <div className="text">
+                      <p>{userpolicy?.my_policies?.vehicle?.length} policies</p>
+                      <h3>Health Insurance</h3>
+                  </div>
               </Link>
               <Link className="insurance_link" to='/travel' >
                 <img className="insurance_img" src={easy} alt="insurance_images" />

@@ -1,108 +1,109 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 // import { useState } from 'react'
 import "../../stylesheets/motor.css"
 import motorp from '../../assets/motorp.png'
 import Policy from '../../components/Policy'
+import {usePolicy} from "../../hooks/Policy";
 
 const Motor = () => {
-    const motorData = [
-        {
-            id: 1,
-            number: 'MOT/PM/01/23/SA/10677',
-            names: 'Joy Imole',
-            dob: 'Oct 10,2014',
-            sdate: 'Jun 10,2023',
-            edate: 'Feb 05,2026',
-            period:'425 Days',
-            price: 'NGN 2500',
-            plate: 'KSG457738',
-            value: 'NGN 1200000.00',
-            type: 'Third Party Only',
-            pay: 'Paid',
-            stats: 'Active'
-
-        },
-        {
-            id: 2,
-            number: 'MOT/PM/01/23/SA/10677',
-            names: 'Joy Imole',
-            dob: 'Oct 10,2014',
-            sdate: 'Jun 10,2023',
-            edate: 'Feb 05,2026',
-            period:'425 Days',
-            price: 'NGN 2500',
-            plate: 'KSG457738',
-            value: 'NGN 1200000.00',
-            type: 'Third Party Only',
-            pay: 'Failed',
-            stats: 'Not Active'
-
-        },
-        {
-            id: 3,
-            number: 'MOT/PM/01/23/SA/10677',
-            names: 'Joy Imole',
-            dob: 'Oct 10,2014',
-            sdate: 'Jun 10,2023',
-            edate: 'Feb 05,2026',
-            period:'425 Days',
-            price: 'NGN 2500',
-            plate: 'KSG457738',
-            value: 'NGN 1200000.00',
-            type: 'Third Party Only',
-            pay: 'Pending',
-            stats: 'Pending'
-
-        },
-        {
-            id: 1,
-            number: 'MOT/PM/01/23/SA/10677',
-            names: 'Joy Imole',
-            dob: 'Oct 10,2014',
-            sdate: 'Jun 10,2023',
-            edate: 'Feb 05,2026',
-            period: '425 Days',
-            price: 'NGN 2500',
-            plate: 'KSG457738',
-            value: 'NGN 1200000.00',
-            type: 'Third Party Only',
-            pay: 'Paid',
-            stats: 'Active'
-
-        },
-        {
-            id: 2,
-            number: 'MOT/PM/01/23/SA/10677',
-            names: 'Joy Imole',
-            dob: 'Oct 10,2014',
-            sdate: 'Jun 10,2023',
-            edate: 'Feb 05,2026',
-            period: '425 Days',
-            price: 'NGN 2500',
-            plate: 'KSG457738',
-            value: 'NGN 1200000.00',
-            type: 'Third Party Only',
-            pay: 'Failed',
-            stats: 'Not Active'
-
-        },
-        {
-            id: 3,
-            number: 'MOT/PM/01/23/SA/10677',
-            names: 'Joy Imole',
-            dob: 'Oct 10,2014',
-            sdate: 'Jun 10,2023',
-            edate: 'Feb 05,2026',
-            period: '425 Days',
-            price: 'NGN 2500',
-            plate: 'KSG457738',
-            value: 'NGN 1200000.00',
-            type: 'Third Party Only',
-            pay: 'Pending',
-            stats: 'Pending'
-
-        },
-    ]
+    // const motorData = [
+    //     {
+    //         id: 1,
+    //         number: 'MOT/PM/01/23/SA/10677',
+    //         names: 'Joy Imole',
+    //         dob: 'Oct 10,2014',
+    //         sdate: 'Jun 10,2023',
+    //         edate: 'Feb 05,2026',
+    //         period:'425 Days',
+    //         price: 'NGN 2500',
+    //         plate: 'KSG457738',
+    //         value: 'NGN 1200000.00',
+    //         type: 'Third Party Only',
+    //         pay: 'Paid',
+    //         stats: 'Active'
+    //
+    //     },
+    //     {
+    //         id: 2,
+    //         number: 'MOT/PM/01/23/SA/10677',
+    //         names: 'Joy Imole',
+    //         dob: 'Oct 10,2014',
+    //         sdate: 'Jun 10,2023',
+    //         edate: 'Feb 05,2026',
+    //         period:'425 Days',
+    //         price: 'NGN 2500',
+    //         plate: 'KSG457738',
+    //         value: 'NGN 1200000.00',
+    //         type: 'Third Party Only',
+    //         pay: 'Failed',
+    //         stats: 'Not Active'
+    //
+    //     },
+    //     {
+    //         id: 3,
+    //         number: 'MOT/PM/01/23/SA/10677',
+    //         names: 'Joy Imole',
+    //         dob: 'Oct 10,2014',
+    //         sdate: 'Jun 10,2023',
+    //         edate: 'Feb 05,2026',
+    //         period:'425 Days',
+    //         price: 'NGN 2500',
+    //         plate: 'KSG457738',
+    //         value: 'NGN 1200000.00',
+    //         type: 'Third Party Only',
+    //         pay: 'Pending',
+    //         stats: 'Pending'
+    //
+    //     },
+    //     {
+    //         id: 1,
+    //         number: 'MOT/PM/01/23/SA/10677',
+    //         names: 'Joy Imole',
+    //         dob: 'Oct 10,2014',
+    //         sdate: 'Jun 10,2023',
+    //         edate: 'Feb 05,2026',
+    //         period: '425 Days',
+    //         price: 'NGN 2500',
+    //         plate: 'KSG457738',
+    //         value: 'NGN 1200000.00',
+    //         type: 'Third Party Only',
+    //         pay: 'Paid',
+    //         stats: 'Active'
+    //
+    //     },
+    //     {
+    //         id: 2,
+    //         number: 'MOT/PM/01/23/SA/10677',
+    //         names: 'Joy Imole',
+    //         dob: 'Oct 10,2014',
+    //         sdate: 'Jun 10,2023',
+    //         edate: 'Feb 05,2026',
+    //         period: '425 Days',
+    //         price: 'NGN 2500',
+    //         plate: 'KSG457738',
+    //         value: 'NGN 1200000.00',
+    //         type: 'Third Party Only',
+    //         pay: 'Failed',
+    //         stats: 'Not Active'
+    //
+    //     },
+    //     {
+    //         id: 3,
+    //         number: 'MOT/PM/01/23/SA/10677',
+    //         names: 'Joy Imole',
+    //         dob: 'Oct 10,2014',
+    //         sdate: 'Jun 10,2023',
+    //         edate: 'Feb 05,2026',
+    //         period: '425 Days',
+    //         price: 'NGN 2500',
+    //         plate: 'KSG457738',
+    //         value: 'NGN 1200000.00',
+    //         type: 'Third Party Only',
+    //         pay: 'Pending',
+    //         stats: 'Pending'
+    //
+    //     },
+    // ]
     const getStatusClass = (status) => {
         switch (status) {
             case "Successful":
@@ -115,7 +116,11 @@ const Motor = () => {
                 return "text-gray-500";
         }
     };
+    const {getMotorPolicy, isLoading, policy} = usePolicy()
 
+    useEffect(() => {
+        getMotorPolicy()
+    }, [])
 
     return (
     <div className="motor">
@@ -136,16 +141,16 @@ const Motor = () => {
                         <th className="ref">End Date</th>
                     </tr>
                     </thead>
-                    {motorData.length === 0 ? <tbody>
+                    {policy.motor.length === 0 ? <tbody>
                         <tr>
-                            <th className="text-center p-5" colSpan={6}>
+                            <th className="text-center p-5" colSpan={9}>
                                 No Data Found
                             </th>
                         </tr>
                         </tbody> :
                         <tbody>
                         {
-                            motorData.map((data, index) => {
+                            policy.motor.map((data, index) => {
                                 return (
                                     <tr key={index}>
                                         <th className="ref">{index + 1}</th>

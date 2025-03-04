@@ -1,55 +1,63 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {ReactComponent as BigLogo} from "../../assets/svgs/big-logo.svg";
-
 import {ReactComponent as Footer30Logo} from "../../assets/svgs/footer-30-logo.svg";
 import {ReactComponent as FooterLogo} from "../../assets/svgs/footer-logo.svg";
 import {ReactComponent as AppStore} from "../../assets/svgs/app-store.svg";
 import {ReactComponent as PlayStore} from "../../assets/svgs/play-store.svg";
 import {NavBar} from "../../components/hompeage/NavBar";
-import {ChairmanSpeech} from "../../components/aboutUs/chaimanSpeech";
-import {Link, useLocation} from "react-router-dom";
-import {InternationalHighlight} from "../../components/aboutUs/internationalHighlight";
-import {ReAssuranceTreaty} from "../../components/aboutUs/reinsurance";
-import {BoardOfDirectors} from "../../components/aboutUs/boardOfDirectors";
-import {Management} from "../../components/aboutUs/management";
-import {WhoWeAre} from "../../components/aboutUs/whoweare";
+// import {ChairmanSpeech} from "../../components/aboutUs/chaimanSpeech";
+import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
+// import {InternationalHighlight} from "../../components/aboutUs/internationalHighlight";
+// import {ReAssuranceTreaty} from "../../components/aboutUs/reinsurance";
+// import {BoardOfDirectors} from "../../components/aboutUs/boardOfDirectors";
+// import {Management} from "../../components/aboutUs/management";
+// import {WhoWeAre} from "../../components/aboutUs/whoweare";
+import {useHomePage} from "../../service/api/homepage.ts";
 
 export const ChairmanStatement = () => {
-    const location = useLocation(); // Get the current location
-    const path = location.pathname; // Example: "/aboutus/chairman-speech"
-    const lastPart = path.split('/').pop();
-    const titleMap = {
-        'who-we-are': 'Who we are',
-        'chairman-speech': 'Chairman’s Statement',
-        'international-highlight': 'International Statements',
-        'financial-highlight': 'Financial Highlights',
-        'reinsurance-treaty': 'Reinsurance Treaty Cover',
-        'board-of-directors': 'Board Of Directors',
-        'management': 'Management',
-        'our-client': 'Our Client',
-    };
-const getComponent = (name) => {
-    switch (name) {
-        case 'who-we-are':
-            return <WhoWeAre />;
-        case 'chairman-speech':
-            return <ChairmanSpeech/>;
-        case 'international-highlight':
-            return <InternationalHighlight/>;
-        case 'financial-highlight':
-            return <ReAssuranceTreaty/>;
-        case 'reinsurance-treaty':
-            return <ReAssuranceTreaty/>;
-        case 'board-of-directors':
-            return <BoardOfDirectors/>;
-        case 'management':
-            return <Management/>;
-        case 'our-client':
-            return <ReAssuranceTreaty/>;
-        default:
-            return <ChairmanSpeech/>;
-    }
-}
+    const navigate = useNavigate();
+    const location = useLocation();
+    const path = location.pathname;
+    let lastPart: string = path.split('/').pop();
+    lastPart = decodeURIComponent(lastPart);
+    const [searchParams] = useSearchParams();
+    const id = searchParams.get("id");
+    console.log(lastPart, id)
+
+//     const titleMap = {
+//         'who-we-are': 'Who we are',
+//         'chairman-speech': 'Chairman’s Statement',
+//         'international-highlight': 'International Statements',
+//         'financial-highlight': 'Financial Highlights',
+//         'reinsurance-treaty': 'Reinsurance Treaty Cover',
+//         'board-of-directors': 'Board Of Directors',
+//         'management': 'Management',
+//         'our-client': 'Our Client',
+//     };
+//
+//
+//     const getComponent = (name) => {
+//     switch (name) {
+//         case 'who-we-are':
+//             return <WhoWeAre />;
+//         case 'chairman-speech':
+//             return <ChairmanSpeech/>;
+//         case 'international-highlight':
+//             return <InternationalHighlight/>;
+//         case 'financial-highlight':
+//             return <ReAssuranceTreaty/>;
+//         case 'reinsurance-treaty':
+//             return <ReAssuranceTreaty/>;
+//         case 'board-of-directors':
+//             return <BoardOfDirectors/>;
+//         case 'management':
+//             return <Management/>;
+//         case 'our-client':
+//             return <ReAssuranceTreaty/>;
+//         default:
+//             return <ChairmanSpeech/>;
+//     }
+// }
 
     const getTitle = (name) => {
         switch (name) {
@@ -74,7 +82,36 @@ const getComponent = (name) => {
         }
     }
 
+    const AboutUsContent = async (id) => {
+        try {
+            if(id.title === 'About Us'){
+                navigate('/aboutus')
+            } else {
+                navigate(`/aboutus/${encodeURIComponent(id.title)}?id=${id.id}`);
+                await getAboutUsContent(id.id)
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
+    const {
+        getAboutUsContent,
+        getAboutUs,
+        data,
+        loading,
+        contentLoading
+    } = useHomePage()
+    console.log(data.aboutUs)
+    useEffect(() => {
+        if (id) {
+             getAboutUsContent(id)
+        }
+
+        Promise.all([
+            getAboutUs()
+        ])
+    }, []);
 
     return (
         <>
@@ -99,10 +136,39 @@ const getComponent = (name) => {
 
                     <div
                         className="flex flex-col py-5 gap-y-4 lg:w-5/12 xl:w-3/12 text-xs lg:text-sm xl:text-sm text-custom-purple">
-                        {Object.entries(titleMap).map(([path, title]) => (
-                            <Link
-                                to={path === 'who-we-are' ? '/aboutus' :`/aboutus/${path}`} // Use path as URL
-                                className={`${lastPart === path ? 'bg-custom-orange' : 'bg-custom-grey'} relative block  px-4 py-2 no-underline group overflow-hidden border-l-8 border-orange`}
+                        {/*{Object.entries(titleMap).map(([path, title]) => (*/}
+                        {/*    <Link*/}
+                        {/*        to={path === 'who-we-are' ? '/aboutus' :`/aboutus/${path}`} // Use path as URL*/}
+                        {/*        className={`${lastPart === path ? 'bg-custom-orange' : 'bg-custom-grey'} relative block  px-4 py-2 no-underline group overflow-hidden border-l-8 border-orange`}*/}
+                        {/*    >*/}
+                        {/*        /!* Expanding Background Animation *!/*/}
+                        {/*        <span*/}
+                        {/*            className="absolute inset-0 left-0 w-0 bg-custom-orange transition-all duration-500 ease-in-out group-hover:w-full"*/}
+                        {/*        ></span>*/}
+
+                        {/*        /!* Text Content (Above Background) *!/*/}
+                        {/*        <div*/}
+                        {/*            className="relative z-10 px-4 transition-colors duration-500 group-hover:text-white">*/}
+                        {/*            <h1 className="capitalize font-bold text-custom-purple text-lg">*/}
+                        {/*                {title}*/}
+                        {/*            </h1>*/}
+                        {/*        </div>*/}
+                        {/*    </Link>*/}
+                        {/*))}*/}
+
+                        {
+                            loading ?
+                                 Array.from({length: 5}).map((_, index) => (
+                                    <div
+                                        key={index}
+                                        className="bg-gray-200 animate-pulse h-8 rounded-md w-full"
+                                    ></div>
+                                ))
+                                :
+                            data.aboutUs.map((path, title) => (
+                            <div key={title} onClick={() => AboutUsContent(path)}
+
+                                className={`${lastPart === path.title ? 'bg-custom-orange' : 'bg-custom-grey'} cursor-pointer relative block  px-4 py-2 no-underline group overflow-hidden border-l-8 border-orange`}
                             >
                                 {/* Expanding Background Animation */}
                                 <span
@@ -113,10 +179,10 @@ const getComponent = (name) => {
                                 <div
                                     className="relative z-10 px-4 transition-colors duration-500 group-hover:text-white">
                                     <h1 className="capitalize font-bold text-custom-purple text-lg">
-                                        {title}
+                                        {path.title}
                                     </h1>
                                 </div>
-                            </Link>
+                            </div>
                         ))}
 
                         <div className="flex flex-col gap-y-3 py-3">
@@ -157,9 +223,25 @@ const getComponent = (name) => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col xl:w-9/12">
-                        {getComponent(lastPart)}
-                    </div>
+                    {
+                        contentLoading ?
+                            <div className="flex flex-col xl:w-9/12 space-y-4">
+                                {/* Skeleton Lines */}
+                                {Array.from({length: 5}).map((_, index) => (
+                                    <div key={index} className="bg-gray-200 animate-pulse h-6 rounded-md w-full"></div>
+                                ))}
+                            </div> :
+                        data.aboutUsContent ?
+                        <div className="flex flex-col xl:w-9/12" dangerouslySetInnerHTML={{__html: data.aboutUsContent}}/>
+                        :
+                        <div className="flex flex-col xl:w-9/12" >
+                            {data.aboutUsContent}
+                        </div>
+                    }
+
+                    {/*<div className="flex flex-col xl:w-9/12">*/}
+                    {/*    {getComponent(lastPart)}*/}
+                    {/*</div>*/}
 
                 </div>
 
