@@ -16,8 +16,8 @@ const Login = () => {
   const AuthState = useSelector((state: RootState) => state.auth);
   const {loading, error} = AuthState;
   const [data, setData] = useState( {
-        'email': 'pyjof@mailinator.com',
-        'password': 'password'
+        'email': 'joycurrent@edny.net',
+        'password': 'Habeeb4life'
       }
   )
 
