@@ -94,7 +94,10 @@ export const NavBar = () => {
                     <div className="relative inline-block text-left">
                         {/* Button */}
                         <button
-                            onMouseEnter={() => setIsOpen(true)}
+                            onMouseEnter={() => {
+                                setIsOpen(true)
+                                setIsOpenProduct(false)
+                            }}
                             onClick={() => setIsOpen(!isOpen)} // Optional: Click to toggle as well
                             className="rounded-md bg-white "
                         >
@@ -106,7 +109,7 @@ export const NavBar = () => {
                             <div
                                 onMouseEnter={() => setIsOpen(true)} // Keep open when hovering
                                 onMouseLeave={() => setIsOpen(false)} // Close when leaving the dropdown
-                                className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5"
+                                className="absolute right-0 z-10 mt-2 origin-top-right w-56 rounded-md bg-white shadow-lg ring-1 ring-black/5"
                             >
                                 <div className="py-1">
                                     {/*{Object.entries(titleMap).map(([path, title]) => (*/}
@@ -135,7 +138,10 @@ export const NavBar = () => {
                     <div className="relative inline-block text-left">
                         {/* Button */}
                         <button
-                            onMouseEnter={() => setIsOpenProduct(true)}
+                            onMouseEnter={() => {
+                                setIsOpenProduct(true);
+                                setIsOpen(false)
+                            }}
                             onClick={() => setIsOpenProduct(!isOpenProduct)} // Optional: Click to toggle as well
                             className="rounded-md bg-white "
                         >
