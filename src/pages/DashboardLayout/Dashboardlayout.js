@@ -23,7 +23,7 @@ import {ReactComponent as Sidebarmenu} from "../../assets/icons/sidebarmenu.svg"
 import {ReactComponent as Backicon} from "../../assets/icons/backicon.svg";
 import {ReactComponent as Labelname} from "../../assets/icons/blacklabel.svg";
 import {ReactComponent as Notification} from "../../assets/icons/notification.svg";
-import Motorinsuranceregister from '../Insurrance/modal/Motorinsuranceregister';
+import Motorinsuranceregister from '../Insurrance/buyPolicy/Motorinsuranceregister';
 import Marineinsurance from '../Insurrance/modal/Marineinsurance';
 import Allrisk from '../Insurrance/modal/Allrisk';
 import Travelinsurance from '../Insurrance/modal/Travelinsurance';

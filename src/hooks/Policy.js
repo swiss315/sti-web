@@ -61,7 +61,7 @@ export const usePolicy = () => {
             const response = await healthPolicy(type)
             console.log(response)
             if (response.data.success) {
-                setPolicy((prev) => ({...prev, helath: response.data.response}))
+                setPolicy((prev) => ({...prev, health: response.data.response}))
                 setIsLoading(false)
                 return true
             }

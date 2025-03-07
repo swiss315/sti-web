@@ -17,6 +17,7 @@ export const useHomePage = () => {
         pressRelease: [],
         service: [],
         aboutUs: [],
+        contactUs: null,
         aboutUsContent: null
     })
     const [loading, setLoading] = useState(false);
@@ -34,6 +35,13 @@ export const useHomePage = () => {
         try {
             const response = await unauthorized.get(CONTACT);
             console.log(response)
+            if (response.statusText === 'OK') {
+                setData((prevData) => ({
+                    ...prevData,
+                    contactUs: response.data.details
+                }));
+                // setData({...data, partners: response.data.topics})
+            }
         } catch (e) {
             console.log(e)
         }

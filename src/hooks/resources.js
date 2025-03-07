@@ -2,7 +2,7 @@ import {useState} from "react";
 import {
     getAllHospital,
     getAllStates,
-    getAllTitle,
+    getAllTitle, getAllVehicleClass, getAllVehicleMake, getAllVehicleModel, getAllVehicleUsage,
     getAvailablePolicy,
     getLga,
     getPolicyType
@@ -15,7 +15,13 @@ export const useResources = () => {
         states: [],
         lgas: [],
         availablePolicy: [],
-        policyType: []
+        policyType: [],
+        hospital: [],
+        vehicleClass: [],
+        vehicleModel: [],
+        vehicleMake: [],
+        vehicleUsage: []
+
     })
     const getAllPolicy = async () => {
         try {
@@ -37,9 +43,9 @@ export const useResources = () => {
         try {
             setLoading(true)
             const response = await getPolicyType(type)
-            console.log(response)
-            if (response.data.success) {
-                setData((prev) => ({...prev, policyType: response.data.response}))
+            console.log(response.data, 'policy')
+            if (response.status === 200) {
+                setData((prev) => ({...prev, policyType: response.data}))
 
                 return true
             }
@@ -87,6 +93,21 @@ export const useResources = () => {
             if (response.data.success) {
                 setData((prev) => ({...prev, lgas: response.data.response}))
 
+                return response.data.response
+            }
+        } catch (e) {
+            console.log(e)
+            return false
+        }
+    }
+
+    const getHospital = async (data) => {
+        try {
+            setLoading(true)
+            const response = await getAllHospital(data)
+            console.log(response)
+            if (response.data.success) {
+                setData((prev) => ({...prev, hospital: response.data.response}))
                 return true
             }
         } catch (e) {
@@ -95,13 +116,58 @@ export const useResources = () => {
         }
     }
 
-    const getHospital = async () => {
+    const getVehicleMakes = async () => {
         try {
             setLoading(true)
-            const response = await getAllHospital()
+            const response = await getAllVehicleMake()
             console.log(response)
             if (response.data.success) {
-                // setData((prev) => ({...prev, states: response.data.response}))
+                setData((prev) => ({...prev, vehicleMake: response.data.response}))
+                return true
+            }
+        } catch (e) {
+            console.log(e)
+            return false
+        }
+    }
+
+    const getVehicleModel = async (id) => {
+        try {
+            setLoading(true)
+            const response = await getAllVehicleModel(id)
+            console.log(response)
+            if (response.data.success) {
+                setData((prev) => ({...prev, vehicleModel: response.data.response}))
+                return true
+            }
+        } catch (e) {
+            console.log(e)
+            return false
+        }
+    }
+
+    const getVehicleUsages = async () => {
+        try {
+            setLoading(true)
+            const response = await getAllVehicleUsage()
+            console.log(response)
+            if (response.data.success) {
+                setData((prev) => ({...prev, vehicleUsage: response.data.response}))
+                return true
+            }
+        } catch (e) {
+            console.log(e)
+            return false
+        }
+    }
+
+    const getVehicleClass = async () => {
+        try {
+            setLoading(true)
+            const response = await getAllVehicleClass()
+            console.log(response)
+            if (response.data.success) {
+                setData((prev) => ({...prev, vehicleClass: response.data.response}))
                 return true
             }
         } catch (e) {
@@ -119,6 +185,9 @@ export const useResources = () => {
         getTitles,
         data,
         getHospital,
-
+        getVehicleClass,
+        getVehicleMakes,
+        getVehicleModel,
+        getVehicleUsages
     }
 }

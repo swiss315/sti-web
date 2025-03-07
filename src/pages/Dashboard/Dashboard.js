@@ -89,7 +89,7 @@ function Dashboard() {
             data.insurance_policies.length !== 0 && (
                   data.insurance_policies.map((policy, index) => {
                     return (
-                        <Link to={`/${getInsurancePath(policy.label)}`} className={`insurance-type-tab `}>
+                        <Link key={index} to={`/${getInsurancePath(policy.label)}?id=${policy.id}`} className={`insurance-type-tab `}>
                           {policy.label}
                         </Link>
                     )

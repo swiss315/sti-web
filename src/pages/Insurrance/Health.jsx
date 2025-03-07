@@ -9,18 +9,19 @@ import TableSkeleton from "../../components/Loader/TableSkeleton";
 const Health = () => {
     const getStatusClass = (status) => {
         switch (status) {
-            case "Successful":
+            case 1:
                 return "text-green-500 font-bold";
-            case "Pending":
+            case 0:
                 return "text-orange-500 font-semibold";
-            case "Failed":
-                return "text-red-500 font-bold";
+            // case "0":
+            //     return "text-red-500 font-bold";
             default:
                 return "text-gray-500";
         }
     };
     const {getHealthPolicy, isLoading, policy} = usePolicy()
 
+    console.log(policy, 'policy')
     useEffect(() => {
         getHealthPolicy()
     }, [])
@@ -36,16 +37,14 @@ const Health = () => {
                         <tr>
                             <th className="ref">Index</th>
                             <th className="ref">Name</th>
-                            <th className="ref">Plate Number</th>
                             <th className="ref">Policy Number</th>
                             <th className="ref">Policy Type</th>
                             <th className="ref">Amount</th>
                             <th className="ref">Status</th>
                             <th className="ref">Payment Status</th>
-                            <th className="ref">End Date</th>
                         </tr>
                         </thead>
-                        {policy.motor.length === 0 ? <tbody>
+                        {policy.health.length === 0 ? <tbody>
                             <tr>
                                 <th className="text-center p-5" colSpan={9}>
                                     No Data Found
@@ -54,19 +53,17 @@ const Health = () => {
                             </tbody> :
                             <tbody>
                             {
-                                policy.motor.map((data, index) => {
+                                policy.health.map((data, index) => {
                                     return (
                                         <tr key={index}>
                                             <th className="ref">{index + 1}</th>
-                                            <th>{data.names}</th>
-                                            <th>{data.plate}</th>
-                                            <th>{data.number}</th>
-                                            <th>{data.type}</th>
-                                            <th>{data.value}</th>
-                                            <th className={getStatusClass(data.stats)}>{data.stats}</th>
-                                            <th className={getStatusClass(data.pay)}>{data.pay}</th>
+                                            <th>{data.quote?.customer.lastname + ' ' + data.quote?.customer.firstname}</th>
+                                            <th>{data.policy_number}</th>
+                                            <th>{data.quote.policy_type.name}</th>
+                                            <th>{data.quote.policy_type.rate}</th>
+                                            <th className={getStatusClass(data.quote.status)}>{data.quote.status === 1 ? 'Paid' : 'Not Paid'}</th>
+                                            <th className={getStatusClass(data.quote.status)}>{data.quote.status === 1 ? 'Paid' : 'Not Paid'}</th>
 
-                                            <th>{data.edate}</th>
                                         </tr>
                                     )
                                 })

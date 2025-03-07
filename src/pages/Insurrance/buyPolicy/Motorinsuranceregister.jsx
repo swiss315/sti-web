@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import "../../../stylesheets/insuranceregister.css";
 import { ReactComponent as Uploadicon } from "../../../assets/icons/uploadicon.svg";
 import { useVechicleBrand } from "../../../hooks/vehiclebrand";
 import { useBuyvehiclepolicy } from "../../../hooks/buy_vehiclepolicy";
 import Loader from "../../../components/Loader";
+import {useResources} from "../../../hooks/resources";
 
 function Summary(props) {
   const {buyVehicle, isLoading: isBuyLoading } = useBuyvehiclepolicy()
@@ -72,6 +73,14 @@ function Summary(props) {
 function Motorinsuranceregister() {
   const [type, setType] = useState('Individual');
   const [tab, setTab] = useState("");
+  const {getTitles, getInsurancePolicyType, data, isLoading, getVehicleClass,
+    getVehicleMakes,
+    getVehicleModel,
+    getVehicleUsages} = useResources()
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const policyId = queryParams.get("id");
+  const navigate = useNavigate();
   const click = useRef("");
   const frontClick = useRef("");
   const backClick = useRef("");
@@ -80,7 +89,6 @@ function Motorinsuranceregister() {
   const clickId = useRef("");
   const [filename, setFilename] = useState({});
   const VerifyData = useRef(false)
-  const {vehiclebrand, brandtypes, vehicles, brandtype, isLoading } = useVechicleBrand()
   const [individualdata, setIndividualData] = useState({
       "first_name": "",
       "last_name": "",
@@ -131,7 +139,6 @@ function Motorinsuranceregister() {
     'policy_type': '',
     'vehicle_type': ''
   })
-
   const { vehiclequote, getvehiclequote, isquoteLoading } = useBuyvehiclepolicy()
 
   const file = () => {
@@ -221,12 +228,19 @@ function Motorinsuranceregister() {
     }
   };
 
-  const vehicleid = async(e) => {
-    setVechicleData({...vechicledata, make : e.target.value});
-    const id = e.currentTarget.options[e.currentTarget.options.selectedIndex].getAttribute('data-key');
-    await brandtypes(id)
+  const handleOnChange = async (e) => {
+    const {name, value} = e.target;
+
+    if (name === 'vehicle_make') {
+      console.log(value, 'value')
+      await getVehicleModel(value)
+    }
   }
 
+
+  if (policyId === null) {
+    navigate('/dashboard');
+  }
   const year = function yearlist(startYear = 2008) {
     const endDate = new Date().getFullYear();
     let years = [];
@@ -238,9 +252,15 @@ function Motorinsuranceregister() {
     setYears(years)
 }
   useEffect(() => {
-    vehiclebrand();
-    year()
-  }, [vehiclebrand])
+    Promise.all([
+    getInsurancePolicyType(policyId),
+    getTitles(),
+    getVehicleClass(),
+    getVehicleUsages(),
+    getVehicleMakes(),
+    year(),
+    ])
+  }, [])
 
   return (
     <div className="report-content">
@@ -264,6 +284,17 @@ function Motorinsuranceregister() {
               </select>
             </div>
             <div className={`individual ${type === 'Individual' ? 'd-block' : 'd-none'}`}>
+              <div className="report-inputgroup insurance-selectgroup">
+                <label>Prefix</label>
+                <select name="title_id" >
+                  <option defaultValue={'select'}>select</option>
+                  {
+                    data?.titles.map((title, index) => {
+                      return <option key={index} value={title.id}>{title.name}</option>
+                    })
+                  }
+                </select>
+              </div>
               <div className="report-inputgroup">
                 <label>First Name</label>
                 <input type="text" name='first_name' onChange={(e) => setIndividualData({...individualdata, first_name : e.target.value})}/>
@@ -402,36 +433,48 @@ function Motorinsuranceregister() {
               tab === "next" ? "" : "d-none"
             }`}
           >
-            <div className="report-inputgroup">
-              <label>Period</label>
-              <input type="date" />
-            </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Private/Commercial</label>
               <select onChange={(e) => {setVechicleData({...vechicledata, private_commercial : e.target.value}); setQuote({...quote, private_commercial: e.target.value})}}>
                 <option >Select</option>
-                <option value="private">Private</option>
-                <option value="commercial">Commercial</option>
-                <option value="motor_cycle">Motor Cycle</option>
+                {
+                  data?.vehicleUsage.map((title, index) => {
+                    return <option key={index} value={title.id}>{title.name}</option>
+                  })
+                }
               </select>
             </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Policy Type</label>
               <select onChange={(e) => {setVechicleData({...vechicledata, policy_type : e.target.value}); setQuote({...quote, policy_type : e.target.value}); setQuote({...quote, third_party_type : e.target.value})}}>
                 <option >Select</option>
-                <option value="third_party_only">3rd Party Only</option>
-                <option value="comprehensive">Comprehensive</option>
+                {
+                  data?.policyType.map((title, index) => {
+                    return <option key={index} value={title.id}>{title.name}</option>
+                  })
+                }
               </select>
             </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Vehicle Make</label>
-              <select onChange={vehicleid}>
+              <select name='vehicle_make' onChange={handleOnChange} >
                 <option >Select</option>
-                {vehicles.map((vehicle, index) => {
-                  return (
-                    <option key={index} data-key={vehicle.id} value={vehicle.name}>{vehicle.name}</option>
-                  )
-                })}
+                {
+                  data?.vehicleMake.map((title, index) => {
+                    return <option key={index} value={title.id}>{title.name}</option>
+                  })
+                }
+              </select>
+            </div>
+            <div className="report-inputgroup insurance-selectgroup">
+              <label>Vehicle Model</label>
+              <select>
+                <option>Select</option>
+                {
+                  data?.vehicleModel.map((title, index) => {
+                    return <option key={index} value={title.id}>{title.name}</option>
+                  })
+                }
               </select>
             </div>
             <div className="report-inputgroup insurance-selectgroup">
@@ -439,10 +482,8 @@ function Motorinsuranceregister() {
               <select onChange={(e) => {setVechicleData({...vechicledata, body_type: e.target.value}); setQuote({...quote, vehicle_type : e.target.value})}}>
                 <option>{isLoading ? 'loading...' : 'Select'}</option>
                 {
-                  brandtype.map((brand, index) => {
-                    return (
-                      <option key={index} value={brand.name}>{brand.name}</option>
-                    )
+                  data?.vehicleClass.map((title, index) => {
+                    return <option key={index} value={title.id}>{title.name}</option>
                   })
                 }
               </select>

@@ -22,14 +22,18 @@ export const NavBar = () => {
     //     'our-client': 'Our Client',
     // };
 
+
     const {
+        getContact,
         getAboutUs,
         data
     } = useHomePage()
-    console.log(data.aboutUs)
+    console.log(data.contactUs)
     useEffect(() => {
         Promise.all([
-            getAboutUs()
+            getAboutUs(),
+            getContact(),
+
         ])
     }, []);
     return (
@@ -37,13 +41,13 @@ export const NavBar = () => {
             <section className="flex justify-center items-center gap-5 py-2 px-4 bg-custom-purple w-full">
                 <div className="flex justify-center items-center gap-1">
                     <span className="uppercase text-custom-orange text-xs font-light">Call Us: </span>
-                    <span className="text-white text-xs font-light"> 07000784752</span>
+                    <span className="text-white text-xs font-light"> {data.contactUs?.mobile || ''}</span>
                 </div>
                 <div className="flex justify-center items-center gap-2">
         <span className="uppercase">
           <Location/>
         </span>
-                    <span className="text-white text-xs font-light">17, Adetokunbo Ademola Street, Victoria Island, Lagos</span>
+                    <span className="text-white text-xs font-light">{data.contactUs?.address || '17, Adetokunbo Ademola Street, Victoria Island, Lagos'}</span>
                 </div>
             </section>
 
