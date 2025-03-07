@@ -5,7 +5,7 @@ import {useToast} from "../service/context/NotificationContext";
 export const useBuyHealthPolicy = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [healthPolicy, setHealthPolicy] = useState(null);
-const {showToast} = useToast()
+    const {showToast} = useToast()
     const buyPolicy = async (payload) => {
         try {
             setIsLoading(true);

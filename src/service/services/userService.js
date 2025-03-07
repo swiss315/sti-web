@@ -1,12 +1,22 @@
 import {authorizedGateRequest} from "../../helper/axios";
 import {
-    ALL_HEALTH_POLICY, ALL_TRANSACTIONS, ALL_VEHICLE_POLICY, BUY_HEALTH_POLICY, CONFIRM_HEALTH_POLICY_PAYMENT,
+    ALL_HEALTH_POLICY,
+    ALL_TRANSACTIONS,
+    ALL_VEHICLE_POLICY,
+    BUY_HEALTH_POLICY,
+    BUY_VEHICLE_POLICY,
+    CONFIRM_HEALTH_POLICY_PAYMENT,
     GET_AVAILABLE_POLICY,
-    GET_HOSPITAL,
+    GET_HOSPITAL, GET_ID,
     GET_LGA,
     GET_POLICY_TYPE,
-    GET_STATES, GET_VEHICLE_CLASS, GET_VEHICLE_MAKE, GET_VEHICLE_MODEL, GET_VEHICLE_USAGES,
-    TITLES, UPDATE_PASSWORD
+    GET_STATES,
+    GET_VEHICLE_CLASS,
+    GET_VEHICLE_MAKE,
+    GET_VEHICLE_MODEL,
+    GET_VEHICLE_USAGES,
+    TITLES,
+    UPDATE_PASSWORD
 } from "./userRoute";
 
 export const getAvailablePolicy = () => {
@@ -19,6 +29,10 @@ export const getPolicyType = (type: string) => {
 
 export const getAllTitle = () => {
     return authorizedGateRequest.get(TITLES);
+};
+
+export const getAllId = () => {
+    return authorizedGateRequest.get(GET_ID);
 };
 
 export const getAllStates = () => {
@@ -43,6 +57,14 @@ export const healthPolicy = () => {
 
 export const buyHealthPolicy = (payload) => {
     return authorizedGateRequest.post(BUY_HEALTH_POLICY, payload, {
+        headers: {
+            contentType: 'multipart/form-data'
+        }
+    });
+};
+
+export const buyVehiclePolicy = (payload) => {
+    return authorizedGateRequest.post(BUY_VEHICLE_POLICY, payload, {
         headers: {
             contentType: 'multipart/form-data'
         }

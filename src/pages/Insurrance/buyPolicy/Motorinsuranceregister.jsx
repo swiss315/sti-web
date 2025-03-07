@@ -73,7 +73,7 @@ function Summary(props) {
 function Motorinsuranceregister() {
   const [type, setType] = useState('Individual');
   const [tab, setTab] = useState("");
-  const {getTitles, getInsurancePolicyType, data, isLoading, getVehicleClass,
+  const {getTitles, getIdTypes, getStates, getInsurancePolicyType, data, isLoading, getVehicleClass,
     getVehicleMakes,
     getVehicleModel,
     getVehicleUsages} = useResources()
@@ -112,34 +112,37 @@ function Motorinsuranceregister() {
       "office_address": "",
       "contact_person": ""
   })
-  const [vechicledata, setVechicleData] = useState(
-    {
-					"period":"",
-					"policy_type":"",
-					"enhanced_third_party":"",
-					"private_commercial":"",
-					"motor_cycle_policy":null,
-					"make":"",
-					"body_type":"",
-					"year":"",
-					"home_address":"",
-					"registration_number":"",
-					"chasis_number":"",
-					"engine_number":"",
-					"vehicle_value":"",
-					"pictures":[]
-					}
-  )
+  const [vechicleData, setVechicleData] = useState({
+    title_id: "",
+    make_id: "",
+    model_id: "",
+    vehicle_value: "",
+    usage_id: "",
+    class_id: "",
+    policy_type_id: "",
+    total: "",
+    account_type: "", // "Individual" or "Corporate"
+    company_name: "",
+    company_address: "",
+    quote_id: "",
+    plate_number: "",
+    drivers_license: "",
+    vehicle_color: "",
+    chasis_number: "",
+    engine_number: "",
+    year_of_registration: "",
+    vehicle_state: "",
+    id_type: "",
+    id_number: "",
+    id_file: null, // Assuming file upload
+    back_view: null, // Image files
+    front_view: null,
+    left_view: null,
+    right_view: null
+  });
   const [years, setYears] = useState([])
   const [modalShow, setModalShow] = useState(false);
-  const [quote, setQuote] = useState({
-    'vehicle_value': '',
-    'private_commercial': '',
-    'third_party_type': '',
-    'policy_type': '',
-    'vehicle_type': ''
-  })
-  const { vehiclequote, getvehiclequote, isquoteLoading } = useBuyvehiclepolicy()
+  const { vehiclequote, getvehiclequote, isquoteLoading, buyPolicy } = useBuyvehiclepolicy()
 
   const file = () => {
     click.current.click();
@@ -189,51 +192,94 @@ function Motorinsuranceregister() {
   }
 
   const handleTabChange = () => {
-    if (VerifyData.current) {
-      setTab("next");
-    }
+    // if (VerifyData.current) {
+    //   setTab("next");
+    // }
+    setTab("next");
+
   };
   const handleImageUpload = (e) => {
+    const {name, value} = e.target;
     const file = e.target.files[0];
-    setFilename({...filename, identification_means : e.target.files[0].name});
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const base64String = e.target.result;
-        setIndividualData({...individualdata, identification_means: base64String});
-        // console.log(base64String)
-      };
-      reader.readAsDataURL(file);
+
+    if (!file) return;
+
+    // Validate file size (max 2MB)
+    const maxSize = 2 * 1024 * 1024; // 2MB in bytes
+    if (file.size > maxSize) {
+      alert("File size must be less than 2MB");
+      return;
     }
+
+    // Validate file type (only PNG, JPG, JPEG)
+    const allowedTypes = ["image/png", "image/jpg", "image/jpeg"];
+    if (!allowedTypes.includes(file.type)) {
+      alert("Only PNG, JPG, and JPEG files are allowed");
+      return;
+    }
+
+    // Update state with file (for FormData)
+    setFilename((prev) => ({...prev, [name]: file.name}));
+    setVechicleData((prev) => ({...prev, [name]: value}))
   };
 
-  const handleVehicleImage = (e) => {
-    const file = e.target.files[0];
-    setFilename({...filename, [e.target.name] : e.target.files[0].name});
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const base64String = e.target.result;
-        const currentState = vechicledata;
 
-        // Create a copy of the object and update the array
-        const updatedState = {
-          ...currentState,
-          myArray: [...currentState.pictures, base64String],
-        };
-        setVechicleData(updatedState);
-        // console.log(base64String)
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  // const handleVehicleImage = (e) => {
+  //   const file = e.target.files[0];
+  //   setFilename({...filename, [e.target.name] : e.target.files[0].name});
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e) => {
+  //       const base64String = e.target.result;
+  //       const currentState = vechicleData;
+  //
+  //       // Create a copy of the object and update the array
+  //       const updatedState = {
+  //         ...currentState,
+  //         myArray: [...currentState.pictures, base64String],
+  //       };
+  //       setVechicleData(updatedState);
+  //       // console.log(base64String)
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
   const handleOnChange = async (e) => {
     const {name, value} = e.target;
-
-    if (name === 'vehicle_make') {
+    setVechicleData((prev) => ({...prev, [name]: value}))
+    if (name === 'make_id') {
       console.log(value, 'value')
       await getVehicleModel(value)
+    }
+
+    if (name === 'policy_type_id') {
+      const policyTotal = data.policyType.find(policy => policy.id.toString() === value)?.rate || "";
+      console.log(policyTotal, 'policyTotal')
+      setVechicleData(prevState => ({...prevState, total: policyTotal}));
+
+    }
+  }
+
+  const handleSubmit = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("title_id", vechicleData.title_id);
+      formData.append("make_id", vechicleData.make_id);
+      formData.append("model_id", vechicleData.model_id);
+      formData.append("vehicle_value", vechicleData.vehicle_value);
+      formData.append("usage_id", vechicleData.usage_id);
+      formData.append("class_id", vechicleData.class_id);
+      formData.append("policy_type_id", vechicleData.policy_type_id);
+      formData.append("total", vechicleData.total);
+      formData.append("account_type", vechicleData.account_type);
+      formData.append("company_name", vechicleData.company_name);
+      formData.append("company_address", vechicleData.company_address);
+
+
+      await buyPolicy(formData)
+    } catch (e) {
+      console.log(e)
     }
   }
 
@@ -255,7 +301,9 @@ function Motorinsuranceregister() {
     Promise.all([
     getInsurancePolicyType(policyId),
     getTitles(),
-    getVehicleClass(),
+      getIdTypes(),
+      getStates(),
+      getVehicleClass(),
     getVehicleUsages(),
     getVehicleMakes(),
     year(),
@@ -278,15 +326,15 @@ function Motorinsuranceregister() {
           >
             <div className="report-inputgroup insurance-selectgroup">
               <label>Type</label>
-              <select onChange={(e) => setType(e.currentTarget.value)}>
+              <select name='account_type' onChange={handleOnChange}>
                 <option defaultValue="Individual">Individual</option>
-                <option value="Coperate">Coperate</option>
+                <option value="Coperate">Corporate</option>
               </select>
             </div>
             <div className={`individual ${type === 'Individual' ? 'd-block' : 'd-none'}`}>
               <div className="report-inputgroup insurance-selectgroup">
                 <label>Prefix</label>
-                <select name="title_id" >
+                <select name="title_id" onChange={handleOnChange} >
                   <option defaultValue={'select'}>select</option>
                   {
                     data?.titles.map((title, index) => {
@@ -324,43 +372,55 @@ function Motorinsuranceregister() {
                 <textarea rows={2} onChange={(e) => setIndividualData({...individualdata, house_address : e.target.value})} />
               </div>
               <div className="report-inputgroup insurance-selectgroup">
-                <label>Marital Status</label>
-                <select onChange={(e) => setIndividualData({...individualdata, marital_status : e.currentTarget.value})}>
-                  <option >Select</option>
-                  <option value="Single">Single</option>
-                  <option value="Married">Married</option>
-                  <option value="Divorced">Divorced</option>
-                  <option value="Widow">Widow</option>
+                <label>State Of Residence</label>
+                <select name="vehicle_state" onChange={handleOnChange}>
+                  <option defaultValue=''>Select</option>
+                  {
+                    data?.states.map((title, index) => {
+                      return <option key={index} value={title.id}>{title.name}</option>
+                    })
+                  }
                 </select>
               </div>
               <div className="report-inputgroup">
-                <label>Next Of Kin</label>
-                <input type="text" onChange={(e) => setIndividualData({...individualdata, next_of_kin : e.target.value})} />
+                <label>Company Name</label>
+                <input type="text" name='company_name' onChange={handleOnChange} />
               </div>
               <div className="report-inputgroup">
-                <label>Next Of Kin Address</label>
-                <textarea rows={2}  onChange={(e) => setIndividualData({...individualdata, next_of_kin_address : e.target.value})}/>
+                <label>Company Address</label>
+                <textarea rows={2} name='company_address'  onChange={handleOnChange}/>
               </div>
               <div className="report-inputgroup">
-                <label>Next Of Kin Phone Number</label>
-                <input type="number" onChange={(e) => setIndividualData({...individualdata, next_of_kin_phone : e.target.value})}/>
+                <label>Driver License Number</label>
+                <input type="text" name='drivers_license' onChange={handleOnChange}/>
+              </div>
+              <div className="report-inputgroup insurance-selectgroup">
+                <label>Means of Id Type</label>
+                <select name='id_type' onChange={handleOnChange}>
+                  <option>Select</option>
+                  {
+                    data?.ID.map((title, index) => {
+                      return <option key={index} value={title.id}>{title.name}</option>
+                    })
+                  }
+                </select>
               </div>
               <div className="report-inputgroup">
-                <label>Mailing Address</label>
-                <textarea rows={2} onChange={(e) => setIndividualData({...individualdata, mailing_address : e.target.value})}/>
+                <label>Id Number</label>
+                <input type="text" name='id_number' onChange={handleOnChange}/>
               </div>
               <div className="report-inputgroup">
                 <label>Upload Means Of Identifications</label>
                 <input
                   type="file"
-                  name='identification_means'
+                  name='id_file'
                   ref={clickId}
                   onChange={handleImageUpload}
                   hidden
                 />
                 <div className="upload-input">
                   <Uploadicon />
-                  <p>{filename.identification_means}</p>
+                  <p>{filename.id_file}</p>
                   <p>
                     Choose File from your device{" "}
                     <span onClick={() => clickId.current.click() }>here</span>
@@ -435,7 +495,7 @@ function Motorinsuranceregister() {
           >
             <div className="report-inputgroup insurance-selectgroup">
               <label>Private/Commercial</label>
-              <select onChange={(e) => {setVechicleData({...vechicledata, private_commercial : e.target.value}); setQuote({...quote, private_commercial: e.target.value})}}>
+              <select name='usage_id' onChange={handleOnChange} >
                 <option >Select</option>
                 {
                   data?.vehicleUsage.map((title, index) => {
@@ -446,7 +506,7 @@ function Motorinsuranceregister() {
             </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Policy Type</label>
-              <select onChange={(e) => {setVechicleData({...vechicledata, policy_type : e.target.value}); setQuote({...quote, policy_type : e.target.value}); setQuote({...quote, third_party_type : e.target.value})}}>
+              <select name='policy_type_id' onChange={handleOnChange}>
                 <option >Select</option>
                 {
                   data?.policyType.map((title, index) => {
@@ -457,7 +517,7 @@ function Motorinsuranceregister() {
             </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Vehicle Make</label>
-              <select name='vehicle_make' onChange={handleOnChange} >
+              <select name='make_id' onChange={handleOnChange} >
                 <option >Select</option>
                 {
                   data?.vehicleMake.map((title, index) => {
@@ -468,7 +528,7 @@ function Motorinsuranceregister() {
             </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Vehicle Model</label>
-              <select>
+              <select name='model_id' onChange={handleOnChange}>
                 <option>Select</option>
                 {
                   data?.vehicleModel.map((title, index) => {
@@ -479,7 +539,7 @@ function Motorinsuranceregister() {
             </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Body Type</label>
-              <select onChange={(e) => {setVechicleData({...vechicledata, body_type: e.target.value}); setQuote({...quote, vehicle_type : e.target.value})}}>
+              <select name='class_id' onChange={handleOnChange}>
                 <option>{isLoading ? 'loading...' : 'Select'}</option>
                 {
                   data?.vehicleClass.map((title, index) => {
@@ -490,7 +550,7 @@ function Motorinsuranceregister() {
             </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Year</label>
-              <select onChange={(e) => setVechicleData({...vechicledata, year: e.target.value})}>
+              <select name='year_of_registration' onChange={handleOnChange}>
                 <option>Select year</option>
                 {
                   years.map((year, index) => {
@@ -502,20 +562,24 @@ function Motorinsuranceregister() {
               </select>
             </div>
             <div className="report-inputgroup">
-              <label>Registration Number</label>
-              <input type="text" onChange={(e) => setVechicleData({...vechicledata, registration_number: e.target.value})}/>
+              <label>Plate Number</label>
+              <input type="text" name='plate_number' onChange={handleOnChange}/>
+            </div>
+            <div className="report-inputgroup">
+              <label>Vehicle Color</label>
+              <input type="text" name='vehicle_color' onChange={handleOnChange}/>
             </div>
             <div className="report-inputgroup">
               <label>Chasis Number</label>
-              <input type="text" onChange={(e) => setVechicleData({...vechicledata, chasis_number: e.target.value})}/>
+              <input type="text" name='chasis_number' onChange={handleOnChange}/>
             </div>
             <div className="report-inputgroup">
               <label>Engine Number</label>
-              <input type="text" onChange={(e) => setVechicleData({...vechicledata, engine_number: e.target.value})}/>
+              <input type="text" name='engine_number' onChange={handleOnChange}/>
             </div>
             <div className="report-inputgroup">
               <label>Vehicle Value</label>
-              <input type="number" onChange={(e) => {setVechicleData({...vechicledata, vehicle_value: e.target.value}); setQuote({...quote, vehicle_value: e.target.value})}} />
+              <input type="number" name='vehicle_value' onChange={handleOnChange} />
             </div>
             <div className="report-inputgroup">
               <label>Front View Of Vehicle</label>
@@ -523,7 +587,7 @@ function Motorinsuranceregister() {
                 type="file"
                 ref={frontClick}
                 name='front_view'
-                onChange={handleVehicleImage}
+                onChange={handleImageUpload}
                 hidden
               />
               <div className="upload-input">
@@ -540,7 +604,7 @@ function Motorinsuranceregister() {
                 type="file"
                 ref={backClick}
                 name='back_view'
-                onChange={handleVehicleImage}
+                onChange={handleImageUpload}
                 hidden
               />
               <div className="upload-input">
@@ -557,7 +621,7 @@ function Motorinsuranceregister() {
                 type="file"
                 ref={leftClick}
                 name='left_view'
-                onChange={handleVehicleImage}
+                onChange={handleImageUpload}
                 hidden
               />
               <div className="upload-input">
@@ -574,7 +638,7 @@ function Motorinsuranceregister() {
                 type="file"
                 ref={rightClick}
                 name='right_view'
-                onChange={handleVehicleImage}
+                onChange={handleImageUpload}
                 hidden
               />
               <div className="upload-input">
@@ -609,12 +673,13 @@ function Motorinsuranceregister() {
               <Link onClick={(e) => setTab("")}>Back</Link>
             </div>
             <div className="insurance-button">
-              <button onClick={(e) => {e.preventDefault(); setModalShow(true)}}>{isquoteLoading ? <Loader/> : 'Submit'}</button>
+              <button onClick={(e) => {e.preventDefault();
+                handleSubmit()}}>{isquoteLoading ? <Loader/> : 'Submit'}</button>
             </div>
           </div>
         </form>
       </div>
-      <Summary show={modalShow} individual={individualdata} vehicle={vechicledata} quote={getvehiclequote} onHide={() => setModalShow(false)}/>
+      <Summary show={modalShow} individual={individualdata} vehicle={vechicleData} quote={getvehiclequote} onHide={() => setModalShow(false)}/>
     </div>
   );
 }

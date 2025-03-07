@@ -96,7 +96,7 @@ export const NavBar = () => {
                         <button
                             onMouseEnter={() => setIsOpen(true)}
                             onClick={() => setIsOpen(!isOpen)} // Optional: Click to toggle as well
-                            className="rounded-md bg-white px-4 py-2  "
+                            className="rounded-md bg-white "
                         >
                             About us
                         </button>
@@ -106,7 +106,7 @@ export const NavBar = () => {
                             <div
                                 onMouseEnter={() => setIsOpen(true)} // Keep open when hovering
                                 onMouseLeave={() => setIsOpen(false)} // Close when leaving the dropdown
-                                className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5"
+                                className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5"
                             >
                                 <div className="py-1">
                                     {/*{Object.entries(titleMap).map(([path, title]) => (*/}
@@ -137,7 +137,7 @@ export const NavBar = () => {
                         <button
                             onMouseEnter={() => setIsOpenProduct(true)}
                             onClick={() => setIsOpenProduct(!isOpenProduct)} // Optional: Click to toggle as well
-                            className="rounded-md bg-white px-4 py-2  "
+                            className="rounded-md bg-white "
                         >
                             Products
                         </button>

@@ -2,69 +2,51 @@ import { useState } from 'react'
 import axios from 'axios'
 import { API } from '../helper/action'
 import { Cookies } from 'react-cookie';
+import {buyHealthPolicy, buyVehiclePolicy, confirmHealthPolicyPayment} from "../service/services/userService";
+import {useToast} from "../service/context/NotificationContext";
 
 export const useBuyvehiclepolicy = () => {
     const [error, setError] = useState(null)
     const [isquoteLoading, setQuoteIsLoading] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
     const [getvehiclequote, setVehiclequote] = useState({})
-    const cookies = new Cookies();
-    let token = cookies.get('xhrTOKEN')
-    
-    const vehiclequote = async (data, setModalShow) => {
-        setQuoteIsLoading(true)
-        setError(null)
+    const {showToast} = useToast()
 
-        // const user = { user : data }
+    const buyPolicy = async (payload) => {
+        try {
+            setIsLoading(true);
+            const response = await buyVehiclePolicy(payload)
+            console.log(response)
+            // setHealthPolicy(response.data.response)
+            setIsLoading(false);
+            return true;
+        } catch (e) {
+            console.log(e)
+            const allErrors = e.response?.data?.errors;
+            const firstError = allErrors ? Object.values(allErrors).find(error => error) : e.response.data.message;
+            setIsLoading(false);
+            showToast('Error', firstError, 'error')
 
-        await axios.post(`${API}/get-vehicle-quote`, data ,
-        {
-            headers: {
-                'Authorization': `Token ${token}`, 
-                'Content-Type': 'application/json'
-            }
-        } ).then((response) => {
-            console.log(response.data.data)
-            setVehiclequote(response.data.data)
-            setModalShow(true)
-            setQuoteIsLoading(false)
-        }).catch((err) => {
-            setQuoteIsLoading(false)
-            setError(err.response.data.errors)
-            console.log(err.response.data.errors)
-        })
-    }
-
-    const buyVehicle = async (individualdata, vehicledata) => {
-        setIsLoading(true)
-        setError(null)
-        let userdata = cookies.get("user");
-        userdata = JSON.parse(atob(userdata));
-
-        const data = {
-            persona : individualdata,
-            vehicle : [vehicledata],
-            "quote_price": getvehiclequote.price,
-            "pin":"7038",
-            "payment_source":"paystack",
-            "user_id": userdata.id
+            return false;
         }
-
-        await axios.post(`${API}/buy-vehicle-policy`, data ,
-            {
-                headers: {
-                    'Authorization': `Token ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            } ).then((response) => {
-            console.log(response.data.data)
-            setIsLoading(false)
-        }).catch((err) => {
-            setQuoteIsLoading(false)
-            setError(err.response.data.errors)
-            console.log(err.response.data.errors)
-        })
     }
 
-    return { vehiclequote, isquoteLoading, error, getvehiclequote, buyVehicle, isLoading }
+    const confirmPayment = async (payload) => {
+        try {
+            setIsLoading(true);
+            const response = await confirmHealthPolicyPayment(payload)
+            console.log(response)
+            setIsLoading(false);
+            showToast('Success', response.data.message, 'success')
+            return true;
+        } catch (e) {
+            console.log(e)
+            setIsLoading(false);
+            showToast('Error', e.response.data.message, 'error')
+
+            return false;
+        }
+    }
+
+    return { isquoteLoading, error, getvehiclequote, buyPolicy, isLoading }
 }
