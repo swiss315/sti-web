@@ -35,7 +35,7 @@ export const postVerifyOtpRequest = async (payload: VerifyOtpCode, navigate: Nav
             const {token} = userResponse
 
             const access_token = token;
-            navigate('/dashboard');
+            navigate('/login');
             return {success: true, token: access_token, user: userResponse};
         }
     } catch (e) {

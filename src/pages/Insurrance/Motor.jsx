@@ -6,114 +6,28 @@ import Policy from '../../components/Policy'
 import {usePolicy} from "../../hooks/Policy";
 
 const Motor = () => {
-    // const motorData = [
-    //     {
-    //         id: 1,
-    //         number: 'MOT/PM/01/23/SA/10677',
-    //         names: 'Joy Imole',
-    //         dob: 'Oct 10,2014',
-    //         sdate: 'Jun 10,2023',
-    //         edate: 'Feb 05,2026',
-    //         period:'425 Days',
-    //         price: 'NGN 2500',
-    //         plate: 'KSG457738',
-    //         value: 'NGN 1200000.00',
-    //         type: 'Third Party Only',
-    //         pay: 'Paid',
-    //         stats: 'Active'
-    //
-    //     },
-    //     {
-    //         id: 2,
-    //         number: 'MOT/PM/01/23/SA/10677',
-    //         names: 'Joy Imole',
-    //         dob: 'Oct 10,2014',
-    //         sdate: 'Jun 10,2023',
-    //         edate: 'Feb 05,2026',
-    //         period:'425 Days',
-    //         price: 'NGN 2500',
-    //         plate: 'KSG457738',
-    //         value: 'NGN 1200000.00',
-    //         type: 'Third Party Only',
-    //         pay: 'Failed',
-    //         stats: 'Not Active'
-    //
-    //     },
-    //     {
-    //         id: 3,
-    //         number: 'MOT/PM/01/23/SA/10677',
-    //         names: 'Joy Imole',
-    //         dob: 'Oct 10,2014',
-    //         sdate: 'Jun 10,2023',
-    //         edate: 'Feb 05,2026',
-    //         period:'425 Days',
-    //         price: 'NGN 2500',
-    //         plate: 'KSG457738',
-    //         value: 'NGN 1200000.00',
-    //         type: 'Third Party Only',
-    //         pay: 'Pending',
-    //         stats: 'Pending'
-    //
-    //     },
-    //     {
-    //         id: 1,
-    //         number: 'MOT/PM/01/23/SA/10677',
-    //         names: 'Joy Imole',
-    //         dob: 'Oct 10,2014',
-    //         sdate: 'Jun 10,2023',
-    //         edate: 'Feb 05,2026',
-    //         period: '425 Days',
-    //         price: 'NGN 2500',
-    //         plate: 'KSG457738',
-    //         value: 'NGN 1200000.00',
-    //         type: 'Third Party Only',
-    //         pay: 'Paid',
-    //         stats: 'Active'
-    //
-    //     },
-    //     {
-    //         id: 2,
-    //         number: 'MOT/PM/01/23/SA/10677',
-    //         names: 'Joy Imole',
-    //         dob: 'Oct 10,2014',
-    //         sdate: 'Jun 10,2023',
-    //         edate: 'Feb 05,2026',
-    //         period: '425 Days',
-    //         price: 'NGN 2500',
-    //         plate: 'KSG457738',
-    //         value: 'NGN 1200000.00',
-    //         type: 'Third Party Only',
-    //         pay: 'Failed',
-    //         stats: 'Not Active'
-    //
-    //     },
-    //     {
-    //         id: 3,
-    //         number: 'MOT/PM/01/23/SA/10677',
-    //         names: 'Joy Imole',
-    //         dob: 'Oct 10,2014',
-    //         sdate: 'Jun 10,2023',
-    //         edate: 'Feb 05,2026',
-    //         period: '425 Days',
-    //         price: 'NGN 2500',
-    //         plate: 'KSG457738',
-    //         value: 'NGN 1200000.00',
-    //         type: 'Third Party Only',
-    //         pay: 'Pending',
-    //         stats: 'Pending'
-    //
-    //     },
-    // ]
     const getStatusClass = (status) => {
+        switch (status) {
+            case 1:
+                return "text-green-500 font-bold";
+            case 0:
+                return "text-orange-500 font-semibold";
+            // case "0":
+            //     return "text-red-500 font-bold";
+            default:
+                return "text-gray-500";
+        }
+    };
+    const getPolicyStatusClass = (status) => {
         switch (status) {
             case "Successful":
                 return "text-green-500 font-bold";
-            case "Pending":
+            case "Processing":
                 return "text-orange-500 font-semibold";
             case "Failed":
                 return "text-red-500 font-bold";
             default:
-                return "text-gray-500";
+                return "text-green-500 font-bold";
         }
     };
     const {getMotorPolicy, isLoading, policy} = usePolicy()
@@ -154,13 +68,13 @@ const Motor = () => {
                                 return (
                                     <tr key={index}>
                                         <th className="ref">{index + 1}</th>
-                                        <th>{data.names}</th>
-                                        <th>{data.plate}</th>
-                                        <th>{data.number}</th>
-                                        <th>{data.type}</th>
-                                        <th>{data.value}</th>
-                                        <th className={getStatusClass(data.stats)}>{data.stats}</th>
-                                        <th className={getStatusClass(data.pay)}>{data.pay}</th>
+                                        <th>{data?.quote?.customer.lastname + " " + data.quote.customer.firstname}</th>
+                                        <th>{data.quote?.plate_number}</th>
+                                        <th>{data.policy_number || 'N/A'}</th>
+                                        <th>{data.quote?.policy_type.name}</th>
+                                        <th>{data.quote?.total}</th>
+                                        <th className={getPolicyStatusClass(data.quote?.policy_status)}>{data.quote?.policy_status}</th>
+                                        <th className={getStatusClass(data.quote?.status)}>{data.quote?.status === 1 ? 'Paid' : 'Not Paid'}</th>
 
                                         <th>{data.edate}</th>
                                     </tr>

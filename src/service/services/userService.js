@@ -5,7 +5,7 @@ import {
     ALL_VEHICLE_POLICY,
     BUY_HEALTH_POLICY,
     BUY_VEHICLE_POLICY,
-    CONFIRM_HEALTH_POLICY_PAYMENT,
+    CONFIRM_HEALTH_POLICY_PAYMENT, CONFIRM_VEHICLE_POLICY_PAYMENT,
     GET_AVAILABLE_POLICY,
     GET_HOSPITAL, GET_ID,
     GET_LGA,
@@ -65,6 +65,14 @@ export const buyHealthPolicy = (payload) => {
 
 export const buyVehiclePolicy = (payload) => {
     return authorizedGateRequest.post(BUY_VEHICLE_POLICY, payload, {
+        headers: {
+            contentType: 'multipart/form-data'
+        }
+    });
+};
+
+export const confirmVehiclePolicyPayment = (payload) => {
+    return authorizedGateRequest.post(CONFIRM_VEHICLE_POLICY_PAYMENT, payload, {
         headers: {
             contentType: 'multipart/form-data'
         }

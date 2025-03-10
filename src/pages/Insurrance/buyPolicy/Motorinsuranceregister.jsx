@@ -7,12 +7,40 @@ import { useVechicleBrand } from "../../../hooks/vehiclebrand";
 import { useBuyvehiclepolicy } from "../../../hooks/buy_vehiclepolicy";
 import Loader from "../../../components/Loader";
 import {useResources} from "../../../hooks/resources";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../service/reducers/rootReducer.ts";
 
 function Summary(props) {
-  const {buyVehicle, isLoading: isBuyLoading } = useBuyvehiclepolicy()
+  const navigate = useNavigate();
+  console.log(props, 'prpos')
+  const { isLoading: isBuyLoading, confirmPayment } = useBuyvehiclepolicy()
 
-  const buyVehicleInsurance = async () => {
-     await buyVehicle(props.individual, props.vehicle)
+  const handleConfirmPayment = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("quote_id", props.quote.id);
+      formData.append("plate_number", props.vehicle.plate_number);
+      formData.append("drivers_license", props.vehicle.drivers_license);
+      formData.append("vehicle_color", props.vehicle.vehicle_color);
+      formData.append("chasis_number", props.vehicle.chasis_number);
+      formData.append("engine_number", props.vehicle.engine_number);
+      formData.append("year_of_registration", props.vehicle.year_of_registration);
+      formData.append("vehicle_state", props.vehicle.vehicle_state);
+      formData.append("id_type", props.vehicle.id_type);
+      formData.append("id_number", props.vehicle.id_number);
+      formData.append("id_file", props.vehicle.id_file);
+      formData.append("back_view", props.vehicle.back_view);
+      formData.append("front_view", props.vehicle.front_view);
+      formData.append("left_view", props.vehicle.left_view);
+      formData.append("right_view", props.vehicle.right_view);
+
+      const res = await confirmPayment(formData)
+      if (res) {
+        navigate('/motor')
+      }
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
@@ -46,22 +74,10 @@ function Summary(props) {
             <p>{props.individual.gender}</p>
           </div>
           <div className="summary-list">
-            <p>Residential Address</p>
-            <p>{props.individual.house_address}</p>
-          </div>
-          <div className="summary-list">
-            <p>Mailing Address</p>
-            <p>{props.individual.mailing_address}</p>
-          </div>
-          <div className="summary-list">
-            <p>Next of Kin</p>
-            <p>{props.individual.next_of_kin}</p>
-          </div>
-          <div className="summary-list">
             <p>Premium Payable</p>
-            <p>{props.quote.price}</p>
+            <p>{props.quote.total}</p>
           </div>
-            <button className="summary-button"  onClick={buyVehicleInsurance}>
+            <button className="summary-button"  onClick={handleConfirmPayment}>
                {isBuyLoading ? <Loader /> : 'Submit'}
             </button>
         </div>
@@ -77,6 +93,9 @@ function Motorinsuranceregister() {
     getVehicleMakes,
     getVehicleModel,
     getVehicleUsages} = useResources()
+  const AuthState = useSelector((state: RootState) => state.auth);
+  const {userData: userdata} = AuthState
+  console.log(userdata)
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const policyId = queryParams.get("id");
@@ -142,12 +161,11 @@ function Motorinsuranceregister() {
   });
   const [years, setYears] = useState([])
   const [modalShow, setModalShow] = useState(false);
-  const { vehiclequote, getvehiclequote, isquoteLoading, buyPolicy } = useBuyvehiclepolicy()
+  const {vehicleQuote, isquoteLoading, buyPolicy } = useBuyvehiclepolicy()
 
   const file = () => {
     click.current.click();
   };
-  console.log(filename, individualdata)
   const checkField = (individualdata) => {
     const {
       first_name,
@@ -155,13 +173,6 @@ function Motorinsuranceregister() {
       email,
       gender,
       phone,
-      house_address,
-      marital_status,
-      next_of_kin,
-      next_of_kin_address,
-      next_of_kin_phone,
-      mailing_address,
-      identification_means,
     } = individualdata;
 
     return (
@@ -169,14 +180,7 @@ function Motorinsuranceregister() {
         last_name.trim() !== "" &&
         email.trim() !== "" &&
         gender.trim() !== "" &&
-        phone.trim() !== "" &&
-        house_address.trim() !== "" &&
-        marital_status.trim() !== "" &&
-        next_of_kin.trim() !== "" &&
-        next_of_kin_address.trim() !== "" &&
-        next_of_kin_phone.trim() !== "" &&
-        mailing_address.trim() !== "" &&
-        identification_means
+        phone.trim() !== ""
     );
   }
 
@@ -199,7 +203,7 @@ function Motorinsuranceregister() {
 
   };
   const handleImageUpload = (e) => {
-    const {name, value} = e.target;
+    const {name} = e.target;
     const file = e.target.files[0];
 
     if (!file) return;
@@ -220,30 +224,8 @@ function Motorinsuranceregister() {
 
     // Update state with file (for FormData)
     setFilename((prev) => ({...prev, [name]: file.name}));
-    setVechicleData((prev) => ({...prev, [name]: value}))
+    setVechicleData((prev) => ({...prev, [name]: file}))
   };
-
-
-  // const handleVehicleImage = (e) => {
-  //   const file = e.target.files[0];
-  //   setFilename({...filename, [e.target.name] : e.target.files[0].name});
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = (e) => {
-  //       const base64String = e.target.result;
-  //       const currentState = vechicleData;
-  //
-  //       // Create a copy of the object and update the array
-  //       const updatedState = {
-  //         ...currentState,
-  //         myArray: [...currentState.pictures, base64String],
-  //       };
-  //       setVechicleData(updatedState);
-  //       // console.log(base64String)
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
 
   const handleOnChange = async (e) => {
     const {name, value} = e.target;
@@ -277,12 +259,14 @@ function Motorinsuranceregister() {
       formData.append("company_address", vechicleData.company_address);
 
 
-      await buyPolicy(formData)
+     const res = await buyPolicy(formData)
+      if (res) {
+        setModalShow(true);
+      }
     } catch (e) {
       console.log(e)
     }
   }
-
 
   if (policyId === null) {
     navigate('/dashboard');
@@ -308,6 +292,15 @@ function Motorinsuranceregister() {
     getVehicleMakes(),
     year(),
     ])
+    if (userdata) {
+      setIndividualData((prev) => ({...prev,
+        first_name: userdata.firstname,
+        last_name: userdata.lastname || "",
+        email: userdata.email || "",
+        phone: userdata.phone || "",
+        gender: userdata.gender || "",
+      }));  // Default to empty if undefined
+    }
   }, [])
 
   return (
@@ -326,8 +319,9 @@ function Motorinsuranceregister() {
           >
             <div className="report-inputgroup insurance-selectgroup">
               <label>Type</label>
-              <select name='account_type' onChange={handleOnChange}>
-                <option defaultValue="Individual">Individual</option>
+              <select name='account_type' value={vechicleData.account_type} onChange={handleOnChange}>
+                <option value="" disabled>Select</option>
+                <option value="Individual">Individual</option>
                 <option value="Coperate">Corporate</option>
               </select>
             </div>
@@ -345,27 +339,27 @@ function Motorinsuranceregister() {
               </div>
               <div className="report-inputgroup">
                 <label>First Name</label>
-                <input type="text" name='first_name' onChange={(e) => setIndividualData({...individualdata, first_name : e.target.value})}/>
+                <input type="text" name='first_name' readOnly={true} value={individualdata.first_name} />
               </div>
               <div className="report-inputgroup">
                 <label>Last Name</label>
-                <input type="text" onChange={(e) => setIndividualData({...individualdata, last_name : e.target.value})}/>
+                <input type="text" readOnly={true} value={individualdata.last_name} />
               </div>
               <div className="report-inputgroup">
                 <label>Email Address</label>
-                <input type="email" onChange={(e) => setIndividualData({...individualdata, email : e.target.value})}/>
+                <input type="email" readOnly={true} value={individualdata.email} />
               </div>
               <div className="report-inputgroup insurance-selectgroup">
                 <label>Gender</label>
-                <select onChange={(e) => setIndividualData({...individualdata, gender : e.currentTarget.value})}>
+                <select aria-readonly={true} value={individualdata.gender}>
                   <option >Select</option>
-                  <option value="male">male</option>
-                  <option value="female">female</option>
+                  <option value="Male">male</option>
+                  <option value="Female">female</option>
                 </select>
               </div>
               <div className="report-inputgroup">
                 <label>Phone Number</label>
-                <input type="number" onChange={(e) => setIndividualData({...individualdata, phone : e.target.value})}/>
+                <input type="number" readOnly={true} value={individualdata.phone}/>
               </div>
               <div className="report-inputgroup">
                 <label>Residential Address</label>
@@ -377,7 +371,7 @@ function Motorinsuranceregister() {
                   <option defaultValue=''>Select</option>
                   {
                     data?.states.map((title, index) => {
-                      return <option key={index} value={title.id}>{title.name}</option>
+                      return <option key={index} value={title.name}>{title.name}</option>
                     })
                   }
                 </select>
@@ -670,7 +664,7 @@ function Motorinsuranceregister() {
             }`}
           >
             <div className="insurance-back">
-              <Link onClick={(e) => setTab("")}>Back</Link>
+              <div onClick={(e) => setTab("")}>Back</div>
             </div>
             <div className="insurance-button">
               <button onClick={(e) => {e.preventDefault();
@@ -679,7 +673,7 @@ function Motorinsuranceregister() {
           </div>
         </form>
       </div>
-      <Summary show={modalShow} individual={individualdata} vehicle={vechicleData} quote={getvehiclequote} onHide={() => setModalShow(false)}/>
+      <Summary show={modalShow} individual={individualdata} vehicle={vechicleData} quote={vehicleQuote} onHide={() => setModalShow(false)}/>
     </div>
   );
 }
