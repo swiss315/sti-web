@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {
-    getAllHospital, getAllId,
+    getAllHospital, getAllId, getAllRiskItem,
     getAllStates,
     getAllTitle, getAllVehicleClass, getAllVehicleMake, getAllVehicleModel, getAllVehicleUsage,
     getAvailablePolicy,
@@ -22,7 +22,7 @@ export const useResources = () => {
         vehicleMake: [],
         vehicleUsage: [],
         ID: [],
-
+        allRiskItems: []
     })
     const getAllPolicy = async () => {
         try {
@@ -192,6 +192,24 @@ export const useResources = () => {
         }
     }
 
+    const getAllRiskItems = async () => {
+        try {
+            setLoading(true)
+            const response = await getAllRiskItem()
+            console.log(response)
+            if (response.data.success) {
+                setLoading(false)
+                setData((prev) => ({...prev, allRiskItems: response.data.response}))
+                return true
+            }
+        } catch (e) {
+            console.log(e)
+            setLoading(false)
+            return false
+        }
+    }
+
+
     return {
         getAllPolicy,
         loading,
@@ -205,6 +223,7 @@ export const useResources = () => {
         getVehicleMakes,
         getVehicleModel,
         getVehicleUsages,
-        getIdTypes
+        getIdTypes,
+        getAllRiskItems
     }
 }

@@ -9,6 +9,7 @@ import Loader from "../../../components/Loader";
 import {useResources} from "../../../hooks/resources";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../service/reducers/rootReducer.ts";
+import PlateNumberDetails from "../modal/plateNumberDetails";
 
 function Summary(props) {
   const navigate = useNavigate();
@@ -89,7 +90,7 @@ function Summary(props) {
 function Motorinsuranceregister() {
   const [type, setType] = useState('Individual');
   const [tab, setTab] = useState("");
-  const {getTitles, getIdTypes, getStates, getInsurancePolicyType, data, isLoading, getVehicleClass,
+  const {getTitles, getIdTypes, getStates, getInsurancePolicyType, data, getVehicleClass,
     getVehicleMakes,
     getVehicleModel,
     getVehicleUsages} = useResources()
@@ -114,22 +115,7 @@ function Motorinsuranceregister() {
       "email": "",
       "gender": "",
       "phone": "",
-      "house_address": "",
-      "account_number": "",
-      "marital_status": "",
-      "picture": "",
-      "identification_means": "",
-      "next_of_kin": "",
-      "next_of_kin_phone": "",
-      "next_of_kin_address": "",
-      "employer": "",
-      "employer_address": "",
-      "customer_type": "",
-      "company_name": "",
-      "mailing_address": "",
-      "tin_number": "",
-      "office_address": "",
-      "contact_person": ""
+
   })
   const [vechicleData, setVechicleData] = useState({
     title_id: "",
@@ -161,7 +147,8 @@ function Motorinsuranceregister() {
   });
   const [years, setYears] = useState([])
   const [modalShow, setModalShow] = useState(false);
-  const {vehicleQuote, isquoteLoading, buyPolicy } = useBuyvehiclepolicy()
+  const [showPlateNumber, setPlateNumber] = useState(true);
+  const {vehicleQuote, isquoteLoading, isLoading, buyPolicy, getVehicleDetails } = useBuyvehiclepolicy()
 
   const file = () => {
     click.current.click();
@@ -191,8 +178,27 @@ function Motorinsuranceregister() {
     VerifyData.current = true
     console.log("All fields are filled.", VerifyData.current);
   } else {
-    // Some fields are empty
     console.log("Some fields are empty.");
+  }
+
+  const handlePlateNumber = async (payload) => {
+    try {
+
+      const {success, data} = await getVehicleDetails(payload)
+      if (success) {
+        console.log(data, 'ghfbruusng')
+        setVechicleData((prev) => ({...prev,
+          plate_number: payload.plate_number,
+          vehicle_color: data.vehicleColor || '',
+          chasis_number: data.vehicleChasisNo || '',
+          engine_number: data.vehicleEngineNo || '',
+          year_of_registration: data.yearOfManufacture || '',
+        }))
+        setPlateNumber(false)
+      }
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   const handleTabChange = () => {
@@ -271,7 +277,7 @@ function Motorinsuranceregister() {
   if (policyId === null) {
     navigate('/dashboard');
   }
-  const year = function yearlist(startYear = 2008) {
+  const year = function yearlist(startYear = 1989) {
     const endDate = new Date().getFullYear();
     let years = [];
 
@@ -544,7 +550,7 @@ function Motorinsuranceregister() {
             </div>
             <div className="report-inputgroup insurance-selectgroup">
               <label>Year</label>
-              <select name='year_of_registration' onChange={handleOnChange}>
+              <select name='year_of_registration' readOnly={true} value={vechicleData.year_of_registration} onChange={handleOnChange}>
                 <option>Select year</option>
                 {
                   years.map((year, index) => {
@@ -557,19 +563,19 @@ function Motorinsuranceregister() {
             </div>
             <div className="report-inputgroup">
               <label>Plate Number</label>
-              <input type="text" name='plate_number' onChange={handleOnChange}/>
+              <input type="text" name='plate_number' readOnly={true} value={vechicleData.plate_number} onChange={handleOnChange}/>
             </div>
             <div className="report-inputgroup">
               <label>Vehicle Color</label>
-              <input type="text" name='vehicle_color' onChange={handleOnChange}/>
+              <input type="text" name='vehicle_color' readOnly={true} value={vechicleData.vehicle_color} onChange={handleOnChange}/>
             </div>
             <div className="report-inputgroup">
               <label>Chasis Number</label>
-              <input type="text" name='chasis_number' onChange={handleOnChange}/>
+              <input type="text" name='chasis_number' readOnly={true} value={vechicleData.chasis_number} onChange={handleOnChange}/>
             </div>
             <div className="report-inputgroup">
               <label>Engine Number</label>
-              <input type="text" name='engine_number' onChange={handleOnChange}/>
+              <input type="text" name='engine_number' readOnly={true} value={vechicleData.engine_number} onChange={handleOnChange}/>
             </div>
             <div className="report-inputgroup">
               <label>Vehicle Value</label>
@@ -674,6 +680,7 @@ function Motorinsuranceregister() {
         </form>
       </div>
       <Summary show={modalShow} individual={individualdata} vehicle={vechicleData} quote={vehicleQuote} onHide={() => setModalShow(false)}/>
+      <PlateNumberDetails loading={isLoading} show={showPlateNumber} getDetails={handlePlateNumber} onHide={() => setPlateNumber(false)} />
     </div>
   );
 }

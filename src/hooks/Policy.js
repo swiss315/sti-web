@@ -2,14 +2,15 @@ import {useCallback, useState} from 'react'
 import axios from 'axios'
 import { API } from '../helper/action'
 import { Cookies } from 'react-cookie';
-import {healthPolicy, motorPolicy} from "../service/services/userService";
+import {getAllRiskPolicies, healthPolicy, motorPolicy} from "../service/services/userService";
 
 export const usePolicy = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
     const [policy, setPolicy] = useState({
         health: [],
-        motor: []
+        motor: [],
+        allRisk: []
     })
     const cookies = new Cookies();
     let token = cookies.get('xhrTOKEN')
@@ -69,6 +70,23 @@ export const usePolicy = () => {
             console.log(e)
             setIsLoading(false)
 
+            return false
+        }
+    }
+
+    const getAllRiskPolicy = async () => {
+        try {
+            setIsLoading(true)
+            const response = await getAllRiskPolicies()
+            console.log(response)
+            if (response.data.success) {
+                setPolicy((prev) => ({...prev, allRisk: response.data.response}))
+                setIsLoading(false)
+                return true
+            }
+        } catch (e) {
+            console.log(e)
+            setIsLoading(false)
             return false
         }
     }

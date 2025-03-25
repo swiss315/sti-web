@@ -1,11 +1,11 @@
 import {authorizedGateRequest} from "../../helper/axios";
 import {
-    ALL_HEALTH_POLICY,
+    ALL_HEALTH_POLICY, ALL_RISK_POLICY,
     ALL_TRANSACTIONS,
     ALL_VEHICLE_POLICY,
     BUY_HEALTH_POLICY,
-    BUY_VEHICLE_POLICY,
-    CONFIRM_HEALTH_POLICY_PAYMENT, CONFIRM_VEHICLE_POLICY_PAYMENT,
+    BUY_VEHICLE_POLICY, CONFIRM_ALL_RISK_PAYMENT,
+    CONFIRM_HEALTH_POLICY_PAYMENT, CONFIRM_VEHICLE_POLICY_PAYMENT, GET_ALL_RISK_ITEM, GET_ALL_RISK_QUOTE,
     GET_AVAILABLE_POLICY,
     GET_HOSPITAL, GET_ID,
     GET_LGA,
@@ -16,7 +16,7 @@ import {
     GET_VEHICLE_MODEL,
     GET_VEHICLE_USAGES,
     TITLES,
-    UPDATE_PASSWORD
+    UPDATE_PASSWORD, VEHICLE_AUTO_REG
 } from "./userRoute";
 
 export const getAvailablePolicy = () => {
@@ -83,6 +83,10 @@ export const confirmHealthPolicyPayment = (payload) => {
     return authorizedGateRequest.post(CONFIRM_HEALTH_POLICY_PAYMENT, payload, );
 };
 
+export const getVehicleDetailAutoReg = (payload) => {
+    return authorizedGateRequest.post(VEHICLE_AUTO_REG, payload,);
+};
+
 
 export const transactions = () => {
     return authorizedGateRequest.get(ALL_TRANSACTIONS);
@@ -105,4 +109,25 @@ export const getAllVehicleClass = () => {
 };
 export const getAllVehicleUsage = () => {
     return authorizedGateRequest.get(GET_VEHICLE_USAGES);
+};
+
+
+
+export const getAllRiskItem = () => {
+    return authorizedGateRequest.get(GET_ALL_RISK_ITEM);
+};
+
+export const getAllRiskPolicies = (id) => {
+    return authorizedGateRequest.get(`${ALL_RISK_POLICY}/${id}`);
+};
+
+export const postAllRiskQuotes = (payload) => {
+    return authorizedGateRequest.post(GET_ALL_RISK_QUOTE, payload, {
+        headers: {
+            contentType: 'multipart/form-data'
+        }
+    });
+};
+export const postConfirmAllRiskPayment = (payload) => {
+    return authorizedGateRequest.post(CONFIRM_ALL_RISK_PAYMENT, payload);
 };

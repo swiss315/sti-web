@@ -1,35 +1,49 @@
 import { useState } from 'react'
-import axios from 'axios'
-import { API } from '../helper/action'
-import { Cookies } from 'react-cookie';
+import {useToast} from "../service/context/NotificationContext";
+import { postAllRiskQuotes, postConfirmAllRiskPayment} from "../service/services/userService";
 
 export const useRiskPolicy = () => {
     const [error, setError] = useState(null)
-    const [isquoteLoading, setQuoteIsLoading] = useState(null)
-    const [getriskquote, setgetRiskQuote] = useState({})
-    const cookies = new Cookies();
-        let token = cookies.get('xhrTOKEN')
-    
-    const riskquote = async (data, setModalShow) => {
-        setQuoteIsLoading(true)
-        setError(null)
-        await axios.post(`${API}/get-all-risk-quote`, data ,
-        {
-            headers: {
-                'Authorization': `Token ${token}`, 
-                'Content-Type': 'application/json'
-            }
-        } ).then((response) => {
-            console.log(response.data.data)
-            setgetRiskQuote(response.data.data)
-            setModalShow(true)
-            setQuoteIsLoading(false)
-        }).catch((err) => {
-            setQuoteIsLoading(false)
-            setError(err.response.data.errors)
-            console.log(err.response.data.errors)
-        })
+    const [isQuoteLoading, setQuoteIsLoading] = useState(null)
+    const [riskQuote, setRiskQuote] = useState({})
+    const [isLoading, setIsLoading] = useState(null)
+    const {showToast} = useToast()
+
+    const getAllRiskQuote = async (payload) => {
+        try {
+            setQuoteIsLoading(true);
+            const response = await postAllRiskQuotes(payload)
+            console.log(response)
+            setRiskQuote(response.data.response.all_risk_quote)
+            setQuoteIsLoading(false);
+            return true;
+        } catch (e) {
+            console.log(e)
+            const allErrors = e.response?.data?.errors;
+            const firstError = allErrors ? Object.values(allErrors).find(error => error) : e.response.data.message;
+            setQuoteIsLoading(false);
+            showToast('Error', firstError, 'error')
+
+            return false;
+        }
     }
-    
-    return { riskquote, isquoteLoading, error, getriskquote }
+
+    const confirmPayment = async (payload) => {
+        try {
+            setIsLoading(true);
+            const response = await postConfirmAllRiskPayment(payload)
+            console.log(response)
+            setIsLoading(false);
+            showToast('Success', response.data.message, 'success')
+            return true;
+        } catch (e) {
+            console.log(e)
+            setIsLoading(false);
+            showToast('Error', e.response.data.message, 'error')
+
+            return false;
+        }
+    }
+
+    return {getAllRiskQuote, isQuoteLoading, error, riskQuote, confirmPayment, isLoading }
 }
