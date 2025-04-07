@@ -8,71 +8,8 @@ import {useResources} from "../../../hooks/resources";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../service/reducers/rootReducer.ts";
 import {useBuyHealthPolicy} from "../../../hooks/buyHealthPolicy";
+import HealthSummary from "../modal/healthSummary";
 
-function Summary(props) {
-    const navigate = useNavigate();
-    const {isLoading, confirmPayment} = useBuyHealthPolicy();
-
-    const getHospital = (data) => {
-        return props.data.hospital.find(policy => policy.id.toString() === data)?.name || "";
-    }
-
-    const getPolicyName = (data) => {
-        return props.data.policyType.find(policy => policy.id.toString() === data)?.name || "";
-    }
-
-    const submitConfirmPayment = async () => {
-
-        const payload = {
-            id: props.quote?.id
-        }
-        const res = await confirmPayment(payload);
-        if (res) {
-            navigate('/health')
-        }
-    }
-    return (
-        <Modal
-            {...props}
-            size="xs"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-        >
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    Summary
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <div>
-                    <div className="summary-list">
-                        <p>Insurance Type</p>
-                        <p>{getPolicyName(props.individual.policy_type_id)}</p>
-                    </div>
-                    <div className="summary-list">
-                        <p>First Name</p>
-                        <p>{props.individual.first_name}</p>
-                    </div>
-                    <div className="summary-list">
-                        <p>Last Name</p>
-                        <p>{props.individual.last_name}</p>
-                    </div>
-                    <div className="summary-list">
-                        <p>Hospital</p>
-                        <p>{getHospital(props.individual.hospital_id)}</p>
-                    </div>
-                    <div className="summary-list">
-                        <p>Premium Payable</p>
-                        <p>{props.individual.total}</p>
-                    </div>
-                    <button onClick={submitConfirmPayment} className="summary-button">
-                        {isLoading ? <Loader/> : 'submit'}
-                    </button>
-                </div>
-            </Modal.Body>
-        </Modal>
-    );
-}
 
 function BuyHealth() {
     const AuthState = useSelector((state: RootState) => state.auth);
@@ -85,7 +22,7 @@ function BuyHealth() {
     const [tab, setTab] = useState("");
     const click = useRef("");
     const [modalShow, setModalShow] = useState(false);
-    const {isLoading, buyPolicy, healthPolicy} = useBuyHealthPolicy();
+    const {isLoading, buyPolicy, healthPolicy, postInitializePayment} = useBuyHealthPolicy();
     const {getTitles, getStates, getAllPolicy, getInsurancePolicyType, getStateLgas, data, getHospital} = useResources()
     const [originLga, setOriginLga] = useState([]);
     const [residenceLga, setResidenceLga] = useState([]);
@@ -181,6 +118,17 @@ function BuyHealth() {
         setIndividualData({...individualdata, passport: file});
     };
 
+    const handlePaymentInitialization = async () => {
+        try {
+            const {success, data} = await postInitializePayment(healthPolicy.id)
+            console.log(success, data, 'response')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+
     const handleSubmit = async (e) => {
         try {
             const formData = new FormData();
@@ -205,6 +153,8 @@ function BuyHealth() {
             const res = await buyPolicy(formData)
             if (res) {
                 setModalShow(true)
+                console.log(healthPolicy)
+
             }
         } catch (e) {
             console.error("Error appending data to FormData:", e);
@@ -225,6 +175,17 @@ function BuyHealth() {
               getInsurancePolicyType(policyId),
            getHospital()
        ])
+
+        if (userdata) {
+            setIndividualData((prev) => ({
+                ...prev,
+                first_name: userdata.firstname,
+                last_name: userdata.lastname || "",
+                email: userdata.email || "",
+                phone: userdata.phone || "",
+                gender: userdata.gender || "",
+            }));  // Default to empty if undefined
+        }
     }, [])
     return (
         <div className="report-content">
@@ -262,22 +223,22 @@ function BuyHealth() {
                         </div>
                         <div className="report-inputgroup">
                             <label>First Name</label>
-                            <input type="text" name="first_name" onChange={onchangeaction}/>
+                            <input type="text" name='first_name' readOnly={true} value={individualdata.first_name}/>
                         </div>
                         <div className="report-inputgroup">
                             <label>Last Name</label>
-                            <input type="text" name="last_name" onChange={onchangeaction}/>
+                            <input type="text" readOnly={true} value={individualdata.last_name}/>
                         </div>
                         <div className="report-inputgroup">
                             <label>Email Address</label>
-                            <input type="email" name="email" onChange={onchangeaction}/>
+                            <input type="email" readOnly={true} value={individualdata.email}/>
                         </div>
                         <div className="report-inputgroup insurance-selectgroup">
                             <label>Gender</label>
-                            <select name="gender" onChange={onchangeaction}>
-                                <option defaultValue=''>Select</option>
-                                <option value="male">male</option>
-                                <option value="female">female</option>
+                            <select aria-readonly={true} value={individualdata.gender}>
+                                <option>Select</option>
+                                <option value="Male">male</option>
+                                <option value="Female">female</option>
                             </select>
                         </div>
                         <div className="report-inputgroup">
@@ -475,8 +436,8 @@ function BuyHealth() {
                 </form>
             </div>
 
-            <Summary show={modalShow} individual={individualdata} data={data}
-                     quote={healthPolicy} onHide={() => setModalShow(false)}/>
+            <HealthSummary show={modalShow} individual={individualdata} data={data}
+                     quote={healthPolicy} handlePaymentInitialization={handlePaymentInitialization} onHide={() => setModalShow(false)}/>
         </div>
     );
 }

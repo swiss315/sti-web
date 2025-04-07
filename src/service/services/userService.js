@@ -3,7 +3,7 @@ import {
     ALL_HEALTH_POLICY, ALL_RISK_POLICY,
     ALL_TRANSACTIONS,
     ALL_VEHICLE_POLICY,
-    BUY_HEALTH_POLICY,
+    BUY_HEALTH_POLICY, BUY_TRAVEL_POLICY,
     BUY_VEHICLE_POLICY, CONFIRM_ALL_RISK_PAYMENT,
     CONFIRM_HEALTH_POLICY_PAYMENT, CONFIRM_VEHICLE_POLICY_PAYMENT, GET_ALL_RISK_ITEM, GET_ALL_RISK_QUOTE,
     GET_AVAILABLE_POLICY,
@@ -14,7 +14,7 @@ import {
     GET_VEHICLE_CLASS,
     GET_VEHICLE_MAKE,
     GET_VEHICLE_MODEL,
-    GET_VEHICLE_USAGES,
+    GET_VEHICLE_USAGES, INITIALIZE_PAYMENT,
     TITLES,
     UPDATE_PASSWORD, VEHICLE_AUTO_REG
 } from "./userRoute";
@@ -71,8 +71,20 @@ export const buyVehiclePolicy = (payload) => {
     });
 };
 
+export const initializePayment = (type, payload) => {
+    return authorizedGateRequest.post(`${INITIALIZE_PAYMENT}/${type}/initiate_payment`, payload);
+};
+
 export const confirmVehiclePolicyPayment = (payload) => {
     return authorizedGateRequest.post(CONFIRM_VEHICLE_POLICY_PAYMENT, payload, {
+        headers: {
+            contentType: 'multipart/form-data'
+        }
+    });
+};
+
+export const buyTravelPolicy = (payload) => {
+    return authorizedGateRequest.post(BUY_TRAVEL_POLICY, payload, {
         headers: {
             contentType: 'multipart/form-data'
         }

@@ -17,6 +17,8 @@ export const ALL_HEALTH_POLICY = '/customer/policy/health';
 export const ALL_VEHICLE_POLICY = '/customer/policy/vehicle';
 export const BUY_HEALTH_POLICY = '/customer/quote/health/generate';
 export const BUY_VEHICLE_POLICY = '/customer/quote/vehicle/generate';
+export const BUY_TRAVEL_POLICY = '/customer/quote/travel/generate';
+
 export const CONFIRM_VEHICLE_POLICY_PAYMENT = '/customer/quote/vehicle/confirm_payment';
 export const CONFIRM_HEALTH_POLICY_PAYMENT = '/customer/quote/health/confirm_payment';
 export const VEHICLE_AUTO_REG = '/customer/autoreg';
@@ -26,6 +28,7 @@ export const ALL_RISK_POLICY = '/customer/policy/all_risk';
 export const GET_ALL_RISK_QUOTE = '/customer/quote/all_risk/generate';
 export const CONFIRM_ALL_RISK_PAYMENT = '/customer/quote/all_risk/confirm_payment';
 
+export const INITIALIZE_PAYMENT = '/customer/quote';
 
 /// TRANSACTIONS
 export const ALL_TRANSACTIONS = '/customer/transactions';

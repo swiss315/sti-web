@@ -65,8 +65,8 @@ function* login(action: PayloadAction<{ payload: Login, navigate: NavigateFuncti
             yield put(handleLoginSuccess({token, email}));
             const id = user.id;
             console.log(id);
-
-            // yield put(showToast('Success', 'Login successful!', 'success'));
+            yield put(handleSaveUserData(user));
+            yield put(showToast('Success', 'Login successful!', 'success'));
 
         } else {
             console.log('errorjjjj', error);

@@ -17,7 +17,7 @@ export const handleLoginRequest = createAction<{
     navigate: NavigateFunction
 }>('LOGIN_REQUEST');
 
-export const handleSaveUserData = createAction<string>('SAVE_USER_DATA');
+export const handleSaveUserData = createAction('SAVE_USER_DATA');
 
 export const handleLoginFailure = createAction<string>('LOGIN_FAILURE');
 export const handleRegisterSuccess = createAction<{ token: string }>('REGISTER_SUCCESS');

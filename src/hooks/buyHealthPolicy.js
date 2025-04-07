@@ -1,4 +1,4 @@
-import {buyHealthPolicy, confirmHealthPolicyPayment} from "../service/services/userService";
+import {buyHealthPolicy, confirmHealthPolicyPayment, initializePayment} from "../service/services/userService";
 import {useState} from "react";
 import {useToast} from "../service/context/NotificationContext";
 
@@ -11,7 +11,7 @@ export const useBuyHealthPolicy = () => {
             setIsLoading(true);
             const response = await buyHealthPolicy(payload)
             console.log(response)
-            setHealthPolicy(response.data.response)
+            setHealthPolicy(response.data.response.health_quote)
             setIsLoading(false);
             return true;
         } catch (e) {
@@ -22,6 +22,25 @@ export const useBuyHealthPolicy = () => {
             showToast('Error', firstError, 'error')
 
             return false;
+        }
+    }
+
+
+    const postInitializePayment = async (payload) => {
+        try {
+            setIsLoading(true);
+            const response = await initializePayment('health', payload)
+            console.log(response)
+            setIsLoading(false);
+            return {success: true, data: response.data.response};
+        } catch (e) {
+            console.log(e)
+            const allErrors = e.response?.data?.errors;
+            const firstError = allErrors ? Object.values(allErrors).find(error => error) : e.response.data.message;
+            setIsLoading(false);
+            showToast('Error', firstError, 'error')
+
+            return {success: false, error: 'this is wrong'};
         }
     }
 
@@ -45,6 +64,7 @@ export const useBuyHealthPolicy = () => {
         isLoading,
         buyPolicy,
         healthPolicy,
-        confirmPayment
+        confirmPayment,
+        postInitializePayment
     }
 }
