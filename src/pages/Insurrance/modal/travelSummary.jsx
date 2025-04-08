@@ -1,13 +1,12 @@
-import {useNavigate} from "react-router-dom";
-import {useBuyHealthPolicy} from "../../../hooks/buyHealthPolicy";
 import Modal from "react-bootstrap/Modal";
-import Loader from "../../../components/Loader";
 import React from "react";
+import {useTravelpolicy} from "../../../hooks/buy_travelpolicy";
+import {useNavigate} from "react-router-dom";
+import Loader from "../../../components/Loader";
 
-export default function HealthSummary(props) {
+export default function TravelSummary (props) {
     const navigate = useNavigate();
-    const {isLoading, confirmPayment, postInitializePayment} = useBuyHealthPolicy();
-    // const [reference, setReference] = useState(null);
+    const {postInitializePayment, confirmPayment, isLoading} = useTravelpolicy()
 
     const handlePaymentInitialization = async () => {
         try {
@@ -60,15 +59,6 @@ export default function HealthSummary(props) {
         }
     };
 
-
-    const getHospital = (data) => {
-        return props.data.hospital.find(policy => policy.id.toString() === data)?.name || "";
-    }
-
-    const getPolicyName = (data) => {
-        return props.data.policyType.find(policy => policy.id.toString() === data)?.name || "";
-    }
-
     const submitConfirmPayment = async (reference) => {
 
         const payload = {
@@ -77,7 +67,7 @@ export default function HealthSummary(props) {
         }
         const res = await confirmPayment(payload);
         if (res) {
-            navigate('/health')
+            navigate('/travel')
         }
     }
     return (
@@ -95,10 +85,6 @@ export default function HealthSummary(props) {
             <Modal.Body>
                 <div>
                     <div className="summary-list">
-                        <p>Insurance Type</p>
-                        <p>{getPolicyName(props.individual.policy_type_id)}</p>
-                    </div>
-                    <div className="summary-list">
                         <p>First Name</p>
                         <p>{props.individual.first_name}</p>
                     </div>
@@ -107,15 +93,39 @@ export default function HealthSummary(props) {
                         <p>{props.individual.last_name}</p>
                     </div>
                     <div className="summary-list">
-                        <p>Hospital</p>
-                        <p>{getHospital(props.individual.hospital_id)}</p>
+                        <p>Phone No</p>
+                        <p>{props.individual.phone}</p>
+                    </div>
+                    <div className="summary-list">
+                        <p>Date of Commencement</p>
+                        <p>{props.individual.date_of_commencement}</p>
+                    </div>
+                    <div className="summary-list">
+                        <p>Duration of Trip</p>
+                        <p>{props.traveldata.trip_duration}</p>
+                    </div>
+                    <div className="summary-list">
+                        <p>Mode of Travel</p>
+                        <p>{props.traveldata.travel_mode}</p>
+                    </div>
+                    <div className="summary-list">
+                        <p>Place of Departure</p>
+                        <p>{props.traveldata.departure}</p>
+                    </div>
+                    <div className="summary-list">
+                        <p>Place of Arrival</p>
+                        <p>{props.traveldata.arrival}</p>
+                    </div>
+                    <div className="summary-list">
+                        <p>Address at Country of Visit</p>
+                        <p>{props.traveldata.visitation_address}</p>
                     </div>
                     <div className="summary-list">
                         <p>Premium Payable</p>
-                        <p>{props.quote?.total}</p>
+                        <p>{props.quote.total}</p>
                     </div>
-                    <button onClick={handlePaymentInitialization} className="summary-button">
-                        {isLoading ? <Loader/> : 'submit'}
+                    <button className="summary-button" onClick={handlePaymentInitialization}>
+                        {isLoading ? <Loader/> : 'Submit'}
                     </button>
                 </div>
             </Modal.Body>

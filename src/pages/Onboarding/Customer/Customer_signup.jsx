@@ -1,8 +1,7 @@
 import "../../../stylesheets/Customer_signup.css";
-import React, {useState} from "react";
+import React from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { BsKey, BsTelephone } from "react-icons/bs";
-// import  {useState} from 'react'
 import { HiOutlineUser } from "react-icons/hi";
 import validate from "../../../validation/validateInfo";
 import useForm from "../../../validation/useForm";

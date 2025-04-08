@@ -14,43 +14,12 @@ const Login = () => {
   const dispatch = useDispatch();
   let Navigate = useNavigate()
   const AuthState = useSelector((state: RootState) => state.auth);
-  const {loading, error} = AuthState;
+  const {loading} = AuthState;
   const [data, setData] = useState( {
-        'email': 'joycurrent@edny.net',
-        'password': 'Habeeb4life'
+        'email': '',
+        'password': ''
       }
   )
-
-  const handlePayment = (e) => {
-    e.preventDefault()
-    console.log("Launching actual modal");
-    // setModalShow(false)
-    if (window.Sarepay) {
-      window.Sarepay.initialize({
-        key: "PUBLIC-1Lq41llGlxCnHyGhWEjzbDnwlL8nNKTw",
-        token: "dVz7gp9Ztd2KwoWxcIgjiq8aH7LZZisS",
-        amount: 100,
-        currency: "NGN",
-        feeBearer: "merchant",
-        customer: {name: "Demo Customer", email: "sam@sam.com"},
-        containerId: "payment-container",
-        reference: "HJSHGDfrtyuiytrJDJHHDhGGDGBBEUUJHSGDGRHHJGDHDBDHHHHFRTJDGDHDGGGNMJSJDJSN",
-        metadata: {tester: "Me"},
-        onClose: function () {
-          console.log("😩, you are gone");
-        },
-        onSuccess: function (data) {
-          console.log("Payment Success:", data);
-        },
-        onFailed: function (data) {
-          console.log("Payment Failed:", data);
-        },
-      });
-    } else {
-      console.error("Sarepay SDK not loaded.");
-    }
-  };
-
 
   const Login = async(e) => {
     e.preventDefault()

@@ -1,22 +1,32 @@
 import {authorizedGateRequest} from "../../helper/axios";
 import {
-    ALL_HEALTH_POLICY, ALL_RISK_POLICY,
+    ALL_HEALTH_POLICY,
+    ALL_RISK_POLICY,
     ALL_TRANSACTIONS,
     ALL_VEHICLE_POLICY,
-    BUY_HEALTH_POLICY, BUY_TRAVEL_POLICY,
-    BUY_VEHICLE_POLICY, CONFIRM_ALL_RISK_PAYMENT,
-    CONFIRM_HEALTH_POLICY_PAYMENT, CONFIRM_VEHICLE_POLICY_PAYMENT, GET_ALL_RISK_ITEM, GET_ALL_RISK_QUOTE,
+    BUY_HEALTH_POLICY,
+    BUY_TRAVEL_POLICY,
+    BUY_VEHICLE_POLICY,
+    CONFIRM_ALL_RISK_PAYMENT,
+    CONFIRM_HEALTH_POLICY_PAYMENT,
+    CONFIRM_TRAVEL_POLICY_PAYMENT,
+    CONFIRM_VEHICLE_POLICY_PAYMENT,
+    GET_ALL_RISK_ITEM,
+    GET_ALL_RISK_QUOTE,
     GET_AVAILABLE_POLICY,
-    GET_HOSPITAL, GET_ID,
+    GET_HOSPITAL,
+    GET_ID,
     GET_LGA,
     GET_POLICY_TYPE,
     GET_STATES,
     GET_VEHICLE_CLASS,
     GET_VEHICLE_MAKE,
     GET_VEHICLE_MODEL,
-    GET_VEHICLE_USAGES, INITIALIZE_PAYMENT,
-    TITLES,
-    UPDATE_PASSWORD, VEHICLE_AUTO_REG
+    GET_VEHICLE_USAGES,
+    INITIALIZE_PAYMENT,
+    TITLES, TRAVEL_POLICY,
+    UPDATE_PASSWORD,
+    VEHICLE_AUTO_REG
 } from "./userRoute";
 
 export const getAvailablePolicy = () => {
@@ -100,7 +110,12 @@ export const getVehicleDetailAutoReg = (payload) => {
 };
 
 
-export const transactions = () => {
+export const confirmTravelPolicyPayment = (payload) => {
+    return authorizedGateRequest.post(CONFIRM_TRAVEL_POLICY_PAYMENT, payload,);
+};
+
+
+export const getTransactions = () => {
     return authorizedGateRequest.get(ALL_TRANSACTIONS);
 };
 
@@ -129,8 +144,16 @@ export const getAllRiskItem = () => {
     return authorizedGateRequest.get(GET_ALL_RISK_ITEM);
 };
 
-export const getAllRiskPolicies = (id) => {
-    return authorizedGateRequest.get(`${ALL_RISK_POLICY}/${id}`);
+export const getAllRiskPolicies = () => {
+    return authorizedGateRequest.get(ALL_RISK_POLICY);
+};
+
+export const getAllTransactions = () => {
+    return authorizedGateRequest.get(ALL_RISK_POLICY);
+};
+
+export const getTravelPolicies = () => {
+    return authorizedGateRequest.get(TRAVEL_POLICY);
 };
 
 export const postAllRiskQuotes = (payload) => {

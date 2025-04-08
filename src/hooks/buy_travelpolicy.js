@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import axios from 'axios'
-import { API } from '../helper/action'
-import { Cookies } from 'react-cookie';
-import {buyTravelPolicy, buyVehiclePolicy} from "../service/services/userService";
+import {
+    buyTravelPolicy, confirmTravelPolicyPayment,
+    initializePayment
+} from "../service/services/userService";
 import {useToast} from "../service/context/NotificationContext";
-import {BUY_TRAVEL_POLICY} from "../service/services/userRoute";
 
 export const useTravelpolicy = () => {
-    const [error, setError] = useState(null)
+    const [isLoading, setIsLoading] = useState(false);
+    const [error] = useState(null)
     const [isQuoteLoading, setQuoteIsLoading] = useState(null)
-    const [gettravelquote, setTravelquote] = useState({})
+    const [getTravelQuote, setTravelQuote] = useState({})
     const {showToast} = useToast()
 
     const buyPolicy = async (payload) => {
@@ -17,7 +17,7 @@ export const useTravelpolicy = () => {
             setQuoteIsLoading(true);
             const response = await buyTravelPolicy(payload)
             console.log(response)
-            // setVehicleQuote(response.data.response.vehicle_quote)
+            setTravelQuote(response.data.response.travel_quote)
             setQuoteIsLoading(false);
             return true;
         } catch (e) {
@@ -31,5 +31,40 @@ export const useTravelpolicy = () => {
         }
     }
 
-    return {buyPolicy, isQuoteLoading, error, gettravelquote }
+    const postInitializePayment = async (payload) => {
+        try {
+            setIsLoading(true);
+            const response = await initializePayment('travel', payload)
+            console.log(response)
+            setIsLoading(false);
+            return {success: true, data: response.data.response};
+        } catch (e) {
+            console.log(e)
+            const allErrors = e.response?.data?.errors;
+            const firstError = allErrors ? Object.values(allErrors).find(error => error) : e.response.data.message;
+            setIsLoading(false);
+            showToast('Error', firstError, 'error')
+
+            return {success: false, error: 'this is wrong'};
+        }
+    }
+
+    const confirmPayment = async (payload) => {
+        try {
+            setIsLoading(true);
+            const response = await confirmTravelPolicyPayment(payload)
+            console.log(response)
+            setIsLoading(false);
+            showToast('Success', response.data.message, 'success')
+            return true;
+        } catch (e) {
+            console.log(e)
+            setIsLoading(false);
+            showToast('Error', e.response.data.message, 'error')
+
+            return false;
+        }
+    }
+
+    return {buyPolicy, isQuoteLoading, error, getTravelQuote, postInitializePayment, isLoading, confirmPayment }
 }

@@ -21,7 +21,10 @@ export const BUY_TRAVEL_POLICY = '/customer/quote/travel/generate';
 
 export const CONFIRM_VEHICLE_POLICY_PAYMENT = '/customer/quote/vehicle/confirm_payment';
 export const CONFIRM_HEALTH_POLICY_PAYMENT = '/customer/quote/health/confirm_payment';
+export const CONFIRM_TRAVEL_POLICY_PAYMENT = '/customer/quote/travel/confirm_payment';
+
 export const VEHICLE_AUTO_REG = '/customer/autoreg';
+export const TRAVEL_POLICY = '/customer/policy/travel';
 
 export const GET_ALL_RISK_ITEM = '/customer/policy/all_risk/items';
 export const ALL_RISK_POLICY = '/customer/policy/all_risk';

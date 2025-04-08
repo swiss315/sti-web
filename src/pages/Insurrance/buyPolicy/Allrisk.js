@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
 import { Link } from "react-router-dom";
-import Modal from 'react-bootstrap/Modal';
 import "../../../stylesheets/insuranceregister.css";
 import { ReactComponent as Uploadicon } from "../../../assets/icons/uploadicon.svg";
 import { useRiskPolicy } from "../../../hooks/buy_allriskpolicy";
@@ -8,54 +7,8 @@ import Loader from "../../../components/Loader";
 import {useResources} from "../../../hooks/resources";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../service/reducers/rootReducer.ts";
+import AllRiskSummary from "../modal/allRiskSummary";
 
-function Summary(props) {
-  return (
-    <Modal
-      {...props}
-      size="xs"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Summary
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div>
-        <div className="summary-list">
-            <p>Insurance Type</p>
-            <p>{props.type?.name}</p>
-          </div>
-          <div className="summary-list">
-            <p>First Name</p>
-            <p>{props.individual.first_name}</p>
-          </div>
-          <div className="summary-list">
-            <p>Last Name</p>
-            <p>{props.individual.last_name}</p>
-          </div>
-          {/*<div className="summary-list">*/}
-          {/*  <p>Email</p>*/}
-          {/*  <p>{props.individual.email}</p>*/}
-          {/*</div>*/}
-          <div className="summary-list">
-            <p>Phone No</p>
-            <p>{props.individual.phone}</p>
-          </div>
-          <div className="summary-list">
-            <p>Premium Payable</p>
-            <p>{props.quote.total}</p>
-          </div>
-            <button className="summary-button" >
-              Submit
-            </button>
-        </div>
-      </Modal.Body>
-    </Modal>
-  );
-}
 
 function Allrisk() {
   const [tab, setTab] = useState("");
@@ -242,14 +195,14 @@ useEffect(() => {
                 }
               </select>
             </div>
-            <div className={`report-inputgroup ${insuranceType?.has_serial_number === 1 ? '' : 'd-none'}`} >
-              <label>Serial Number</label>
-              <input type="text" name={'serial_number'} onChange={onChange}/>
-            </div>
-            <div className={`report-inputgroup ${insuranceType?.has_imei === 1 ? '' : 'd-none'}`}>
-              <label>IMEI</label>
-              <input type="text" name={'imei'} onChange={onChange}/>
-            </div>
+            {/*<div className={`report-inputgroup ${insuranceType?.has_serial_number === 1 ? '' : 'd-none'}`} >*/}
+            {/*  <label>Serial Number</label>*/}
+            {/*  <input type="text" name={'serial_number'} onChange={onChange}/>*/}
+            {/*</div>*/}
+            {/*<div className={`report-inputgroup ${insuranceType?.has_imei === 1 ? '' : 'd-none'}`}>*/}
+            {/*  <label>IMEI</label>*/}
+            {/*  <input type="text" name={'imei'} onChange={onChange}/>*/}
+            {/*</div>*/}
             {/*<div className="report-inputgroup insurance-selectgroup">*/}
             {/*  <label>Type</label>*/}
             {/*  <select name="customer_type" onChange={onchangeaction}>*/}
@@ -432,7 +385,7 @@ useEffect(() => {
           </div>
         </form>
       </div>
-      <Summary show={modalShow} type={insuranceType} individual={individualdata} quote={riskQuote} onHide={() => setModalShow(false)} />
+      <AllRiskSummary show={modalShow} type={insuranceType} individual={individualdata} quote={riskQuote} onHide={() => setModalShow(false)} />
     </div>
   );
 }

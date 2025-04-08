@@ -1,13 +1,14 @@
 import {useNavigate} from "react-router-dom";
-import {useBuyHealthPolicy} from "../../../hooks/buyHealthPolicy";
+import {useBuyvehiclepolicy} from "../../../hooks/buy_vehiclepolicy";
 import Modal from "react-bootstrap/Modal";
 import Loader from "../../../components/Loader";
 import React from "react";
 
-export default function HealthSummary(props) {
+export default function MotorSummary(props) {
     const navigate = useNavigate();
-    const {isLoading, confirmPayment, postInitializePayment} = useBuyHealthPolicy();
-    // const [reference, setReference] = useState(null);
+    console.log(props, 'prpos')
+    const {isLoading: isBuyLoading, confirmPayment, postInitializePayment} = useBuyvehiclepolicy()
+
 
     const handlePaymentInitialization = async () => {
         try {
@@ -49,7 +50,7 @@ export default function HealthSummary(props) {
 
                 onSuccess: async function (data) {
                     console.log("Payment Success:", data);
-                    await submitConfirmPayment(reference);
+                    await handleConfirmPayment(reference);
                 },
                 onFailed: function (data) {
                     console.log("Payment Failed:", data);
@@ -60,26 +61,17 @@ export default function HealthSummary(props) {
         }
     };
 
-
-    const getHospital = (data) => {
-        return props.data.hospital.find(policy => policy.id.toString() === data)?.name || "";
-    }
-
-    const getPolicyName = (data) => {
-        return props.data.policyType.find(policy => policy.id.toString() === data)?.name || "";
-    }
-
-    const submitConfirmPayment = async (reference) => {
-
+    const handleConfirmPayment = async (reference) => {
         const payload = {
             quote_id: props.quote?.id,
             reference: reference
         }
         const res = await confirmPayment(payload);
         if (res) {
-            navigate('/health')
+            navigate('/motor')
         }
     }
+
     return (
         <Modal
             {...props}
@@ -95,10 +87,6 @@ export default function HealthSummary(props) {
             <Modal.Body>
                 <div>
                     <div className="summary-list">
-                        <p>Insurance Type</p>
-                        <p>{getPolicyName(props.individual.policy_type_id)}</p>
-                    </div>
-                    <div className="summary-list">
                         <p>First Name</p>
                         <p>{props.individual.first_name}</p>
                     </div>
@@ -107,15 +95,19 @@ export default function HealthSummary(props) {
                         <p>{props.individual.last_name}</p>
                     </div>
                     <div className="summary-list">
-                        <p>Hospital</p>
-                        <p>{getHospital(props.individual.hospital_id)}</p>
+                        <p>Phone No</p>
+                        <p>{props.individual.phone}</p>
+                    </div>
+                    <div className="summary-list">
+                        <p>Gender</p>
+                        <p>{props.individual.gender}</p>
                     </div>
                     <div className="summary-list">
                         <p>Premium Payable</p>
-                        <p>{props.quote?.total}</p>
+                        <p>{props.quote.total}</p>
                     </div>
-                    <button onClick={handlePaymentInitialization} className="summary-button">
-                        {isLoading ? <Loader/> : 'submit'}
+                    <button className="summary-button" onClick={handlePaymentInitialization}>
+                        {isBuyLoading ? <Loader/> : 'Submit'}
                     </button>
                 </div>
             </Modal.Body>

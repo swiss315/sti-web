@@ -1,13 +1,12 @@
-import {useNavigate} from "react-router-dom";
-import {useBuyHealthPolicy} from "../../../hooks/buyHealthPolicy";
 import Modal from "react-bootstrap/Modal";
-import Loader from "../../../components/Loader";
 import React from "react";
+import {useRiskPolicy} from "../../../hooks/buy_allriskpolicy";
+import {useNavigate} from "react-router-dom";
+import Loader from "../../../components/Loader";
 
-export default function HealthSummary(props) {
+export default function AllRiskSummary(props) {
     const navigate = useNavigate();
-    const {isLoading, confirmPayment, postInitializePayment} = useBuyHealthPolicy();
-    // const [reference, setReference] = useState(null);
+    const {isLoading, postInitializePayment, confirmPayment} = useRiskPolicy();
 
     const handlePaymentInitialization = async () => {
         try {
@@ -47,9 +46,9 @@ export default function HealthSummary(props) {
                 reference: reference,
                 metadata: {tester: "Me"},
 
-                onSuccess: async function (data) {
+                onSuccess: function (data) {
                     console.log("Payment Success:", data);
-                    await submitConfirmPayment(reference);
+                    submitConfirmPayment(reference);
                 },
                 onFailed: function (data) {
                     console.log("Payment Failed:", data);
@@ -61,14 +60,6 @@ export default function HealthSummary(props) {
     };
 
 
-    const getHospital = (data) => {
-        return props.data.hospital.find(policy => policy.id.toString() === data)?.name || "";
-    }
-
-    const getPolicyName = (data) => {
-        return props.data.policyType.find(policy => policy.id.toString() === data)?.name || "";
-    }
-
     const submitConfirmPayment = async (reference) => {
 
         const payload = {
@@ -77,9 +68,10 @@ export default function HealthSummary(props) {
         }
         const res = await confirmPayment(payload);
         if (res) {
-            navigate('/health')
+            navigate('/risk')
         }
     }
+
     return (
         <Modal
             {...props}
@@ -96,7 +88,7 @@ export default function HealthSummary(props) {
                 <div>
                     <div className="summary-list">
                         <p>Insurance Type</p>
-                        <p>{getPolicyName(props.individual.policy_type_id)}</p>
+                        <p>{props.type?.name}</p>
                     </div>
                     <div className="summary-list">
                         <p>First Name</p>
@@ -107,12 +99,12 @@ export default function HealthSummary(props) {
                         <p>{props.individual.last_name}</p>
                     </div>
                     <div className="summary-list">
-                        <p>Hospital</p>
-                        <p>{getHospital(props.individual.hospital_id)}</p>
+                        <p>Phone No</p>
+                        <p>{props.individual.phone}</p>
                     </div>
                     <div className="summary-list">
                         <p>Premium Payable</p>
-                        <p>{props.quote?.total}</p>
+                        <p>{props.quote.total}</p>
                     </div>
                     <button onClick={handlePaymentInitialization} className="summary-button">
                         {isLoading ? <Loader/> : 'submit'}

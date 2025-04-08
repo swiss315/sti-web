@@ -1,37 +1,26 @@
-import { useCallback, useState } from 'react'
-import axios from 'axios'
-import { API } from '../helper/action'
-import { Cookies } from 'react-cookie';
+import {useState } from 'react'
+import { getTransactions} from "../service/services/userService";
 
 export const useTransaction = () => {
-    const [error, setError] = useState('')
+    const [error] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [data, setData] = useState([])
 
-    const transaction = useCallback(async () => {
-        setIsLoading(true)
-        setError(null)
-
-        const cookies = new Cookies();
-        let token = cookies.get('xhrTOKEN')
-
-        await axios.get(`${API}/transaction-history`,
-        {
-            headers: {
-                'Authorization': `Token ${token}`, 
-                'Content-Type': 'application/json'
+    const getAllTransactions = async () => {
+        try {
+            setIsLoading(true)
+            const response = await getTransactions()
+            console.log(response)
+            if (response.data.success) {
+                setData(response.data.response)
+                setIsLoading(false)
+                return true
             }
-        } ).then((response) => {
-            // console.log(response.data.history)
-            setData(response.data.history)
+        } catch (e) {
+            console.log(e)
             setIsLoading(false)
-            // return response.data.history
-        }).catch((err) => {
-            setIsLoading(false)
-            setError(err.response.data.message)
-            console.log(err.response.data.message)
-        })
-    }, [])
-    
-    return { transaction, data, isLoading, error }
+            return false
+        }
+    }
+    return {getAllTransactions, data, isLoading, error }
 }

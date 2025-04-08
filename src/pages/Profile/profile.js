@@ -8,7 +8,6 @@ import { ReactComponent as Termsicon } from "../../assets/icons/termsicon.svg";
 import { ReactComponent as Privacyicon } from "../../assets/icons/privacyicon.svg";
 import { ReactComponent as Redlogouticon } from "../../assets/icons/redlogout.svg";
 import { useProfile } from "../../hooks/profile";
-import Loader from "../../components/Loader";
 import {useSelector} from "react-redux";
 import {RootState} from "../../service/reducers/rootReducer.ts";
 import {areAllKeysFilled} from "../../utils/formValidator";

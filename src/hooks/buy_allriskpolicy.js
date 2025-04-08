@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import {useToast} from "../service/context/NotificationContext";
-import { postAllRiskQuotes, postConfirmAllRiskPayment} from "../service/services/userService";
+import {initializePayment, postAllRiskQuotes, postConfirmAllRiskPayment} from "../service/services/userService";
 
 export const useRiskPolicy = () => {
     const [error, setError] = useState(null)
@@ -28,6 +28,24 @@ export const useRiskPolicy = () => {
         }
     }
 
+    const postInitializePayment = async (payload) => {
+        try {
+            setIsLoading(true);
+            const response = await initializePayment('all_risk', payload)
+            console.log(response)
+            setIsLoading(false);
+            return {success: true, data: response.data.response};
+        } catch (e) {
+            console.log(e)
+            const allErrors = e.response?.data?.errors;
+            const firstError = allErrors ? Object.values(allErrors).find(error => error) : e.response.data.message;
+            setIsLoading(false);
+            showToast('Error', firstError, 'error')
+
+            return {success: false, error: 'this is wrong'};
+        }
+    }
+
     const confirmPayment = async (payload) => {
         try {
             setIsLoading(true);
@@ -45,5 +63,5 @@ export const useRiskPolicy = () => {
         }
     }
 
-    return {getAllRiskQuote, isQuoteLoading, error, riskQuote, confirmPayment, isLoading }
+    return {getAllRiskQuote, isQuoteLoading, error, riskQuote, confirmPayment, postInitializePayment, isLoading }
 }

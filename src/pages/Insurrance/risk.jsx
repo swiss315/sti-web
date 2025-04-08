@@ -1,126 +1,40 @@
-import React from 'react'
-// import { useState } from 'react'
+import React, {useEffect} from 'react'
 import "../../stylesheets/motor.css"
 import motorp from '../../assets/motorp.png'
 import Policy from '../../components/Policy'
+import {usePolicy} from "../../hooks/Policy";
+import {PolicyLoader} from "../../components/Loader/policyLoader";
 
 const Risk = () => {
-    const motorData = [
-        {
-            id: 1,
-            number: 'MOT/PM/01/23/SA/10677',
-            names: 'Joy Imole',
-            dob: 'Oct 10,2014',
-            sdate: 'Jun 10,2023',
-            edate: 'Feb 05,2026',
-            period: '425 Days',
-            price: 'NGN 2500',
-            plate: 'KSG457738',
-            value: 'NGN 1200000.00',
-            type: 'Third Party Only',
-            pay: 'Paid',
-            stats: 'Active'
-
-        },
-        {
-            id: 2,
-            number: 'MOT/PM/01/23/SA/10677',
-            names: 'Joy Imole',
-            dob: 'Oct 10,2014',
-            sdate: 'Jun 10,2023',
-            edate: 'Feb 05,2026',
-            period: '425 Days',
-            price: 'NGN 2500',
-            plate: 'KSG457738',
-            value: 'NGN 1200000.00',
-            type: 'Third Party Only',
-            pay: 'Failed',
-            stats: 'Not Active'
-
-        },
-        {
-            id: 3,
-            number: 'MOT/PM/01/23/SA/10677',
-            names: 'Joy Imole',
-            dob: 'Oct 10,2014',
-            sdate: 'Jun 10,2023',
-            edate: 'Feb 05,2026',
-            period: '425 Days',
-            price: 'NGN 2500',
-            plate: 'KSG457738',
-            value: 'NGN 1200000.00',
-            type: 'Third Party Only',
-            pay: 'Pending',
-            stats: 'Pending'
-
-        },
-        {
-            id: 1,
-            number: 'MOT/PM/01/23/SA/10677',
-            names: 'Joy Imole',
-            dob: 'Oct 10,2014',
-            sdate: 'Jun 10,2023',
-            edate: 'Feb 05,2026',
-            period: '425 Days',
-            price: 'NGN 2500',
-            plate: 'KSG457738',
-            value: 'NGN 1200000.00',
-            type: 'Third Party Only',
-            pay: 'Paid',
-            stats: 'Active'
-
-        },
-        {
-            id: 2,
-            number: 'MOT/PM/01/23/SA/10677',
-            names: 'Joy Imole',
-            dob: 'Oct 10,2014',
-            sdate: 'Jun 10,2023',
-            edate: 'Feb 05,2026',
-            period: '425 Days',
-            price: 'NGN 2500',
-            plate: 'KSG457738',
-            value: 'NGN 1200000.00',
-            type: 'Third Party Only',
-            pay: 'Failed',
-            stats: 'Not Active'
-
-        },
-        {
-            id: 3,
-            number: 'MOT/PM/01/23/SA/10677',
-            names: 'Joy Imole',
-            dob: 'Oct 10,2014',
-            sdate: 'Jun 10,2023',
-            edate: 'Feb 05,2026',
-            period: '425 Days',
-            price: 'NGN 2500',
-            plate: 'KSG457738',
-            value: 'NGN 1200000.00',
-            type: 'Third Party Only',
-            pay: 'Pending',
-            stats: 'Pending'
-
-        },
-    ]
     const getStatusClass = (status) => {
         switch (status) {
-            case "Successful":
+            case 1:
                 return "text-green-500 font-bold";
-            case "Pending":
+            case 0:
                 return "text-orange-500 font-semibold";
-            case "Failed":
-                return "text-red-500 font-bold";
+            // case "0":
+            //     return "text-red-500 font-bold";
             default:
                 return "text-gray-500";
         }
     };
+    const {getAllRiskPolicy, isLoading, policy} = usePolicy()
 
+    console.log(policy, 'policy')
+    useEffect(() => {
+        getAllRiskPolicy()
+    }, [])
+
+    if (isLoading) {
+        return (
+            <PolicyLoader/>
+        );
+    }
 
     return (
         <div className="motor">
             <div className="motor_container">
-                <Policy heading='All Risk Insurance' text='32 Policies' image={motorp}/>
+                <Policy heading='All Risk Insurance' text={`${policy.allRisk.length} Policies`} image={motorp}/>
                 <div className="mt-5">
                     <table className="transaction-table mt-4">
                         <thead>
@@ -133,7 +47,7 @@ const Risk = () => {
                             <th className="ref">End Date</th>
                         </tr>
                         </thead>
-                        {motorData.length === 0 ? <tbody>
+                        {policy.allRisk.length === 0 ? <tbody>
                             <tr>
                                 <th className="text-center p-5" colSpan={6}>
                                     No Data Found
@@ -142,14 +56,14 @@ const Risk = () => {
                             </tbody> :
                             <tbody>
                             {
-                                motorData.map((data, index) => {
+                                policy.allRisk.map((data, index) => {
                                     return (
                                         <tr key={index}>
                                             <th className="ref">{index + 1}</th>
-                                            <th>{data.names}</th>
-                                            <th>{data.value}</th>
-                                            <th className={getStatusClass(data.stats)}>{data.stats}</th>
-                                            <th className={getStatusClass(data.pay)}>{data.pay}</th>
+                                            <th>{data.quote.customer.lastname + " " + data.quote.customer.firstname}</th>
+                                            <th>{data.quote.total}</th>
+                                            <th className={getStatusClass(data.status)}>{data.quote.policy_status}</th>
+                                            <th className={getStatusClass(data.status)}>{data.quote.status === 1 ? 'Paid' : 'Not Paid'}</th>
 
                                             <th>{data.edate}</th>
                                         </tr>

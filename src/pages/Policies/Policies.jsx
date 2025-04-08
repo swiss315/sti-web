@@ -7,7 +7,6 @@ import health from '../../assets/health1.jpg';
 import motor from '../../assets/motor.png';
 import easy from '../../assets/easy.png';
 import swiss from '../../assets/swiss.png';
-import { Cookies } from "react-cookie";
 import {usePolicy} from "../../hooks/Policy";
 
 // import Navbar from '../components/Navbar.js'
@@ -53,7 +52,6 @@ import {usePolicy} from "../../hooks/Policy";
 // ]
 
 const Policies = () => {
-  const cookie = new Cookies();
   let userpolicy = {}
 console.log(userpolicy);
 const { getPolicies } = usePolicy()

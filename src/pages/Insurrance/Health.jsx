@@ -4,7 +4,7 @@ import "../../stylesheets/motor.css"
 import motorp from '../../assets/health1.jpg'
 import Policy from '../../components/Policy'
 import {usePolicy} from "../../hooks/Policy";
-import TableSkeleton from "../../components/Loader/TableSkeleton";
+import {PolicyLoader} from "../../components/Loader/policyLoader";
 
 const Health = () => {
     const getStatusClass = (status) => {
@@ -26,10 +26,17 @@ const Health = () => {
         getHealthPolicy()
     }, [])
 
+
+    if (isLoading) {
+        return (
+            <PolicyLoader/>
+        );
+    }
+
     return (
         <div className="motor">
             <div className="motor_container">
-                <Policy heading='Health Insurance' text='32 Policies' image={motorp}/>
+                <Policy heading='Health Insurance' text={`${policy.health.length} Policies`} image={motorp}/>
                 <div className="mt-5">
                     {/*<TableSkeleton />*/}
                     <table className="transaction-table mt-4">

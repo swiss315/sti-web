@@ -4,6 +4,7 @@ import "../../stylesheets/motor.css"
 import motorp from '../../assets/motorp.png'
 import Policy from '../../components/Policy'
 import {usePolicy} from "../../hooks/Policy";
+import {PolicyLoader} from "../../components/Loader/policyLoader";
 
 const Motor = () => {
     const getStatusClass = (status) => {
@@ -36,10 +37,17 @@ const Motor = () => {
         getMotorPolicy()
     }, [])
 
+
+    if (isLoading) {
+        return (
+            <PolicyLoader/>
+        );
+    }
+
     return (
     <div className="motor">
         <div className="motor_container">
-            <Policy heading='Motor Insurance' text='32 Policies' image={motorp}   />
+            <Policy heading='Motor Insurance' text={`${policy.motor.length} Policies`} image={motorp}   />
             <div className="mt-5">
                 <table className="transaction-table mt-4">
                     <thead>
@@ -86,38 +94,6 @@ const Motor = () => {
                     }
                 </table>
             </div>
-        {/*<div className="policy_container">*/}
-        {/*      {motorData.map((item)=>(*/}
-        {/*        <div className="transaction" key={item.id}>*/}
-        {/*        <div className="dot"></div>*/}
-        {/*        <div className="details">*/}
-        {/*            <p> Policy Number: <b>{item.number}</b></p>*/}
-        {/*            <p>Name: <b>{item.names}</b></p>*/}
-        {/*            <p>Date Of Birth: {item.dob} </p>*/}
-        {/*            <p>Start Date: {item.sdate}</p>*/}
-        {/*            <p>End Date: {item.edate}</p>*/}
-        {/*            <p>Period: {item.period}</p>*/}
-        {/*            <p>Price: {item.price}</p>*/}
-        {/*            <p>Plate Number: {item.plate}</p>*/}
-        {/*            <p>Premium Value: {item.value}</p>*/}
-        {/*            <p>Premium Type: {item.type}</p>*/}
-        {/*            <p>Payment Status: <span  className={*/}
-        {/*                item.pay === "Paid"? "active_text" : (*/}
-        {/*                    item.pay === "Failed" ? "notactive" : "pending"*/}
-        {/*                )*/}
-
-        {/*            }>{item.pay}</span> </p>*/}
-        {/*            <p>Status: <span className={*/}
-        {/*                item.stats === "Active"? "active_text" : (*/}
-        {/*                    item.stats === "Not Active" ? "notactive" : "stats-pending"*/}
-        {/*                )*/}
-
-        {/*            }>{item.stats} </span> </p>*/}
-        {/*        </div>*/}
-
-        {/*       </div>*/}
-        {/*      ))}*/}
-        {/*</div>*/}
 
 
         </div>

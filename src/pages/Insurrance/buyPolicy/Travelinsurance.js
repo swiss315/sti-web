@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
 import { Link } from "react-router-dom";
-import Modal from 'react-bootstrap/Modal';
 import "../../../stylesheets/insuranceregister.css";
 import { ReactComponent as Uploadicon } from "../../../assets/icons/uploadicon.svg";
 import { useTravelpolicy } from "../../../hooks/buy_travelpolicy";
@@ -8,74 +7,7 @@ import Loader from "../../../components/Loader";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../service/reducers/rootReducer.ts";
 import {useResources} from "../../../hooks/resources";
-
-function Summary(props) {
-  return (
-    <Modal
-      {...props}
-      size="xs"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Summary
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div>
-          <div className="summary-list">
-            <p>First Name</p>
-            <p>{props.individual.first_name}</p>
-          </div>
-          <div className="summary-list">
-            <p>Last Name</p>
-            <p>{props.individual.last_name}</p>
-          </div>
-          <div className="summary-list">
-            <p>Email</p>
-            <p>{props.individual.email}</p>
-          </div>
-          <div className="summary-list">
-            <p>Phone No</p>
-            <p>{props.individual.phone}</p>
-          </div>
-          <div className="summary-list">
-            <p>Intended Commencement date of cover</p>
-            <p>{props.individual.cover_commencement_date}</p>
-          </div>
-          <div className="summary-list">
-            <p>Duration of Trip</p>
-            <p>{props.traveldata.trip_duration}</p>
-          </div>
-          <div className="summary-list">
-            <p>Mode of Travel</p>
-            <p>{props.traveldata.travel_mode}</p>
-          </div>
-          <div className="summary-list">
-            <p>Place of Departure</p>
-            <p>{props.traveldata.place_departure}</p>
-          </div>
-          <div className="summary-list">
-            <p>Place of Arrival</p>
-            <p>{props.traveldata.place_arrival}</p>
-          </div>
-          <div className="summary-list">
-            <p>Address at Country of Visit</p>
-            <p>{props.traveldata.address_country_of_visit}</p>
-          </div>
-          <div className="summary-list">
-            <p>Premium Payable</p>
-            <p>{props.quote.price}</p>
-          </div>
-            <button className="summary-button" >
-              Submit
-            </button>
-        </div>
-      </Modal.Body>
-    </Modal>
-  );
-}
+import TravelSummary from "../modal/travelSummary";
 
 function Travelinsurance() {
   const AuthState = useSelector((state: RootState) => state.auth);
@@ -86,7 +18,7 @@ function Travelinsurance() {
   const [filename, setFilename] = useState({});
   const [modalShow, setModalShow] = useState(false);
   const {getTitles, getIdTypes, getStates, data} = useResources()
-  const { isQuoteLoading, gettravelquote, buyPolicy } = useTravelpolicy()
+  const { isQuoteLoading, getTravelQuote, buyPolicy } = useTravelpolicy()
   const [individualdata, setIndividualData] = useState({
     "title_id": "",
     "first_name": "",
@@ -174,7 +106,6 @@ function Travelinsurance() {
       formData.append("departure", traveldata.departure);
       formData.append("arrival", traveldata.arrival);
       formData.append("visitation_address", formData.visitation_address);
-      formData.append("total", formData.total);
 
       const res = await buyPolicy(formData)
       if (res) {
@@ -184,7 +115,6 @@ function Travelinsurance() {
       console.log(e)
     }
   }
-
 
   useEffect(() => {
     Promise.all([
@@ -277,7 +207,7 @@ function Travelinsurance() {
             </div>
             <div className="report-inputgroup">
               <label>Date Of Commencement</label>
-              <input type="date" name="date_of_commencement" onChange={onchangeaction}/>
+              <input type="date" name="date_of_commencement" min={new Date().toISOString().split('T')[0]} onChange={onchangeaction}/>
             </div>
             <div className="report-inputgroup">
               <label>Next Of Kin</label>
@@ -365,10 +295,10 @@ function Travelinsurance() {
                 <option value={0}>No</option>
               </select>
             </div>
-            <div className="report-inputgroup">
+            {traveldata.disabled === '1' && (<div className="report-inputgroup">
               <label>If Yes, Give Details</label>
               <textarea rows={2} onChange={(e) => setTraveldata({...traveldata, disability: e.target.value})}/>
-            </div>
+            </div>)}
             <div className="report-inputgroup">
               <label>Place Of Departure</label>
               <input type="text" onChange={(e) => setTraveldata({...traveldata, departure: e.target.value})}/>
@@ -407,7 +337,7 @@ function Travelinsurance() {
           </div>
         </form>
       </div>
-      <Summary show={modalShow} individual={individualdata} traveldata={traveldata} quote={gettravelquote} onHide={() => setModalShow(false)} />
+      <TravelSummary show={modalShow} individual={individualdata} traveldata={traveldata} quote={getTravelQuote} onHide={() => setModalShow(false)} />
     </div>
   );
 }

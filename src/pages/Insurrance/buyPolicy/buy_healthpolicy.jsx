@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import Modal from 'react-bootstrap/Modal';
 import "../../../stylesheets/insuranceregister.css";
 import {ReactComponent as Uploadicon} from "../../../assets/icons/uploadicon.svg";
 import Loader from "../../../components/Loader";

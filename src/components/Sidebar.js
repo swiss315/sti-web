@@ -1,11 +1,9 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import { Cookies } from "react-cookie";
 
 import '../stylesheets/sidebar.css'
 
 import {ReactComponent as Claimicon} from "../assets/icons/claimicon.svg";
-import {ReactComponent as Mypinsicon} from "../assets/icons/pinicon.svg";
 import {ReactComponent as Activepolicies} from "../assets/icons/actpolicon.svg";
 import {ReactComponent as Transactionicon} from "../assets/icons/tranhisicon.svg";
 import {ReactComponent as Reporticon} from "../assets/icons/report&incidenticon.svg";

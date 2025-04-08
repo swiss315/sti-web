@@ -1,94 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import Modal from 'react-bootstrap/Modal';
 import "../../../stylesheets/insuranceregister.css";
 import { ReactComponent as Uploadicon } from "../../../assets/icons/uploadicon.svg";
-import { useVechicleBrand } from "../../../hooks/vehiclebrand";
 import { useBuyvehiclepolicy } from "../../../hooks/buy_vehiclepolicy";
 import Loader from "../../../components/Loader";
 import {useResources} from "../../../hooks/resources";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../service/reducers/rootReducer.ts";
 import PlateNumberDetails from "../modal/plateNumberDetails";
+import MotorSummary from "../modal/motorSummary";
 
-function Summary(props) {
-  const navigate = useNavigate();
-  console.log(props, 'prpos')
-  const { isLoading: isBuyLoading, confirmPayment } = useBuyvehiclepolicy()
-
-  const handleConfirmPayment = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("quote_id", props.quote.id);
-      formData.append("plate_number", props.vehicle.plate_number);
-      formData.append("drivers_license", props.vehicle.drivers_license);
-      formData.append("vehicle_color", props.vehicle.vehicle_color);
-      formData.append("chasis_number", props.vehicle.chasis_number);
-      formData.append("engine_number", props.vehicle.engine_number);
-      formData.append("year_of_registration", props.vehicle.year_of_registration);
-      formData.append("vehicle_state", props.vehicle.vehicle_state);
-      formData.append("id_type", props.vehicle.id_type);
-      formData.append("id_number", props.vehicle.id_number);
-      formData.append("id_file", props.vehicle.id_file);
-      formData.append("back_view", props.vehicle.back_view);
-      formData.append("front_view", props.vehicle.front_view);
-      formData.append("left_view", props.vehicle.left_view);
-      formData.append("right_view", props.vehicle.right_view);
-
-      const res = await confirmPayment(formData)
-      if (res) {
-        navigate('/motor')
-      }
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
-  return (
-    <Modal
-      {...props}
-      size="xs"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Summary
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div>
-          <div className="summary-list">
-            <p>First Name</p>
-            <p>{props.individual.first_name}</p>
-          </div>
-          <div className="summary-list">
-            <p>Last Name</p>
-            <p>{props.individual.last_name}</p>
-          </div>
-          <div className="summary-list">
-            <p>Phone No</p>
-            <p>{props.individual.phone}</p>
-          </div>
-          <div className="summary-list">
-            <p>Gender</p>
-            <p>{props.individual.gender}</p>
-          </div>
-          <div className="summary-list">
-            <p>Premium Payable</p>
-            <p>{props.quote.total}</p>
-          </div>
-            <button className="summary-button"  onClick={handleConfirmPayment}>
-               {isBuyLoading ? <Loader /> : 'Submit'}
-            </button>
-        </div>
-      </Modal.Body>
-    </Modal>
-  );
-}
 
 function Motorinsuranceregister() {
-  const [type, setType] = useState('Individual');
+  const [type] = useState('Individual');
   const [tab, setTab] = useState("");
   const {getTitles, getIdTypes, getStates, getInsurancePolicyType, data, getVehicleClass,
     getVehicleMakes,
@@ -263,7 +187,20 @@ function Motorinsuranceregister() {
       formData.append("account_type", vechicleData.account_type);
       formData.append("company_name", vechicleData.company_name);
       formData.append("company_address", vechicleData.company_address);
-
+      formData.append("plate_number", vechicleData.plate_number);
+      formData.append("drivers_license", vechicleData.drivers_license);
+      formData.append("vehicle_color", vechicleData.vehicle_color);
+      formData.append("chasis_number", vechicleData.chasis_number);
+      formData.append("engine_number", vechicleData.engine_number);
+      formData.append("year_of_registration", vechicleData.year_of_registration);
+      formData.append("vehicle_state", vechicleData.vehicle_state);
+      formData.append("id_type", vechicleData.id_type);
+      formData.append("id_number", vechicleData.id_number);
+      formData.append("id_file", vechicleData.id_file);
+      formData.append("back_view", vechicleData.back_view);
+      formData.append("front_view", vechicleData.front_view);
+      formData.append("left_view", vechicleData.left_view);
+      formData.append("right_view", vechicleData.right_view);
 
      const res = await buyPolicy(formData)
       if (res) {
@@ -679,7 +616,7 @@ function Motorinsuranceregister() {
           </div>
         </form>
       </div>
-      <Summary show={modalShow} individual={individualdata} vehicle={vechicleData} quote={vehicleQuote} onHide={() => setModalShow(false)}/>
+      <MotorSummary show={modalShow} individual={individualdata} vehicle={vechicleData} quote={vehicleQuote} onHide={() => setModalShow(false)}/>
       <PlateNumberDetails loading={isLoading} show={showPlateNumber} getDetails={handlePlateNumber} onHide={() => setPlateNumber(false)} />
     </div>
   );

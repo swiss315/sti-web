@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import {
     buyVehiclePolicy,
-    confirmVehiclePolicyPayment, getVehicleDetailAutoReg
+    confirmVehiclePolicyPayment, getVehicleDetailAutoReg, initializePayment
 } from "../service/services/userService";
 import {useToast} from "../service/context/NotificationContext";
 
 export const useBuyvehiclepolicy = () => {
-    const [error, setError] = useState(null)
+    const [error] = useState(null)
     const [isquoteLoading, setQuoteIsLoading] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
     const [vehicleDetails, setVehicleDetails] = useState({})
@@ -32,7 +32,6 @@ export const useBuyvehiclepolicy = () => {
         }
     }
 
-
     const buyPolicy = async (payload) => {
         try {
             setQuoteIsLoading(true);
@@ -49,6 +48,24 @@ export const useBuyvehiclepolicy = () => {
             showToast('Error', firstError, 'error')
 
             return false;
+        }
+    }
+
+    const postInitializePayment = async (payload) => {
+        try {
+            setIsLoading(true);
+            const response = await initializePayment('vehicle', payload)
+            console.log(response)
+            setIsLoading(false);
+            return {success: true, data: response.data.response};
+        } catch (e) {
+            console.log(e)
+            const allErrors = e.response?.data?.errors;
+            const firstError = allErrors ? Object.values(allErrors).find(error => error) : e.response.data.message;
+            setIsLoading(false);
+            showToast('Error', firstError, 'error')
+
+            return {success: false, error: 'this is wrong'};
         }
     }
 
@@ -69,5 +86,6 @@ export const useBuyvehiclepolicy = () => {
         }
     }
 
-    return { isquoteLoading, getVehicleDetails, error, vehicleQuote, buyPolicy, isLoading, confirmPayment }
+    return { isquoteLoading, getVehicleDetails, vehicleDetails, error, vehicleQuote, buyPolicy, isLoading, confirmPayment,
+        postInitializePayment }
 }

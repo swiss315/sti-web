@@ -3,9 +3,6 @@ import { useNavigate} from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import "../../stylesheets/Login.css";
 import {ReactComponent as Email} from "../../assets/icons/emailicon.svg";
-import Loader from "../../components/Loader";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../service/reducers/rootReducer.ts";
 import PinInput from "../../components/form/InputPin";
 import CustomButton from "../../components/form/customButton";
 import {BsKey} from "react-icons/bs";
@@ -14,7 +11,6 @@ import {areAllKeysFilled} from "../../utils/formValidator";
 
 
 const ForgetPassword = () => {
-    const dispatch = useDispatch();
     let Navigate = useNavigate()
     const [tabs, setTabs] = useState('email')
     const [loading, setLoading] = useState({
@@ -22,7 +18,6 @@ const ForgetPassword = () => {
         verifyLoading: false,
         updatePassword: false
     })
-    const AuthState = useSelector((state: RootState) => state.auth);
     const [errors, setError] = useState({});
     const [passwordData, setPasswordData] = useState({
         newPassword: '',
