@@ -1,5 +1,5 @@
 import Modal from "react-bootstrap/Modal";
-import React from "react";
+import React, {useRef} from "react";
 import {useRiskPolicy} from "../../../hooks/buy_allriskpolicy";
 import {useNavigate} from "react-router-dom";
 import Loader from "../../../components/Loader";
@@ -7,6 +7,7 @@ import Loader from "../../../components/Loader";
 export default function AllRiskSummary(props) {
     const navigate = useNavigate();
     const {isLoading, postInitializePayment, confirmPayment} = useRiskPolicy();
+    const hasSubmittedRef = useRef(false);
 
     const handlePaymentInitialization = async () => {
         try {
@@ -41,11 +42,13 @@ export default function AllRiskSummary(props) {
                 amount: total,
                 currency: "NGN",
                 feeBearer: "merchant",
-                customer: {name: "Demo Customer", email: "sam@sam.com"},
+                customer: {name: "Paddycover", email: props.individual.email},
                 containerId: "payment-container",
                 reference: reference,
                 metadata: {tester: "Me"},
-
+                onClose: function () {
+                    console.log("😩, you are gone");
+                },
                 onSuccess: function (data) {
                     console.log("Payment Success:", data);
                     submitConfirmPayment(reference);
@@ -61,7 +64,8 @@ export default function AllRiskSummary(props) {
 
 
     const submitConfirmPayment = async (reference) => {
-
+        if (hasSubmittedRef.current) return; // Prevent double execution
+        hasSubmittedRef.current = true;
         const payload = {
             quote_id: props.quote?.id,
             reference: reference

@@ -1,5 +1,5 @@
 import Modal from "react-bootstrap/Modal";
-import React from "react";
+import React, {useRef} from "react";
 import {useTravelpolicy} from "../../../hooks/buy_travelpolicy";
 import {useNavigate} from "react-router-dom";
 import Loader from "../../../components/Loader";
@@ -7,6 +7,7 @@ import Loader from "../../../components/Loader";
 export default function TravelSummary (props) {
     const navigate = useNavigate();
     const {postInitializePayment, confirmPayment, isLoading} = useTravelpolicy()
+    const hasSubmittedRef = useRef(false);
 
     const handlePaymentInitialization = async () => {
         try {
@@ -41,11 +42,13 @@ export default function TravelSummary (props) {
                 amount: total,
                 currency: "NGN",
                 feeBearer: "merchant",
-                customer: {name: "Demo Customer", email: "sam@sam.com"},
+                customer: {name: "Paddycover", email: props.individual.email},
                 containerId: "payment-container",
                 reference: reference,
                 metadata: {tester: "Me"},
-
+                onClose: function () {
+                    console.log("😩, you are gone");
+                },
                 onSuccess: async function (data) {
                     console.log("Payment Success:", data);
                     await submitConfirmPayment(reference);
@@ -60,7 +63,8 @@ export default function TravelSummary (props) {
     };
 
     const submitConfirmPayment = async (reference) => {
-
+        if (hasSubmittedRef.current) return; // Prevent double execution
+        hasSubmittedRef.current = true;
         const payload = {
             quote_id: props.quote?.id,
             reference: reference

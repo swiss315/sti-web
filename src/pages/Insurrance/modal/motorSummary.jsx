@@ -2,13 +2,13 @@ import {useNavigate} from "react-router-dom";
 import {useBuyvehiclepolicy} from "../../../hooks/buy_vehiclepolicy";
 import Modal from "react-bootstrap/Modal";
 import Loader from "../../../components/Loader";
-import React from "react";
+import React, {useRef} from "react";
 
 export default function MotorSummary(props) {
     const navigate = useNavigate();
     console.log(props, 'prpos')
     const {isLoading: isBuyLoading, confirmPayment, postInitializePayment} = useBuyvehiclepolicy()
-
+    const hasSubmittedRef = useRef(false);
 
     const handlePaymentInitialization = async () => {
         try {
@@ -43,11 +43,13 @@ export default function MotorSummary(props) {
                 amount: total,
                 currency: "NGN",
                 feeBearer: "merchant",
-                customer: {name: "Demo Customer", email: "sam@sam.com"},
+                customer: {name: "Paddycover", email: props.individual.email},
                 containerId: "payment-container",
                 reference: reference,
                 metadata: {tester: "Me"},
-
+                onClose: function () {
+                    console.log("😩, you are gone");
+                },
                 onSuccess: async function (data) {
                     console.log("Payment Success:", data);
                     await handleConfirmPayment(reference);
@@ -62,6 +64,8 @@ export default function MotorSummary(props) {
     };
 
     const handleConfirmPayment = async (reference) => {
+        if (hasSubmittedRef.current) return; // Prevent double execution
+        hasSubmittedRef.current = true;
         const payload = {
             quote_id: props.quote?.id,
             reference: reference
