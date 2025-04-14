@@ -147,7 +147,7 @@ const onchangeaction = (e) => {
             </div>
           </div>
           <div className="claim-notice">
-            <h5>NB:</h5>
+            <h5 className={'mb-0'}>NB:</h5>
             <p>
               Claim will be settled within 5 working days after the receipt of
               executed discharge voucher.

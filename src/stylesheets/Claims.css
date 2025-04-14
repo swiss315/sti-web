@@ -31,6 +31,8 @@
 }
 .claim-notice{
     display: flex;
+    align-items: center;
+    gap: 0.35rem;
 }
 .claim-submit button{
     width: 100%;
