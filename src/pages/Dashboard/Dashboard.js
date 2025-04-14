@@ -59,6 +59,9 @@ function Dashboard() {
     }
   }
 
+  const order = ["vehicle", "health", "travel", "all_risk"];
+
+
   useEffect(() => {
     getDashboard()
   }, [])
@@ -93,18 +96,19 @@ function Dashboard() {
                 ))}
               </div> :
               <div className='insurance-tab-container'>
-                {
-                    data.insurance_policies.length !== 0 && (
-                        data.insurance_policies.map((policy, index) => {
-                          return (
-                              <Link key={index} to={`/${getInsurancePath(policy.label)}?id=${policy.id}`}
-                                    className={`insurance-type-tab `}>
-                                {policy.label}
-                              </Link>
-                          )
-                        })
-                    )
-                }
+                {data.insurance_policies.length !== 0 && (
+                    [...data.insurance_policies]
+                        .sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name))
+                        .map((policy, index) => (
+                            <Link
+                                key={policy.id}
+                                to={`/${getInsurancePath(policy.label)}?id=${policy.id}`}
+                                className="insurance-type-tab"
+                            >
+                              {policy.label}
+                            </Link>
+                        ))
+                )}
               </div>
         }
 

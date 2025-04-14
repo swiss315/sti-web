@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, Route, Routes, useLocation } from "react-router-dom";
+import {Link, Route, Routes, useLocation, useNavigate} from "react-router-dom";
 
 import '../../stylesheets/dashboardlayout.css'
 import '../../stylesheets/dashboardlayout.css'
@@ -37,6 +37,7 @@ import BuyHealth from "../Insurrance/buyPolicy/buy_healthpolicy";
 import Health from "../Insurrance/Health";
 
 function Dashboardlayout() {
+    const navigate = useNavigate();
   const [sidebar, setSidebar] = useState(true);
 
   const handleclick = () => {
@@ -46,6 +47,7 @@ function Dashboardlayout() {
   const location = useLocation();
   let pagename = location.pathname;
   pagename = pagename.slice(1);
+    console.log(pagename, 'pagename')
 
 
   return (
@@ -62,7 +64,8 @@ function Dashboardlayout() {
             <div className='sidebar-container'>
                 {/*<Sidebarmenu onClick={handleclick}/>*/}
               {
-                pagename === 'health' || pagename === 'motor' || pagename === 'travel' || pagename === 'risk' ? <Link to='/policies'> <Backicon/> </Link> : <Sidebarmenu onClick={handleclick}/>
+                pagename === 'health' || pagename === 'motor' || pagename === 'travel' || pagename === 'risk' || pagename === 'health-insurance' || pagename === 'motor-insurance' || pagename === 'travel-insurance' || pagename === 'all-risk' ?
+                    <div className={'cursor-pointer'} onClick={() => navigate(-1)}> <Backicon/> </div> : <Sidebarmenu onClick={handleclick}/>
               }
             </div>
             <div className='profile-notification'>
