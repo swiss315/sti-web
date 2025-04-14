@@ -6,6 +6,7 @@ import Policy from '../../components/Policy'
 import {usePolicy} from "../../hooks/Policy";
 import {PolicyLoader} from "../../components/Loader/policyLoader";
 import HealthDetails from "./modal/healthDetails";
+import {formatAmount} from "../../utils/formatAmount";
 
 const Health = () => {
     const [modalShow, setModalShow] = React.useState(false);
@@ -73,7 +74,7 @@ const Health = () => {
                                             <th>{data.quote?.customer.lastname + ' ' + data.quote?.customer.firstname}</th>
                                             <th>{data.policy_number || 'N/A'}</th>
                                             <th>{data.quote.policy_type.name}</th>
-                                            <th>{data.quote.policy_type.rate}</th>
+                                            <th>{formatAmount(data.quote.policy_type.rate)}</th>
                                             <th className={getStatusClass(data.quote.status)}>{data.quote.status === 1 ? 'Paid' : 'Not Paid'}</th>
                                             <th className={getStatusClass(data.quote.status)}>{data.quote.status === 1 ? 'Paid' : 'Not Paid'}</th>
                                             <th className={'cursor-pointer underline'} onMouseEnter={() => setPolicyDetails(data)} onClick={() => setModalShow(true)}>View details</th>
