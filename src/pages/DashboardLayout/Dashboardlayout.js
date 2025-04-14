@@ -60,8 +60,9 @@ function Dashboardlayout() {
         <div className={` ${sidebar ? "maincontentexpand" : "content"}`}>
           <div className='dashboard-nav'>
             <div className='sidebar-container'>
+                {/*<Sidebarmenu onClick={handleclick}/>*/}
               {
-                pagename === 'dashboard' ? <Sidebarmenu onClick={handleclick}/> : <Link to='/dashboard' > <Backicon /> </Link>
+                pagename === 'health' || pagename === 'motor' || pagename === 'travel' || pagename === 'risk' ? <Link to='/policies'> <Backicon/> </Link> : <Sidebarmenu onClick={handleclick}/>
               }
             </div>
             <div className='profile-notification'>

@@ -5,8 +5,13 @@ import motorp from '../../assets/health1.jpg'
 import Policy from '../../components/Policy'
 import {usePolicy} from "../../hooks/Policy";
 import {PolicyLoader} from "../../components/Loader/policyLoader";
+import HealthDetails from "./modal/healthDetails";
 
 const Health = () => {
+    const [modalShow, setModalShow] = React.useState(false);
+    const [policyDetails, setPolicyDetails] = React.useState(null);
+
+
     const getStatusClass = (status) => {
         switch (status) {
             case 1:
@@ -49,6 +54,7 @@ const Health = () => {
                             <th className="ref">Amount</th>
                             <th className="ref">Status</th>
                             <th className="ref">Payment Status</th>
+                            <th className="ref">Action</th>
                         </tr>
                         </thead>
                         {policy.health.length === 0 ? <tbody>
@@ -70,6 +76,7 @@ const Health = () => {
                                             <th>{data.quote.policy_type.rate}</th>
                                             <th className={getStatusClass(data.quote.status)}>{data.quote.status === 1 ? 'Paid' : 'Not Paid'}</th>
                                             <th className={getStatusClass(data.quote.status)}>{data.quote.status === 1 ? 'Paid' : 'Not Paid'}</th>
+                                            <th className={'cursor-pointer underline'} onMouseEnter={() => setPolicyDetails(data)} onClick={() => setModalShow(true)}>View details</th>
 
                                         </tr>
                                     )
@@ -81,6 +88,7 @@ const Health = () => {
                     </table>
                 </div>
             </div>
+            <HealthDetails show={modalShow} data={policyDetails} close={() => setModalShow(false)} />
         </div>
     )
 }

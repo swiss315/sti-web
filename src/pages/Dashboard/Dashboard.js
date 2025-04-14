@@ -8,6 +8,7 @@ import { ReactComponent as SearchIcon } from "../../assets/icons/searchicon.svg"
 import {useDashboard} from "../../hooks/dashboard";
 import {useSelector} from "react-redux";
 import {RootState} from "../../service/reducers/rootReducer.ts";
+import {formatAmount} from "../../utils/formatAmount";
 
 function Dashboard() {
   const AuthState = useSelector((state: RootState) => state.auth);
@@ -46,6 +47,18 @@ function Dashboard() {
     return formattedToday;
   }
 
+  function getGreeting() {
+    const hour = new Date().getHours();
+
+    if (hour >= 5 && hour < 12) {
+      return "Good Morning";
+    } else if (hour >= 12 && hour < 17) {
+      return "Good Afternoon";
+    } else {
+      return "Good Evening";
+    }
+  }
+
   useEffect(() => {
     getDashboard()
   }, [])
@@ -56,7 +69,7 @@ function Dashboard() {
           Hi <span>{userdata?.firstname}</span>,
         </p>
         <h2 className='dashboard-greetings'>
-          Good Morning!
+          {getGreeting()}!
         </h2>
         <div className='search-container'>
           <div className='input-group'>
@@ -197,7 +210,7 @@ function Dashboard() {
                                 <th className="ref">{index + 1}</th>
                                 <th>{data.trnx}</th>
                                 <th>{data.details}</th>
-                                <th>{data.amount}</th>
+                                <th>{formatAmount(data.amount)}</th>
                                 {/*<th className={getStatusClass(data.status)}>{data.status}</th>*/}
                                 <th>{convertDate(data.updated_at)}</th>
                               </tr>

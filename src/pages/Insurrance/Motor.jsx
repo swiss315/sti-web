@@ -5,6 +5,7 @@ import motorp from '../../assets/motorp.png'
 import Policy from '../../components/Policy'
 import {usePolicy} from "../../hooks/Policy";
 import {PolicyLoader} from "../../components/Loader/policyLoader";
+import {formatAmount} from "../../utils/formatAmount";
 
 const Motor = () => {
     const getStatusClass = (status) => {
@@ -80,7 +81,7 @@ const Motor = () => {
                                         <th>{data.quote?.plate_number}</th>
                                         <th>{data.policy_number || 'N/A'}</th>
                                         <th>{data.quote?.policy_type.name}</th>
-                                        <th>{data.quote?.total}</th>
+                                        <th>{formatAmount(data.quote?.total)}</th>
                                         <th className={getPolicyStatusClass(data.quote?.policy_status)}>{data.quote?.policy_status}</th>
                                         <th className={getStatusClass(data.quote?.status)}>{data.quote?.status === 1 ? 'Paid' : 'Not Paid'}</th>
 

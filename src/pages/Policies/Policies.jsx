@@ -96,13 +96,13 @@ const { getPolicies } = usePolicy()
                   <h3>All Risk Insurance</h3>
                 </div>
               </Link>
-              <Link className="insurance_link" to='/swiss' >
-                <img className="insurance_img" src={swiss} alt="insurance_images" />
-                <div className="text">
-                  <p>{userpolicy?.my_policies?.swiss?.length} policies</p>
-                  <h3>Swiss-F Insurance</h3>
-                </div>
-              </Link>
+              {/*<Link className="insurance_link" to='/swiss' >*/}
+              {/*  <img className="insurance_img" src={swiss} alt="insurance_images" />*/}
+              {/*  <div className="text">*/}
+              {/*    <p>{userpolicy?.my_policies?.swiss?.length} policies</p>*/}
+              {/*    <h3>Swiss-F Insurance</h3>*/}
+              {/*  </div>*/}
+              {/*</Link>*/}
           </div>
         </div>
 

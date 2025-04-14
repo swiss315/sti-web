@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "../../stylesheets/Claims.css";
 import { useTransaction } from "../../hooks/transaction";
+import {formatAmount} from "../../utils/formatAmount";
 
 const PinTransaction = () => {
   const {getAllTransactions, data, isLoading } = useTransaction()
@@ -245,7 +246,7 @@ const PinTransaction = () => {
                               <th className="ref">{index + 1}</th>
                               <th>{data.trnx}</th>
                               <th>{data.details}</th>
-                              <th>{data.amount}</th>
+                              <th>{formatAmount(data.amount)}</th>
                               {/*<th className={getStatusClass(data.status)}>{data.status}</th>*/}
                               <th>{convertDate(data.updated_at)}</th>
                             </tr>
