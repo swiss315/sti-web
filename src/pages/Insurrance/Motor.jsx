@@ -6,8 +6,11 @@ import Policy from '../../components/Policy'
 import {usePolicy} from "../../hooks/Policy";
 import {PolicyLoader} from "../../components/Loader/policyLoader";
 import {formatAmount} from "../../utils/formatAmount";
+import VehicleDetails from "./modal/vehicleDetails";
 
 const Motor = () => {
+    const [modalShow, setModalShow] = React.useState(false);
+    const [policyDetails, setPolicyDetails] = React.useState(null);
     const getStatusClass = (status) => {
         switch (status) {
             case 1:
@@ -62,6 +65,8 @@ const Motor = () => {
                         <th className="ref">Status</th>
                         <th className="ref">Payment Status</th>
                         <th className="ref">End Date</th>
+                        <th className="ref">Action</th>
+
                     </tr>
                     </thead>
                     {policy.motor.length === 0 ? <tbody>
@@ -85,7 +90,12 @@ const Motor = () => {
                                         <th className={getPolicyStatusClass(data.quote?.policy_status)}>{data.quote?.policy_status}</th>
                                         <th className={getStatusClass(data.quote?.status)}>{data.quote?.status === 1 ? 'Paid' : 'Not Paid'}</th>
 
-                                        <th>{data.edate}</th>
+                                        <th>{data.edate || 'N/A'}</th>
+                                        <th className={'cursor-pointer underline'}
+                                            onMouseEnter={() => setPolicyDetails(data)}
+                                            onClick={() => setModalShow(true)}>View details
+                                        </th>
+
                                     </tr>
                                 )
                             })
@@ -95,7 +105,7 @@ const Motor = () => {
                     }
                 </table>
             </div>
-
+            <VehicleDetails show={modalShow} data={policyDetails} close={() => setModalShow(false)}/>
 
         </div>
     </div>

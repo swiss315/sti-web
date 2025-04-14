@@ -80,7 +80,7 @@ const Travel = () => {
                                             <th>{formatAmount(data.quote.total)}</th>
                                             <th className={getStatusClass(data.status)}>{data.quote.policy_status}</th>
                                             <th className={getStatusClass(data.status)}>{data.quote.status === 1 ? 'Paid' : 'Not Paid'}</th>
-                                            <th>{data.edate}</th>
+                                            <th>{data.edate || 'N/A'}</th>
                                         </tr>
                                     )
                                 })

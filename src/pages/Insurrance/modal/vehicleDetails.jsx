@@ -1,8 +1,9 @@
 import Modal from "react-bootstrap/Modal";
 import React from "react";
 import {ReactComponent as CloseIcon} from "../../../assets/icons/closeicon.svg";
+import {formatAmount} from "../../../utils/formatAmount";
 
-export default function HealthDetails(props) {
+export default function VehicleDetails(props) {
 
     return (
         <Modal
@@ -27,63 +28,55 @@ export default function HealthDetails(props) {
                 <div className="pt-6 relative metaData_container">
                     <div className="flex flex-wrap justify-between p-2.5">
                         <div>
-                            <label>Hospital</label>
-                            <p className="font-semibold">{props.data?.quote?.hospital_id}</p>
+                            <label>Vehicle Make</label>
+                            <p className="font-semibold">{props.data?.quote?.make_id}</p>
                         </div>
                         <div>
-                            <label>Name</label>
-                            <p className="font-semibold">{props.data?.quote?.customer.lastname + " " + props.data?.quote?.customer.firstname}</p>
+                            <label>Vehicle Model</label>
+                            <p className="font-semibold">{props.data?.quote?.model_id}</p>
                         </div>
                         <div>
-                            <label>dob</label>
-                            <p className="font-semibold">{props.data?.quote?.customer.dob || 'nill'}</p>
+                            <label>Vehicle Value</label>
+                            <p className="font-semibold">{formatAmount(props.data?.quote?.vehicle_value) || 'nill'}</p>
                         </div>
                         <div>
-                            <label>Email</label>
-                            <p className="font-semibold">{props.data?.quote?.customer.email}</p>
+                            <label>Plate Number</label>
+                            <p className="font-semibold">{props.data?.quote?.license}</p>
                         </div>
                     </div>
                     <div className="flex flex-wrap justify-between p-2.5">
                         <div>
-                            <label>Address</label>
-                            <p className="font-semibold">{props.data?.quote?.customer.address || 'nil'}</p>
+                            <label>Engine Number</label>
+                            <p className="font-semibold">{props.data?.quote?.engine_number || 'nil'}</p>
                         </div>
                         <div>
-                            <label>Occupation</label>
-                            <p className="font-semibold">{props.data?.quote?.occupation}</p>
+                            <label>Chasis No</label>
+                            <p className="font-semibold">{props.data?.quote?.chasis_number}</p>
                         </div>
 
                         <div>
-                            <label>Country</label>
-                            <p className="font-semibold">{props.data?.quote?.nationality}</p>
+                            <label>Vehicle Class</label>
+                            <p className="font-semibold">{props.data?.quote?.usage_id}</p>
                         </div>
                         <div>
-                            <label>Blood group</label>
-                            <p className="font-semibold">{props.data?.quote?.blood_group}</p>
+                            <label>Vehicle Usage</label>
+                            <p className="font-semibold">{props.data?.quote?.usage_id}</p>
                         </div>
                     </div>
-                    <div className="flex flex-wrap justify-between p-2.5">
+                    <div className="flex flex-wrap justify-between w-1/2 p-2.5">
                         <div>
-                            <label>Plan</label>
-                            <p className="font-semibold">{props.data?.quote?.policy_type.name}</p>
+                            <label>Vehicle Color</label>
+                            <p className="font-semibold">{props.data?.quote?.vehicle_color}</p>
                         </div>
                         <div>
-                            <label>Marital Status</label>
-                            <p className="font-semibold">{props.data?.quote?.marital_status}</p>
-                        </div>
-                        <div>
-                            <label>Genotype</label>
-                            <p className="font-semibold">{props.data?.quote?.genotype}</p>
-                        </div>
-                        <div>
-                            <label>Medical History</label>
-                            <p className="font-semibold">{props.data?.quote?.medical_history}</p>
+                            <label>Year of Make</label>
+                            <p className="font-semibold">{props.data?.quote?.year}</p>
                         </div>
                     </div>
                     <div className="flex flex-wrap justify-start p-2.5">
                         <div>
-                            <label>Employer</label>
-                            <p className="font-semibold">{props.data?.quote?.lga_of_residence}</p>
+                            <label>Premium</label>
+                            <p className="font-semibold">{formatAmount(props.data?.quote?.total)}</p>
                         </div>
 
 

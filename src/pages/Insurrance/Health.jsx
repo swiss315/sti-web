@@ -71,7 +71,7 @@ const Health = () => {
                                         <tr key={index}>
                                             <th className="ref">{index + 1}</th>
                                             <th>{data.quote?.customer.lastname + ' ' + data.quote?.customer.firstname}</th>
-                                            <th>{data.policy_number}</th>
+                                            <th>{data.policy_number || 'N/A'}</th>
                                             <th>{data.quote.policy_type.name}</th>
                                             <th>{data.quote.policy_type.rate}</th>
                                             <th className={getStatusClass(data.quote.status)}>{data.quote.status === 1 ? 'Paid' : 'Not Paid'}</th>
