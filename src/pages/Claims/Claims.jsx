@@ -64,7 +64,12 @@ const onchangeaction = (e) => {
           </div>
           <div className="claim-type">
             <label htmlFor="">Policy Number</label>
-            <input type="number" name="policy_number" onChange={onchangeaction}/>
+            <select className=" use_user4" name="claim_type" onChange={onchangeaction}>
+              <option defaultValue="">
+                Select Policy Number
+              </option>
+              <option value="policy">PPAN5905890499</option>
+            </select>
           </div>
           <div className="claim-type">
             <label htmlFor="">Description of claims</label>

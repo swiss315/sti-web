@@ -22,7 +22,14 @@ const TrackClaim = () => {
       <div className="claim-form">
         <div className="claim-type">
           <label htmlFor="">Claim Type</label>
-          <input type="text" placeholder="Select preferred type"/>
+            <select className=" use_user4" name="claim_type" >
+                <option defaultValue="">
+                    Select preferred type
+                </option>
+                <option value="marine">Marine Insurance</option>
+                <option value="travel">Easy Travel Insurance</option>
+                <option value="all_risk">All Risk</option>
+            </select>
         </div>
         <div className="claim-submit">
           <button>Track Your Claim</button>
